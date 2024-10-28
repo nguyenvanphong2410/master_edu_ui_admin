@@ -1,0 +1,16 @@
+.table{
+    margin-top: 10px;
+}
+
+.noDataContent {
+    min-height: calc(100vh - 453px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 766px) {
+    .table{
+        margin-top: 0;
+    }
+}

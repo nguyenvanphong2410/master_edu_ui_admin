@@ -1,0 +1,14 @@
+.container-table-class {
+    display: block;
+}
+.container-card-class {
+    display: none;
+}
+@media only screen and (max-width: 991px) {
+    .container-table-class {
+        display: none;
+    }
+    .container-card-class {
+        display: block;
+    }
+}

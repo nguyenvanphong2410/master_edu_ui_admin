@@ -1,0 +1,123 @@
+.btn-action {
+  .btn-edit {
+    .fa-primary {
+      @apply fill-black-55 #{!important}
+    }
+
+    .fa-secondary {
+      @apply fill-black-70 #{!important}
+    }
+
+    &:hover {
+      .fa-primary {
+        @apply fill-blue-65 #{!important}
+      }
+
+      .fa-secondary {
+        @apply fill-blue-70 #{!important}
+      }
+    }
+
+    @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md
+  }
+
+  .btn-delete {
+    .fa-primary {
+      @apply fill-black-55 #{!important}
+    }
+
+    .fa-secondary {
+      @apply fill-black-60 #{!important}
+    }
+
+    &:hover {
+      .fa-primary {
+        @apply fill-blue-65 #{!important}
+      }
+
+      .fa-secondary {
+        @apply fill-blue-70 #{!important}
+      }
+    }
+
+    @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md w-[35.5px] ml-1 flex justify-center
+  }
+
+  .btn-reset {
+    .fa-primary {
+      @apply fill-black-55 #{!important}
+    }
+
+    .fa-secondary {
+      @apply fill-black-60 #{!important}
+    }
+
+    &:hover {
+      .fa-primary {
+        @apply fill-blue-65 #{!important}
+      }
+
+      .fa-secondary {
+        @apply fill-blue-70 #{!important}
+      }
+    }
+
+    @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md w-[35.5px] mr-1 flex justify-center
+  }
+
+  @apply flex justify-center
+}
+
+.avatar-user {
+  width: 40px;
+  height: 40px;
+
+}
+
+.name-user {
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: rgb(37 47 74 / var(--tw-text-opacity));
+  margin-top: -4px;
+}
+
+.email-user {
+  color: rgb(37 47 74 / var(--tw-text-opacity));
+  font-size: 0.875rem
+    /* 14px */
+  ;
+  line-height: 1.25rem
+    /* 20px */
+  ;
+  margin-top: -5px;
+  color: rgb(144, 146, 145);
+
+}
+
+.email {
+  color: rgb(4, 104, 255);
+}
+
+.icon-img {
+  @apply bg-white shadow rounded-[50%] flex justify-center items-center absolute z-10 cursor-pointer fill-[#99A1B7] hover:fill-blue-60 md:w-[30px] md:h-[30px]
+}
+
+.icon-edit-img {
+  @apply md:left-[145px] md:top-[118px];
+}
+
+.icon-remove-img {
+  @apply md:left-[145px] md:top-[240px] ;
+}
+
+.img-avt {
+  @apply shadow border-white rounded-[8px] border-[3px] object-cover md:w-32 md:h-32
+}
+
+.icon-action {
+  @apply w-3.5 h-3.5
+}

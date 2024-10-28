@@ -1,0 +1,9 @@
+.btn-save {
+  &.ant-btn-default {
+    @apply border-transparent p-4 shadow-none flex justify-center items-center font-semibold;
+
+    &:hover {
+        @apply bg-[#f9f9f9] border-transparent  text-[#000000] shadow-none #{!important};
+    }
+  }
+}

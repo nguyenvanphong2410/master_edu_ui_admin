@@ -1,0 +1,49 @@
+@import "../../assets/scss/variables.scss";
+
+.listWrap{
+  @apply p-8 rounded-lg bg-white border border-gray-110 shadow-card-box;
+  @media only screen and (max-width: 576px) {
+    @apply p-4;
+  }
+  .filterWrap {
+    .search{
+      @apply mb-3.5 w-3/12;
+
+      @media only screen and (max-width: 1200px) {
+        @apply w-5/12;
+      }
+
+      @media only screen and (max-width: 768px) {
+        @apply w-6/12;
+      }
+
+      @media only screen and (max-width: 576px) {
+        @apply w-full;
+      }
+    }
+    @apply mb-2.5 flex justify-between;
+  }
+}
+
+.infoUser {
+  @apply absolute right-14 top-[130px];
+
+  @media only screen and (max-width: 991px) {
+    @apply hidden;
+  }
+}
+
+.infoTab {
+  @apply mt-[-18px] relative;
+}
+.tableSearchHistoryWrap {
+  @apply mt-6;
+  :global(.ant-table-body) {
+    @apply max-h-[calc(100vh_-_530px)] #{!important};
+  }
+}
+.serviceOptionPopupWrap {
+  :global(.ant-select-item-option-content) {
+    white-space: pre-wrap;
+  }
+}

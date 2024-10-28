@@ -1,0 +1,54 @@
+.btn-action{
+    .btn-edit{
+      .fa-primary{
+        @apply fill-black-55 #{!important}
+      }
+      .fa-secondary{
+        @apply fill-black-70 #{!important}
+      }
+      &:hover{
+        .fa-primary{
+          @apply fill-blue-65 #{!important}
+        }
+        .fa-secondary{
+          @apply fill-blue-70 #{!important}
+        }
+      }
+      @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md
+    }
+    .btn-delete{
+      .fa-primary{
+        @apply fill-black-55 #{!important}
+      }
+      .fa-secondary{
+        @apply fill-black-60 #{!important}
+      }
+      &:hover{
+        .fa-primary{
+          @apply fill-blue-65 #{!important}
+        }
+        .fa-secondary{
+          @apply fill-blue-70 #{!important}
+        }
+      }
+      @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md w-[35.5px] ml-1 flex justify-center
+    }
+    .btn-reset{
+      .fa-primary{
+        @apply fill-black-55 #{!important}
+      }
+      .fa-secondary{
+        @apply fill-black-60 #{!important}
+      }
+      &:hover{
+        .fa-primary{
+          @apply fill-blue-65 #{!important}
+        }
+        .fa-secondary{
+          @apply fill-blue-70 #{!important}
+        }
+      }
+      @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md w-[35.5px] mr-1 flex justify-center
+    }
+    @apply flex justify-center
+  }

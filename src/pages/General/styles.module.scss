@@ -1,0 +1,49 @@
+.generalConfigurationWrap{
+    @apply p-8 rounded-lg bg-white border border-gray-110 shadow-card-box h-[calc(100vh_-_135px)];
+    .general{
+        @apply flex flex-wrap gap-4 ;
+        .configWrap{
+            @apply flex items-center p-4 m-0 box-border rounded-lg cursor-pointer;
+            flex: 1 1 calc(33.333% - 16px);
+            max-width: calc(33.333% - 16px);
+            &:hover {
+                @apply bg-[#dddbdb];
+                .content {
+                    label {
+                        @apply text-[#1677ff];
+                    }
+                }
+            }
+            .svg{
+                @apply bg-[#dddbdb] w-16 h-16 rounded-md flex items-center justify-center p-[16px] text-[#575656];
+            }
+            .content{
+                @apply ml-2;
+                label {
+                    @apply font-bold cursor-pointer capitalize;
+                }
+                p{
+                    @apply max-w-xs text-sm;
+                }
+            }
+        }
+        @media (max-width: 1200px) {
+            .configWrap {
+                flex: 1 1 calc(50% - 16px); 
+                max-width: calc(50% - 16px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .configWrap {
+                flex: 1 1 100%; 
+                max-width: 100%;
+            }
+        }
+
+    }
+   
+    @media (max-width: 576px) {
+        @apply p-0 ;
+    }
+}

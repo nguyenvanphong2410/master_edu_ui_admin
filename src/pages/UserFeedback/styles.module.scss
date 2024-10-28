@@ -1,0 +1,20 @@
+.listWrap {
+  .feedbackCard {
+    @apply mb-5 flex flex-col h-full;
+    :global(.ant-card-head) {
+      @apply p-0;
+    }
+    :global(.ant-card-body) {
+      @apply flex-1;
+    }
+  }
+}
+.coverWrap {
+  width: unset !important;
+  :global(.ant-upload.ant-upload-select) {
+    width: 160px #{!important};
+  }
+}
+.avatarWrap {
+  width: unset !important;
+}

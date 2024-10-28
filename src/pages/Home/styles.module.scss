@@ -1,0 +1,49 @@
+.iconRevenue {
+    @apply w-[38px] h-auto;
+}
+
+.chartWrap {
+    @apply pt-[45px] pb-[34px];
+}
+
+@media screen and (max-width: 991px) {
+    .transactionWrap{
+        @apply mt-7
+    }
+    .overviewWrap{
+        @apply mt-5
+    }
+} 
+
+
+@media screen and (max-width: 1380px) {
+    .iconRevenue {
+        @apply w-[26px];
+    }
+
+    .chartWrap {
+        @apply pt-16 pb-[52px];
+    }
+} 
+
+@media screen and (max-width: 1301px) {
+    .chartWrap {
+        @apply pt-[53px] pb-[44px];
+    }
+}
+
+@media screen and (max-width: 997px) { 
+    .iconRevenue {
+        @apply w-[38px];
+    }
+
+    .chartWrap {
+        @apply pt-[38px] pb-[28px];
+    }
+}
+
+@media screen and (max-width: 767px) { 
+    .iconRevenue {
+        @apply w-[26px];
+    }
+}

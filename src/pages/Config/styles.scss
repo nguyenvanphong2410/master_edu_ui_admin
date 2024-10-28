@@ -1,0 +1,29 @@
+.btn-action {
+  .btn-edit {
+    .fa-primary {
+      @apply fill-black-55 #{!important};
+    }
+
+    .fa-secondary {
+      @apply fill-black-70 #{!important};
+    }
+
+    &:hover {
+      .fa-primary {
+        @apply fill-blue-65 #{!important};
+      }
+
+      .fa-secondary {
+        @apply fill-blue-70 #{!important};
+      }
+    }
+
+    @apply cursor-pointer bg-gray-120 w-max p-2 rounded-md;
+  }
+}
+
+.temmpalte-select{
+  .ant-select-selection-item{
+    font-weight: 600;
+  }
+}

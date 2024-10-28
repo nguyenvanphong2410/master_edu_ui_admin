@@ -1,0 +1,22 @@
+.headerMainWrap {
+  .titleWrap {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .breadcrumbWrap {
+    margin-top: 7px;
+    color: gray;
+    .text {
+      &:hover {
+        @apply text-[#d338e7];
+      }
+
+      @apply cursor-pointer;
+    }
+
+    @apply flex
+  }
+
+  @apply text-xs font-medium transition-all duration-300;
+}

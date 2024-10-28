@@ -1,0 +1,11 @@
+.generalWrap {
+  @apply max-w-[90rem] mx-auto h-[calc(100vh_-_135px)];
+
+  .boxItem {
+    @apply w-full rounded-lg bg-white border border-gray-110 shadow-card-box;
+
+    @media only screen and (max-width: 576px) {
+      @apply p-4;
+    }
+  }
+}

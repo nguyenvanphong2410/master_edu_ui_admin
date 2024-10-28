@@ -1,0 +1,49 @@
+
+.datepicker-popup{
+  .ant-picker-month-panel .ant-picker-cell-inner {
+      width: 65px;
+  }
+}
+
+.datepicker-search{
+  .ant-picker-input{
+      input{
+          font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+      }
+  }
+}
+
+@media screen and (min-width: 998px) and (max-width:1550px) {
+  .text-overview{
+    @apply text-xl
+  }
+}
+
+@media screen and (min-width: 998px) and (max-width:1380px){
+  .icon-overview{
+    @apply w-11 h-11 text-xl
+  }
+  .overview-wrap{
+    @apply h-24
+  }
+}
+
+
+@media screen and (max-width:767px) {
+  .text-overview{
+    @apply text-xl
+  }
+  .icon-overview{
+    @apply w-11 h-11 text-xl
+  }
+  .overview-wrap{
+    @apply h-24
+  }
+}
+
+@media screen and (max-width:575px) {
+  .text-overview{
+    @apply text-base
+  }
+  
+}

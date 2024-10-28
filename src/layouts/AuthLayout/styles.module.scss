@@ -1,0 +1,94 @@
+.authLoginWrap {
+    .contentWrap {
+        .contentContainer {
+            .companyMobile {
+                @apply hidden;
+            }
+
+            .formWrap {
+                .content {
+                    .header {
+                        @apply font-semibold text-2xl text-center
+                    }
+
+                    .headerDetail {
+                        @apply text-center text-gray-75 mb-10 mt-3
+                    }
+
+                    @apply w-5/12
+                }
+
+                @apply w-full flex justify-center justify-items-center items-center h-screen
+            }
+        }
+
+        @apply w-1/2;
+
+    }
+
+    .viewWrap {
+        .logoWrap {
+            .company {
+                img {
+                    @apply w-3/5
+                }
+
+                @apply flex justify-center
+            }
+
+            .decorWrap {
+                img {
+                    @apply w-3/5
+                }
+
+                @apply flex justify-center
+            }
+        }
+
+        @apply flex justify-center justify-items-center items-center w-6/12 h-screen bg-cover
+    }
+
+    @apply flex
+}
+
+@media only screen and (max-width: 576px) {
+    .authLoginWrap {
+        .contentWrap {
+            .contentContainer {
+                .companyMobile {
+                    @apply flex justify-center;
+
+                    img {
+                        @apply w-10/12 #{!important};
+                    }
+                }
+
+                .formWrap {
+                    .content {
+                        @apply w-full px-6 py-6;
+                    }
+
+                    @apply rounded-xl bg-[#fff] w-full h-[50%];
+                }
+
+                @apply absolute w-full px-4 top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2;
+            }
+
+            @apply absolute bg-transparent h-full w-full;
+        }
+
+        .viewWrap {
+            .logoWrap {
+                .decorWrap {
+                    @apply hidden #{!important};
+                }
+
+                @apply hidden #{!important};
+            }
+
+            @apply w-full block;
+        }
+
+        @apply text-sm;
+    }
+}
