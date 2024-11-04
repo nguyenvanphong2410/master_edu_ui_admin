@@ -17,7 +17,7 @@ import { ORDER_STATUS, ORDER_STATUS_LABEL, PACKAGE_TYPE, PERMISSIONS } from '../
 import { Tag, Tooltip } from 'antd';
 import { changeStatusOrder, deleteOrder, getListOrders } from '../../api/order/index.js';
 import moment from 'moment';
-import shield from '@/assets/images/icons/solid/shield.svg';
+import hv from '@/assets/images/icons/solid/graduation.svg';
 
 export default function Handle() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function Handle() {
   const [orderData, setOrderData] = useState('');
   const [filterSelect, setFilterSelect] = useState({
     status: null,
-    packageName: null,
+    courseName: null,
   });
 
   const windowWidth = useWindowSize().width;
@@ -39,7 +39,7 @@ export default function Handle() {
   const visibleModalDeleteOrder = useSelector((state) => state.order.visibleModalDeleteOrder);
   const isLoadingBtnChangeStatus = useSelector((state) => state.order.isLoadingBtnChangeStatus);
   const visibleModalChangeStatusOrder = useSelector((state) => state.order.visibleModalChangeStatusOrder);
-  const listPackage = useSelector((state) => state.order.listPackage);
+  const listCourse = useSelector((state) => state.order.listCourse);
   const statusOrderType = useSelector((state) => state.order.statusOrderType);
   const orderStatus = ORDER_STATUS_LABEL;
 
@@ -52,7 +52,7 @@ export default function Handle() {
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
       render: (text, record) => (
-        <span className={`font-bold ${record.package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
+        <span className={`font-bold ${record.course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
           {text}{' '}
         </span>
       ),
@@ -69,8 +69,8 @@ export default function Handle() {
           {record.user?.name ? (
             <span className={'font-semibold flex'}>
               {record.user.name}
-              <Tooltip title={`Quản trị viên`}>
-                <InlineSVG src={shield} className={`w-4 h-4 mt-1 ml-1 text-[#2178fa]`} />
+              <Tooltip title={`Học viên`}>
+                <InlineSVG src={hv} className={`w-4 h-4 mt-1 ml-1 text-[#a321fa]`} />
               </Tooltip>
             </span>
           ) : (
@@ -78,7 +78,7 @@ export default function Handle() {
           )}
           <a
             href={'tel:' + record.user.phone}
-            className={`${record.package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}
+            className={`${record.course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}
           >
             {formatPhoneNumber(record.user.phone)}
           </a>{' '}
@@ -88,21 +88,21 @@ export default function Handle() {
     },
     {
       title: 'Khóa học',
-      dataIndex: 'package_name',
-      key: 'package_name',
+      dataIndex: 'course_name',
+      key: 'course_name',
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
       width: 160,
       render: (text, record) => (
-        <span className={`${record.package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
+        <span className={`${record.course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
           {text}
         </span>
       ),
     },
     {
       title: 'Tổng tiền',
-      dataIndex: 'package_current_price',
-      key: 'package_current_price',
+      dataIndex: 'course_current_price',
+      key: 'course_current_price',
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
       align: 'center',
@@ -110,7 +110,7 @@ export default function Handle() {
       render: (text, record) => (
         <p
           className={`w-full text-right ${
-            record.package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''
+            record.course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''
           }`}
         >
           {formatMoney(text)}
@@ -143,7 +143,7 @@ export default function Handle() {
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
       render: (text, record) => (
-        <span className={`${record.package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
+        <span className={`${record.course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? 'text-[#999999]' : ''}`}>
           {moment(record.created_at).format('HH:mm DD/MM/YYYY')}
         </span>
       ),
@@ -328,7 +328,7 @@ export default function Handle() {
     visibleModalDeleteOrder,
     orderStatus,
     filterSelect,
-    listPackage,
+    listCourse,
     statusOrderType,
     isLoadingBtnChangeStatus,
     visibleModalChangeStatusOrder,

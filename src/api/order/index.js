@@ -6,9 +6,9 @@ import {
   requestDeleteOrderFail,
   requestDeleteOrderSuccess,
   startRequestDeleteOrder,
-  startRequestGetListPackage,
-  requestGetListPackageSuccess,
-  requestGetListPackageFail,
+  startRequestGetListCourse,
+  requestGetListCourseSuccess,
+  requestGetListCourseFail,
   startRequestChangeStatusOrder,
   requestChangeStatusOrderSuccess,
   requestChangeStatusOrderFail
@@ -27,8 +27,8 @@ export const getListOrders = (dataFilter) => async (dispatch, getState) => {
       path += `&status=${dataFilter.status}`;
     }
 
-    if (dataFilter.packageName) {
-      path += `&package_name=${dataFilter.packageName}`;
+    if (dataFilter.courseName) {
+      path += `&course_name=${dataFilter.courseName}`;
     }
 
     if (dataFilter.order && dataFilter.column) {
@@ -49,14 +49,14 @@ export const getListOrders = (dataFilter) => async (dispatch, getState) => {
   })
 }
 
-export const getListPackage = () => async (dispatch, getState) => {
+export const getListCourse = () => async (dispatch, getState) => {
   return callApi({
     method: 'get',
-    apiPath: `admin/orders/list-package`,
+    apiPath: `admin/orders/list-course`,
     actionTypes: [
-      startRequestGetListPackage,
-      requestGetListPackageSuccess,
-      requestGetListPackageFail
+      startRequestGetListCourse,
+      requestGetListCourseSuccess,
+      requestGetListCourseFail
     ],
     variables: {},
     dispatch,

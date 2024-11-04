@@ -15,9 +15,15 @@ import {
   getListClass,
   getListClassFailure,
   getListClassSuccess,
+  getListStudentScoreOfClass,
+  getListStudentScoreOfClassFailure,
+  getListStudentScoreOfClassSuccess,
   updateClass,
   updateClassFail,
   updateClassSuccess,
+  updateScore,
+  updateScoreFail,
+  updateScoreSuccess,
 } from '@/states/modules/class';
 
 export const getListClasses = () => async (dispatch, getState) => {
@@ -32,10 +38,9 @@ export const getListClasses = () => async (dispatch, getState) => {
     path += `&sort_order=${dataFilter.sort_order}&field=${dataFilter.column}`;
   }
 
-  
-  if (dataFilter.packageId) {
-    console.log("🌈 ~ getListClasses ~ packageId:", dataFilter.packageId)
-    path += `&package_id=${dataFilter.packageId}`;
+  if (dataFilter.courseId) {
+    console.log('🌈 ~ getListClasses ~ courseId:', dataFilter.courseId);
+    path += `&course_id=${dataFilter.courseId}`;
   }
 
   return callApi({
@@ -89,7 +94,7 @@ export const handleCreateClass = (data) => async (dispatch, getState) => {
 };
 
 export const handleUpdateClass = (id, data) => async (dispatch, getState) => {
-  console.log("🌈 ~ handleUpdateClass ~ id:", id)
+  console.log('🌈 ~ handleUpdateClass ~ id:', id);
   const headers = {
     'Content-Type': 'multipart/form-data',
   };
@@ -164,6 +169,33 @@ export const handleDeleteClass = (id) => async (dispatch, getState) => {
     method: 'delete',
     apiPath: `/admin/class/${id}`,
     actionTypes: [deleteClass, deleteClassSuccess, deleteClassFail],
+    variables: {},
+    dispatch,
+    getState,
+  });
+};
+
+export const requestUpdateScore = (idStudent, idClass, data) => async (dispatch, getState) => {
+  return callApi({
+    method: 'put',
+    apiPath: `/admin/score/${idStudent}/${idClass}`,
+    actionTypes: [updateScore, updateScoreSuccess, updateScoreFail],
+    variables: {
+      attendance_score: data.attendance_score,
+      plus_score: data.plus_score,
+      midterm_score: data.midterm_score,
+      final_score: data.final_score,
+    },
+    dispatch,
+    getState,
+  });
+};
+
+export const requestGetListStudentScoreOfClass = (idClass) => async (dispatch, getState) => {
+  return callApi({
+    method: 'get',
+    apiPath: `/admin/class/get-student-of-class/${idClass}`,
+    actionTypes: [getListStudentScoreOfClass, getListStudentScoreOfClassSuccess, getListStudentScoreOfClassFailure],
     variables: {},
     dispatch,
     getState,

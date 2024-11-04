@@ -38,11 +38,11 @@ export default function ModalChangeStatusOrder(props) {
             <Col span={12} className={`font-bold text-left py-3 border-b`}>Mã giao dịch</Col>
             <Col span={12} className={`text-right border-b py-3`}>{orderData.code}</Col>
             <Col span={12} className={`font-bold text-left py-3 border-b`}>Khóa học</Col>
-            <Col span={12} className={`text-right border-b py-3`}>{orderData.package_name}</Col>
+            <Col span={12} className={`text-right border-b py-3`}>{orderData.course_name}</Col>
             {/* <Col span={12} className={`font-bold text-left py-3 border-b`}>Số điểm nhận được</Col>
-            <Col span={12} className={`text-right border-b py-3`}>{formatPoint(orderData.package_point)}</Col> */}
+            <Col span={12} className={`text-right border-b py-3`}>{formatPoint(orderData.course_point)}</Col> */}
             <Col span={12} className={`font-bold text-left py-3`}>Tổng tiền</Col>
-            <Col span={12} className={`text-right py-3`}>{formatMoney(orderData.package_current_price)}</Col>
+            <Col span={12} className={`text-right py-3`}>{formatMoney(orderData.course_current_price)}</Col>
           </Row>
         </div>
         <div className={'flex justify-center mb-[20px]'}>

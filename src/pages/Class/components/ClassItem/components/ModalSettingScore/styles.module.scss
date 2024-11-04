@@ -1,0 +1,36 @@
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    
+}
+
+.pictures {
+    @apply w-[300px] h-[200px] shadow border-[#f1efef] rounded-[8px] border-[3px] object-cover
+  }
+
+.contentInfoWrap {
+    .classSelectedInfo {
+      display: flex;
+      padding: 4px 0;
+  
+      .fieldName {
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 4px;
+        display: flex;
+        flex-wrap: nowrap;
+        min-width: 80px;
+      }
+  
+      .content {
+        color: grey;
+       
+  
+        .textThreeDot {
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }

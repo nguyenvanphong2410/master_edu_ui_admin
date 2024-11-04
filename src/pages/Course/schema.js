@@ -1,7 +1,7 @@
 import Joi from "joi";
 import {MAX_STRING_SIZE, PACKAGE_TYPE} from "../../utils/constants";
 
-export const packageSchema = Joi.object({
+export const courseSchema = Joi.object({
   _id: Joi.any(),
   type: Joi.number().integer(),
   name: Joi.string().trim().max(MAX_STRING_SIZE).required().label("Tên khóa học"),
@@ -51,7 +51,7 @@ export const updateCourseSchema = Joi.object({
     }),
 });
 
-export const packageGiftSchema = Joi.object({
+export const courseGiftSchema = Joi.object({
   _id: Joi.any(),
   name: Joi.string().trim().max(MAX_STRING_SIZE).required().label('Tên khóa học'),
   point: Joi.number().integer().min(1).required().empty('').label('Điểm')

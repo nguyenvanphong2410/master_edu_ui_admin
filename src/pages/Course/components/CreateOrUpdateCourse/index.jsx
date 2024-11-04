@@ -6,7 +6,7 @@ import IconWarning from '../../../../assets/images/icons/light/warning.svg';
 import { PACKAGE_TYPE, TYPE_MODAL_PACKAGE } from '../../../../utils/constants';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { packageSchema } from '../../schema';
+import { courseSchema } from '../../schema';
 import './styles.scss';
 import styles from './styles.module.scss';
 import IconPlus from '@/assets/images/icons/light/plus.svg';
@@ -14,15 +14,15 @@ import IconRemove from '@/assets/images/icons/duotone/remove.svg';
 import IconStar from '@/assets/images/icons/duotone/star.svg';
 import dayjs from 'dayjs';
 
-function ModalCreateOrUpdatePackage() {
+function ModalCreateOrUpdateCourse() {
   const {
-    infoPackages,
-    errorInfoPackages,
+    infoCourses,
+    errorInfoCourses,
     isLoadingBtnCreateOrUpdate,
-    configModalPackage,
+    configModalCourse,
     handleChangeInputInfo,
     handleFocus,
-    handleCancelModalCreateOrUpdatePackage,
+    handleCancelModalCreateOrUpdateCourse,
     handleSubmit,
     handleChangeImage,
     handleRemoveImage,
@@ -49,7 +49,7 @@ function ModalCreateOrUpdatePackage() {
               multiple
               hidden
             />
-            {infoPackages.images.map((file) => {
+            {infoCourses.images.map((file) => {
               return (
                 <div key={file.id} className={`${styles.previewImage}`}>
                   <img src={file.url} alt={file.name} />
@@ -69,7 +69,7 @@ function ModalCreateOrUpdatePackage() {
                 </div>
               );
             })}
-            {infoPackages.images.length < 3 ? (
+            {infoCourses.images.length < 3 ? (
               <div onClick={() => handleClickUpload()} className={`${styles.uploadButton}`}>
                 <InlineSVG src={IconPlus} width={14} height={14} />
               </div>
@@ -89,18 +89,18 @@ function ModalCreateOrUpdatePackage() {
                 Tên khóa học <span className={'required'}>*</span>
               </div>
               <Input
-                value={infoPackages.name}
+                value={infoCourses.name}
                 onFocus={() => handleFocus('name')}
                 onChange={(e) => handleChangeInputInfo(e.target.value, 'name')}
                 className={`main-input`}
                 placeholder={'Nhập tên khóa học'}
               />
-              {errorInfoPackages && errorInfoPackages.name && (
+              {errorInfoCourses && errorInfoCourses.name && (
                 <span className={`error`}>
                   <div className={`icon`}>
                     <InlineSVG src={IconWarning} width={14} height={14} />
                   </div>
-                  <span>{errorInfoPackages.name}</span>
+                  <span>{errorInfoCourses.name}</span>
                 </span>
               )}
             </div>
@@ -118,25 +118,25 @@ function ModalCreateOrUpdatePackage() {
                 className={`main-input w-full`}
                 placeholder={['Bắt đầu', 'Kết thúc']}
                 value={[
-                  infoPackages.start_time ? dayjs(infoPackages.start_time) : null,
-                  infoPackages.end_time ? dayjs(infoPackages.end_time) : null,
+                  infoCourses.start_time ? dayjs(infoCourses.start_time) : null,
+                  infoCourses.end_time ? dayjs(infoCourses.end_time) : null,
                 ]}
                 onChange={(startTime) => handleChangeInputInfo(startTime, 'time')}
               />
-              {errorInfoPackages && errorInfoPackages.start_time && (
+              {errorInfoCourses && errorInfoCourses.start_time && (
                 <span className={`error`}>
                   <div className={`icon`}>
                     <InlineSVG src={IconWarning} width={14} height={14} />
                   </div>
-                  {errorInfoPackages.start_time}
+                  {errorInfoCourses.start_time}
                 </span>
               )}
-              {errorInfoPackages && errorInfoPackages.end_time && (
+              {errorInfoCourses && errorInfoCourses.end_time && (
                 <span className={`error`}>
                   <div className={`icon`}>
                     <InlineSVG src={IconWarning} width={14} height={14} />
                   </div>
-                  {errorInfoPackages.end_time}
+                  {errorInfoCourses.end_time}
                 </span>
               )}
             </div>{' '}
@@ -147,7 +147,7 @@ function ModalCreateOrUpdatePackage() {
                 Giá tiền gốc <span className={'required'}>*</span>
               </div>
               <InputNumber
-                value={infoPackages.original_price}
+                value={infoCourses.original_price}
                 onFocus={() => handleFocus('original_price')}
                 onChange={(value) => handleChangeInputInfo(value, 'original_price')}
                 className={`main-input-number input-price`}
@@ -156,12 +156,12 @@ function ModalCreateOrUpdatePackage() {
                 formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={(value) => value?.replace(',', '')}
               />
-              {errorInfoPackages && errorInfoPackages.original_price && (
+              {errorInfoCourses && errorInfoCourses.original_price && (
                 <span className={`error`}>
                   <div className={`icon`}>
                     <InlineSVG src={IconWarning} width={14} height={14} />
                   </div>
-                  <span>{errorInfoPackages.original_price}</span>
+                  <span>{errorInfoCourses.original_price}</span>
                 </span>
               )}
             </div>
@@ -171,7 +171,7 @@ function ModalCreateOrUpdatePackage() {
                 Giá tiền hiện tại <span className={'required'}>*</span>
               </div>
               <InputNumber
-                value={infoPackages.current_price}
+                value={infoCourses.current_price}
                 onFocus={() => handleFocus('current_price')}
                 onChange={(value) => handleChangeInputInfo(value, 'current_price')}
                 className={`main-input-number input-price`}
@@ -180,12 +180,12 @@ function ModalCreateOrUpdatePackage() {
                 formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={(value) => value?.replace(',', '')}
               />
-              {errorInfoPackages && errorInfoPackages.current_price && (
+              {errorInfoCourses && errorInfoCourses.current_price && (
                 <span className={`error`}>
                   <div className={`icon`}>
                     <InlineSVG src={IconWarning} width={14} height={14} />
                   </div>
-                  <span>{errorInfoPackages.current_price}</span>
+                  <span>{errorInfoCourses.current_price}</span>
                 </span>
               )}
             </div>
@@ -195,11 +195,11 @@ function ModalCreateOrUpdatePackage() {
 
       <div></div>
 
-      {infoPackages?.type !== PACKAGE_TYPE['NEW_ACCOUNT_GIFT'] ? (
+      {infoCourses?.type !== PACKAGE_TYPE['NEW_ACCOUNT_GIFT'] ? (
         <div className={`input-wrap`}>
           <div className={'label-wrap'}>
             Mô tả
-            {infoPackages.type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? (
+            {infoCourses.type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT ? (
               <></>
             ) : (
               <span className={'required ml-[5px]'}>*</span>
@@ -211,19 +211,19 @@ function ModalCreateOrUpdatePackage() {
               placeholder: 'Nhập mô tả...',
               shouldNotGroupWhenFull: true,
             }}
-            data={infoPackages.description || ''}
+            data={infoCourses.description || ''}
             onChange={(event, editor) => {
               const data = editor.getData();
               handleChangeInputInfo(data, 'description');
             }}
             onFocus={() => handleFocus('description')}
           />
-          {errorInfoPackages && errorInfoPackages.description && (
+          {errorInfoCourses && errorInfoCourses.description && (
             <span className={`error`}>
               <div className={`icon`}>
                 <InlineSVG src={IconWarning} width={14} height={14} />
               </div>
-              <span>{errorInfoPackages.description}</span>
+              <span>{errorInfoCourses.description}</span>
             </span>
           )}
         </div>
@@ -232,7 +232,7 @@ function ModalCreateOrUpdatePackage() {
       )}
 
       <div className={`flex justify-center`}>
-        <Button className={`main-btn-close mr-[10px]`} size={'large'} onClick={handleCancelModalCreateOrUpdatePackage}>
+        <Button className={`main-btn-close mr-[10px]`} size={'large'} onClick={handleCancelModalCreateOrUpdateCourse}>
           Đóng
         </Button>
         <Button
@@ -240,13 +240,13 @@ function ModalCreateOrUpdatePackage() {
           type={'primary'}
           size={'large'}
           loading={isLoadingBtnCreateOrUpdate}
-          onClick={() => handleSubmit(configModalPackage.type, packageSchema, infoPackages)}
+          onClick={() => handleSubmit(configModalCourse.type, courseSchema, infoCourses)}
         >
-          {configModalPackage.type === TYPE_MODAL_PACKAGE.CREATE ? 'Tạo mới' : 'Cập nhật'}
+          {configModalCourse.type === TYPE_MODAL_PACKAGE.CREATE ? 'Tạo mới' : 'Cập nhật'}
         </Button>
       </div>
     </div>
   );
 }
 
-export default ModalCreateOrUpdatePackage;
+export default ModalCreateOrUpdateCourse;

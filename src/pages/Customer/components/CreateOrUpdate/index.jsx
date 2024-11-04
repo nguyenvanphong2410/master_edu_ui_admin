@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Input, InputNumber, Radio, Row, Space, Switch, Tooltip } from 'antd';
+import { Button, Col, Input, Radio, Row, Space, Switch, Tooltip } from 'antd';
 import InlineSVG from 'react-inlinesvg';
 import IconWarning from '../../../../assets/images/icons/light/warning.svg';
 import Handle from './handle.js';
@@ -84,29 +84,6 @@ export default function CreateOrUpdate(props) {
                     ''
                   )}
                 </div>
-                <div className={`input-wrap`}>
-                  <div className={'label-wrap'}>
-                    Số điện thoại <span className={'required'}>*</span>
-                  </div>
-
-                  <Input
-                    className={`main-input`}
-                    placeholder={'Nhập số điện thoại'}
-                    value={inForCustomer.phone}
-                    onFocus={() => handleFocus('phone')}
-                    onChange={(e) => handleChangeInput(e, 'phone')}
-                  />
-                  {errorCreateOrUpdate && errorCreateOrUpdate?.phone?.length > 0 ? (
-                    <span className={'error'}>
-                      <div className={'icon'}>
-                        <InlineSVG src={IconWarning} width={14} height="auto" />
-                      </div>
-                      {errorCreateOrUpdate?.phone}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </div>
 
                 <div className={`input-wrap`}>
                   <div className={'label-wrap'}>
@@ -182,10 +159,65 @@ export default function CreateOrUpdate(props) {
                 ) : (
                   ''
                 )}
-                                <div className={`input-wrap`}>
+                
+                <div className={`input-wrap !mb-[15px]`}>
+                  <div className={'label-wrap'}>Trạng thái</div>
+                  <Switch
+                    className={`main-switch`}
+                    checked={inForCustomer.status}
+                    onChange={(e) => handleChangeSwitch(e, 'status')}
+                  />
+                </div>
+              </Col>
+              <Col sm={12} xs={24}>
+                <div className={`input-wrap`}>
+                  <div className={'label-wrap'}>
+                    Số điện thoại <span className={'required'}>*</span>
+                  </div>
+
+                  <Input
+                    className={`main-input`}
+                    placeholder={'Nhập số điện thoại'}
+                    value={inForCustomer.phone}
+                    onFocus={() => handleFocus('phone')}
+                    onChange={(e) => handleChangeInput(e, 'phone')}
+                  />
+                  {errorCreateOrUpdate && errorCreateOrUpdate?.phone?.length > 0 ? (
+                    <span className={'error'}>
+                      <div className={'icon'}>
+                        <InlineSVG src={IconWarning} width={14} height="auto" />
+                      </div>
+                      {errorCreateOrUpdate?.phone}
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className={`input-wrap`}>
+                  <div className={'label-wrap'}>Địa chỉ</div>
+                  <Input
+                    className={`main-input`}
+                    placeholder={'Nhập địa chỉ'}
+                    value={inForCustomer.address}
+                    onFocus={() => handleFocus('address')}
+                    onChange={(e) => handleChangeInput(e, 'address')}
+                  />
+                  {errorCreateOrUpdate && errorCreateOrUpdate?.address?.length > 0 ? (
+                    <span className={'error'}>
+                      <div className={'icon'}>
+                        <InlineSVG src={IconWarning} width={14} height="auto" />
+                      </div>
+                      {errorCreateOrUpdate?.address}
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </div>
+
+                <div className={`input-wrap`}>
                   <div className={'label-wrap'}>Giới tính</div>
 
-                  <Radio.Group onChange={(e) => handleChangeInput(e, 'gender')} value={inForCustomer.gender}>
+                  <Radio.Group onChange={(e) => handleChangeInput(e, 'gender')} value={inForCustomer.gender} className='mt-3'>
                     <Space>
                       <Radio value={GENDER_USER.MALE}>Nam</Radio>
                       <Radio value={GENDER_USER.FEMALE}>Nữ</Radio>
@@ -203,132 +235,6 @@ export default function CreateOrUpdate(props) {
                     ''
                   )}
                 </div>
-                <div className={`input-wrap !mb-[15px]`}>
-                  <div className={'label-wrap'}>Trạng thái</div>
-                  <Switch
-                    className={`main-switch`}
-                    checked={inForCustomer.status}
-                    onChange={(e) => handleChangeSwitch(e, 'status')}
-                  />
-                </div>
-              </Col>
-              <Col sm={12} xs={24}>
-                <div className={`input-wrap`}>
-                  <div className={'label-wrap'}>Điểm chuyên cần</div>
-                  <InputNumber
-                    className={`main-input`}
-                    style={{ width: '100%' }}
-                    min="0"
-                    max="10"
-                    step="0.1"
-                    value={inForCustomer.attendance_score}
-                    placeholder={'Nhập điểm chuyên cần'}
-                    onChange={(e) => handleChangeInput(e, 'attendance_score')}
-                  />
-                  {errorCreateOrUpdate && errorCreateOrUpdate?.attendance_score?.length > 0 ? (
-                    <span className={'error'}>
-                      <div className={'icon'}>
-                        <InlineSVG src={IconWarning} width={14} height="auto" />
-                      </div>
-                      {errorCreateOrUpdate?.attendance_score}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className={`input-wrap`}>
-                  <div className={'label-wrap'}>Điểm cộng</div>
-                  <InputNumber
-                    className={`main-input`}
-                    style={{ width: '100%' }}
-                    min="0"
-                    max="10"
-                    step="0.1"
-                    placeholder={'Nhập điểm cộng'}
-                    value={inForCustomer.plus_score}
-                    onChange={(e) => handleChangeInput(e, 'plus_score')}
-                  />
-                  {errorCreateOrUpdate && errorCreateOrUpdate?.plus_score?.length > 0 ? (
-                    <span className={'error'}>
-                      <div className={'icon'}>
-                        <InlineSVG src={IconWarning} width={14} height="auto" />
-                      </div>
-                      {errorCreateOrUpdate?.plus_score}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className={`input-wrap`}>
-                  <div className={'label-wrap'}>Điểm giữa kì</div>
-                  <InputNumber
-                    className={`main-input`}
-                    style={{ width: '100%' }}
-                    min="0"
-                    max="10"
-                    step="0.1"
-                    placeholder={'Nhập điểm giữa kì'}
-                    value={inForCustomer.midterm_score}
-                    onChange={(e) => handleChangeInput(e, 'midterm_score')}
-                  />
-                  {errorCreateOrUpdate && errorCreateOrUpdate?.midterm_score?.length > 0 ? (
-                    <span className={'error'}>
-                      <div className={'icon'}>
-                        <InlineSVG src={IconWarning} width={14} height="auto" />
-                      </div>
-                      {errorCreateOrUpdate?.midterm_score}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className={`input-wrap`}>
-                  <div className={'label-wrap'}>Điểm cuối kì</div>
-                  <InputNumber
-                    className={`main-input`}
-                    style={{ width: '100%' }}
-                    placeholder={'Nhập điểm cuối kì'}
-                    min="0"
-                    max="10"
-                    step="0.1"
-                    value={inForCustomer.final_score}
-                    onChange={(e) => handleChangeInput(e, 'final_score')}
-                  />
-                  {errorCreateOrUpdate && errorCreateOrUpdate?.final_score?.length > 0 ? (
-                    <span className={'error'}>
-                      <div className={'icon'}>
-                        <InlineSVG src={IconWarning} width={14} height="auto" />
-                      </div>
-                      {errorCreateOrUpdate?.final_score}
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                {configModal.type === TYPE_SUBMIT.CREATE ? (
-                  <div className={`input-wrap`}>
-                    <div className={'label-wrap'}>Địa chỉ</div>
-                    <Input
-                      className={`main-input`}
-                      placeholder={'Nhập địa chỉ'}
-                      value={inForCustomer.address}
-                      onFocus={() => handleFocus('address')}
-                      onChange={(e) => handleChangeInput(e, 'address')}
-                    />
-                    {errorCreateOrUpdate && errorCreateOrUpdate?.address?.length > 0 ? (
-                      <span className={'error'}>
-                        <div className={'icon'}>
-                          <InlineSVG src={IconWarning} width={14} height="auto" />
-                        </div>
-                        {errorCreateOrUpdate?.address}
-                      </span>
-                    ) : (
-                      ''
-                    )}
-                  </div>
-                ) : (
-                  ''
-                )}
               </Col>
             </Row>
           </div>

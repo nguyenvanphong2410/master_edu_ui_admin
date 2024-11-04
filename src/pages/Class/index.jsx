@@ -18,9 +18,6 @@ import ModalDeleteDefault from '@/components/ModalDelete';
 import { setDataFilter, setShowModalDeleteClass } from '@/states/modules/class';
 import { getListClasses, handleDeleteClass } from '@/api/class';
 import { useDebounce } from '@/utils/hooks/useDebounce.js';
-import { getListPackage } from '@/api/order';
-import _ from 'lodash';
-import { getAllCourses } from '@/api/package';
 
 function ClassCpn() {
   const dispatch = useDispatch();
@@ -31,23 +28,23 @@ function ClassCpn() {
   const isLoadingBtnDeleteClass = useSelector((state) => state.class.isLoadingBtnDeleteClass);
   const classSelected = useSelector((state) => state.class.classSelected);
   const debouncedQuery = useDebounce(dataFilter.keySearch, 500);
-  const dataListCourse = useSelector((state) => state.package.allCourse);
+  const dataListCourse = useSelector((state) => state.course.allCourse);
   const [courseOption, setCourseOption] = useState([]);
 
   const { handleShowModalCreateClass, handleCancelModalCreateOrUpdateClass, handleChangeTableClass, infoClass } =
     Handle();
 
-  const handleCancelModalDeletePackage = () => {
+  const handleCancelModalDeleteCourse = () => {
     dispatch(setShowModalDeleteClass(false));
   };
 
-  const handleSubmitDeletePackage = () => {
+  const handleSubmitDeleteCourse = () => {
     dispatch(handleDeleteClass(classSelected._id));
   };
 
   const handleFilterSelect = (e, val) => {
 
-    dispatch(setDataFilter({...dataFilter, packageName: val?.label, packageId:e}));
+    dispatch(setDataFilter({...dataFilter, courseName: val?.label, courseId:e}));
     dispatch(getListClasses());
   };
 
@@ -90,7 +87,7 @@ function ClassCpn() {
 
               <Select
                 className={`main-select w-60 ml-5`}
-                value={dataFilter?.packageName || null}
+                value={dataFilter?.courseName || null}
                 allowClear
                 placeholder="Chọn khóa học"
                 onChange={(e, val) => handleFilterSelect(e, val)}
@@ -139,8 +136,8 @@ function ClassCpn() {
             }
             contentBtn={'Xóa lớp học'}
             isModalOpen={visibleModalDeleteClass}
-            handleCancel={handleCancelModalDeletePackage}
-            handleConfirm={handleSubmitDeletePackage}
+            handleCancel={handleCancelModalDeleteCourse}
+            handleConfirm={handleSubmitDeleteCourse}
             loading={isLoadingBtnDeleteClass}
           />
         </div>

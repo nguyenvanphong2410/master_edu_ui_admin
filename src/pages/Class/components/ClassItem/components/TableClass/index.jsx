@@ -10,9 +10,21 @@ import styles from './styles.module.scss';
 import { hasPermission } from '@/utils/helper';
 import Edit from '@/assets/images/icons/duotone/pencil.svg';
 import Delete from '@/assets/images/icons/duotone/trash-can.svg';
+import filePen from '@/assets/images/icons/duotone/file-pen.svg';
 import useWindowSize from '@/utils/hooks/useWindowSize';
 import moment from 'moment';
 import teacher from '@/assets/images/icons/solid/chalkboard-user.svg';
+import ModalDefault from '@/components/Modal';
+import {
+  setClassSelected,
+  setInfoScore,
+  setStudentToSetScoreSelected,
+  setVisibleModalSettingScore,
+} from '@/states/modules/class';
+import ModalSettingScore from '../ModalSettingScore';
+import { requestGetListStudentOfClass } from '@/api/score';
+import { initInfoScore } from '@/states/modules/class/initState';
+import { requestGetListStudentScoreOfClass } from '@/api/class';
 
 function TableClass({ handleChangeTableClass }) {
   const dispatch = useDispatch();
@@ -21,6 +33,8 @@ function TableClass({ handleChangeTableClass }) {
   const dataListClasses = useSelector((state) => state.class.classes);
   const isLoadingTableClass = useSelector((state) => state.class.isLoadingTableClass);
   const paginationListClass = useSelector((state) => state.class.paginationListClass);
+  const classSelected = useSelector((state) => state.class.classSelected);
+  const visibleModalSettingScore = useSelector((state) => state.class.visibleModalSettingScore);
 
   const { handleShowModalUpdateClass, handleDeleteClassAlert, handleChangePaginationClass } = Handle();
 
@@ -29,7 +43,7 @@ function TableClass({ handleChangeTableClass }) {
       title: <span className="title-table">Lớp học</span>,
       dataIndex: 'pictures',
       key: 'pictures',
-      width: 190,
+      width: 300,
       align: 'center',
       render: (text, record) => {
         return (
@@ -43,12 +57,12 @@ function TableClass({ handleChangeTableClass }) {
             />
             <span className="ml-3">
               <a
-                className={`text-ui font-semibold`}
+                className={`text-ui font-semibold text-[#6589a1] flex items-start`}
                 onClick={() => handleShowModalUpdateClass(record, TYPE_SUBMIT.UPDATE)}
               >
                 {record.code}
               </a>
-              <p className="text-left">{record.name}</p>
+              <p className="text-left font-semibold">{record.name}</p>
             </span>
           </div>
         );
@@ -90,7 +104,7 @@ function TableClass({ handleChangeTableClass }) {
       title: <span className="title-table">Tạo bởi</span>,
       dataIndex: 'creator',
       key: 'creator',
-      width: 200,
+      width: 150,
       showSorterTooltip: false,
       defaultSortOrder: '',
       render: (text) => {
@@ -137,11 +151,19 @@ function TableClass({ handleChangeTableClass }) {
           width: 160,
           render: (text, record) => {
             return (
-              <div className={`btn-action flex justify-evenly`}>
+              <div className={`btn-action flex justify-evenly bg-white`}>
+                <Tooltip placement="top" title={'Xet điểm'}>
+                  <div
+                    className={`btn-edit cursor-pointer mr-2`}
+                    onClick={() => handleShowModalSettingScoreClass(record)}
+                  >
+                    <InlineSVG src={filePen} width={14} />
+                  </div>
+                </Tooltip>
                 {hasPermission([PERMISSIONS.EDIT.EDIT_CLASS]) && (
-                  <Tooltip placement="bottom" title={'Cập nhật'}>
+                  <Tooltip placement="top" title={'Cập nhật'}>
                     <div
-                      className={`btn-edit cursor-pointer`}
+                      className={`btn-edit cursor-pointer mr-1`}
                       onClick={() => handleShowModalUpdateClass(record, TYPE_SUBMIT.UPDATE)}
                     >
                       <InlineSVG src={Edit} width={14} />
@@ -150,7 +172,7 @@ function TableClass({ handleChangeTableClass }) {
                 )}
 
                 {hasPermission([PERMISSIONS.DELETE.DELETE_CLASS]) && (
-                  <Tooltip placement="bottom" title={'Xóa'}>
+                  <Tooltip placement="top" title={'Xóa'}>
                     <div className={`btn-delete cursor-pointer`} onClick={() => handleDeleteClassAlert(record)}>
                       <InlineSVG src={Delete} width={14} />
                     </div>
@@ -164,6 +186,19 @@ function TableClass({ handleChangeTableClass }) {
           width: 1,
         },
   ];
+
+  const handleShowModalSettingScoreClass = (record) => {
+    dispatch(setVisibleModalSettingScore(true));
+    dispatch(setClassSelected(record));
+    dispatch(requestGetListStudentOfClass(record._id));
+    dispatch(requestGetListStudentScoreOfClass(record._id));
+  };
+
+  const handleCancelModalSettingScore = () => {
+    dispatch(setVisibleModalSettingScore(false));
+    dispatch(setStudentToSetScoreSelected(''));
+    dispatch(setInfoScore(initInfoScore));
+  };
 
   return (
     <div>
@@ -186,6 +221,14 @@ function TableClass({ handleChangeTableClass }) {
               : 'calc(100vh - 342px)',
         }}
       />
+      <ModalDefault
+        isModalOpen={visibleModalSettingScore}
+        handleCancel={handleCancelModalSettingScore}
+        title={'Xét điểm số'}
+        width={1200}
+      >
+        <ModalSettingScore />
+      </ModalDefault>
     </div>
   );
 }

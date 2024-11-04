@@ -29,7 +29,7 @@ export default function Handle() {
             showSorterTooltip: false,
             sorter: (a, b) => a.age - b.age,
             render: (text) => text ?
-            <span className={'text-name-package'}>{text}</span> : <span className={`italic`}>Đang cập nhật</span>
+            <span className={'text-name-course'}>{text}</span> : <span className={`italic`}>Đang cập nhật</span>
         },
         {
             title: 'Thông tin tra cứu',

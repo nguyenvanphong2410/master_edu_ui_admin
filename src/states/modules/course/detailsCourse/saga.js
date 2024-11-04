@@ -1,5 +1,5 @@
 import {all, fork, put, select, takeLatest} from 'redux-saga/effects';
-import {requestGetDetailsCourseForUser} from '@/api/package';
+import {requestGetDetailsCourseForUser} from '@/api/course';
 import {
   createCommentFail,
   createCommentSuccess,

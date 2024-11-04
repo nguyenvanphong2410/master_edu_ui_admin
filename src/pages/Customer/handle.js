@@ -128,57 +128,57 @@ export default function Handle() {
       sorter: (a, b) => a.age - b.age,
       render: (text) => (text ? <span>{text}</span> : <i className={`text-gray-60`}>Đang cập nhật</i>),
     },
-    {
-      title: 'Điểm CC',
-      dataIndex: 'attendance_score',
-      key: 'attendance_score',
-      align: 'center',
-      width: 130,
-      showSorterTooltip: false,
-      render: (text) => <p>{formatPoint(text)}</p>,
-    },
-    {
-      title: 'Điểm cộng',
-      dataIndex: 'plus_score',
-      key: 'plus_score',
-      align: 'center',
-      width: 130,
-      showSorterTooltip: false,
-      render: (text) => <p>{formatPoint(text)}</p>,
-    },
-    {
-      title: 'Điểm GK',
-      dataIndex: 'midterm_score',
-      key: 'midterm_score',
-      align: 'center',
-      width: 130,
-      showSorterTooltip: false,
-      render: (text) => <p>{formatPoint(text)}</p>,
-    },
-    {
-      title: 'Điểm CK',
-      dataIndex: 'final_score',
-      key: 'final_score',
-      align: 'center',
-      width: 130,
-      showSorterTooltip: false,
-      render: (text) => <p>{formatPoint(text)}</p>,
-    },
-    {
-      title: 'Điểm tổng',
-      dataIndex: '',
-      key: '',
-      align: 'center',
-      width: 130,
-      showSorterTooltip: false,
-      render: (text, record) => (
-        <p className="font-semibold text-blue-25">
-          {displayScoreTotal(
-            record.attendance_score * 0.1 + record.plus_score + record.midterm_score * 0.3 + record.final_score * 0.6
-          )}
-        </p>
-      ),
-    },
+    // {
+    //   title: 'Điểm CC',
+    //   dataIndex: 'attendance_score',
+    //   key: 'attendance_score',
+    //   align: 'center',
+    //   width: 130,
+    //   showSorterTooltip: false,
+    //   render: (text) => <p>{formatPoint(text)}</p>,
+    // },
+    // {
+    //   title: 'Điểm cộng',
+    //   dataIndex: 'plus_score',
+    //   key: 'plus_score',
+    //   align: 'center',
+    //   width: 130,
+    //   showSorterTooltip: false,
+    //   render: (text) => <p>{formatPoint(text)}</p>,
+    // },
+    // {
+    //   title: 'Điểm GK',
+    //   dataIndex: 'midterm_score',
+    //   key: 'midterm_score',
+    //   align: 'center',
+    //   width: 130,
+    //   showSorterTooltip: false,
+    //   render: (text) => <p>{formatPoint(text)}</p>,
+    // },
+    // {
+    //   title: 'Điểm CK',
+    //   dataIndex: 'final_score',
+    //   key: 'final_score',
+    //   align: 'center',
+    //   width: 130,
+    //   showSorterTooltip: false,
+    //   render: (text) => <p>{formatPoint(text)}</p>,
+    // },
+    // {
+    //   title: 'Điểm tổng',
+    //   dataIndex: '',
+    //   key: '',
+    //   align: 'center',
+    //   width: 130,
+    //   showSorterTooltip: false,
+    //   render: (text, record) => (
+    //     <p className="font-semibold text-blue-25">
+    //       {displayScoreTotal(
+    //         record.attendance_score * 0.1 + record.plus_score + record.midterm_score * 0.3 + record.final_score * 0.6
+    //       )}
+    //     </p>
+    //   ),
+    // },
 
     {
       title: 'Ngày đăng ký',
@@ -296,11 +296,11 @@ export default function Handle() {
     }
   }, [visibleModalCreateOrUpdate]);
 
-  const displayScoreTotal = (num) => {
-    let result = null;
-    result = parseFloat(num.toFixed(2));
-    return result;
-  };
+  // const displayScoreTotal = (num) => {
+  //   let result = null;
+  //   result = parseFloat(num.toFixed(2));
+  //   return result;
+  // };
 
   const handleReloadData = () => {
     dispatch(setErrorCreateOrUpdate(initErrInfoCustomer));

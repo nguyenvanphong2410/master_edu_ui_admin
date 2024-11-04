@@ -1,7 +1,7 @@
 export const orderInitialData = {
   dataFilter: {
     keySearch: '',
-    packageName: '',
+    courseName: '',
     status: null,
     page: 1,
     perPage: 20,

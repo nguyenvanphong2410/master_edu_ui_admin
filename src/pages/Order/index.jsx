@@ -26,7 +26,7 @@ export default function OrderManagement() {
     visibleModalDeleteOrder,
     orderStatus,
     filterSelect,
-    listPackage,
+    listCourse,
     statusOrderType,
     isLoadingBtnChangeStatus,
     visibleModalChangeStatusOrder,
@@ -56,11 +56,11 @@ export default function OrderManagement() {
             className={`main-select w-60 pl-3`}
             placeholder="Chọn khóa học"
             optionLabelProp="label"
-            value={filterSelect.packageName}
+            value={filterSelect.courseName}
             allowClear
-            onChange={(e) => handleFilterSelect(e, 'packageName')}
+            onChange={(e) => handleFilterSelect(e, 'courseName')}
           >
-            {listPackage.map((status, index) => {
+            {listCourse.map((status, index) => {
               return (
                 <Select.Option key={index} value={status} label={status}>
                   {status}
@@ -88,8 +88,8 @@ export default function OrderManagement() {
 
         <div className={'tableWrap h-[calc(100vh-267px)]'}>
           <TableDefault
-            rowClassName={({ package_type }) => {
-              return package_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT;
+            rowClassName={({ course_type }) => {
+              return course_type === PACKAGE_TYPE.NEW_ACCOUNT_GIFT;
             }}
             loading={isLoadingTableOrders}
             dataSource={orders}

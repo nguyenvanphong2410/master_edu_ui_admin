@@ -1,50 +1,50 @@
 import _ from 'lodash';
 import {
-  setConfigModalPackage,
-  setErrorInfoPackages,
-  setInfoPackages,
-  setShowModalCreateOrUpdatePackage,
-  setShowModalDeletePackage,
-} from '../../states/modules/package/index.js';
+  setConfigModalCourse,
+  setErrorInfoCourses,
+  setInfoCourses,
+  setShowModalCreateOrUpdateCourse,
+  setShowModalDeleteCourse,
+} from '../../states/modules/course/index.js';
 import {TYPE_FILE, TYPE_MODAL_PACKAGE} from '../../utils/constants.js';
 import useWindowSize from '../../utils/hooks/useWindowSize.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { validate } from '../../utils/validateJoi/index.js';
-import { handleChangeHighlightPackage, handleCreatePackages, handleDeletePackages, handleUpdatePackages } from '../../api/package/index.js';
+import { handleChangeHighlightCourse, handleCreateCourses, handleDeleteCourses, handleUpdateCourses } from '../../api/course/index.js';
 import store from '../../states/configureStore.js';
-import { initErrInfoCourse, initInfoCourse } from '@/states/modules/package/initState.js';
+import { initErrInfoCourse, initInfoCourse } from '@/states/modules/course/initState.js';
 import { getNotification } from '@/utils/helper.js';
 
 export default function Handle() {
   const windowWidth = useWindowSize().width;
   const dispatch = useDispatch();
-  const packages = useSelector((state) => state.package.packages);
-  const isLoadingCardPackages = useSelector((state) => state.package.isLoadingCardPackages);
-  const isLoadingBtnCreateOrUpdate = useSelector((state) => state.package.isLoadingBtnCreateOrUpdate);
-  const visibleModalCreateOrUpdatePackage = useSelector((state) => state.package.visibleModalCreateOrUpdatePackage);
-  const configModalPackage = useSelector((state) => state.package.configModalPackage);
-  const errorInfoPackages = useSelector((state) => state.package.errorInfoPackages);
-  const infoPackages = useSelector((state) => state.package.infoPackages);
-  const isLoadingBtnDelete = useSelector((state) => state.package.isLoadingBtnDelete);
-  const visibleModalDeletePackage = useSelector((state) => state.package.visibleModalDeletePackage);
-  const dataFilter = useSelector((state) => state.package.dataFilter);
+  const courses = useSelector((state) => state.course.courses);
+  const isLoadingCardCourses = useSelector((state) => state.course.isLoadingCardCourses);
+  const isLoadingBtnCreateOrUpdate = useSelector((state) => state.course.isLoadingBtnCreateOrUpdate);
+  const visibleModalCreateOrUpdateCourse = useSelector((state) => state.course.visibleModalCreateOrUpdateCourse);
+  const configModalCourse = useSelector((state) => state.course.configModalCourse);
+  const errorInfoCourses = useSelector((state) => state.course.errorInfoCourses);
+  const infoCourses = useSelector((state) => state.course.infoCourses);
+  const isLoadingBtnDelete = useSelector((state) => state.course.isLoadingBtnDelete);
+  const visibleModalDeleteCourse = useSelector((state) => state.course.visibleModalDeleteCourse);
+  const dataFilter = useSelector((state) => state.course.dataFilter);
 
-  const handleShowModalCreatePackage = (type) => {
+  const handleShowModalCreateCourse = (type) => {
     dispatch(
-      setInfoPackages(initInfoCourse)
+      setInfoCourses(initInfoCourse)
     );
     dispatch(
-      setConfigModalPackage({
+      setConfigModalCourse({
         title: 'Tạo mới khóa học',
         type,
       })
     );
-    dispatch(setShowModalCreateOrUpdatePackage(true));
+    dispatch(setShowModalCreateOrUpdateCourse(true));
   };
 
-  const handleShowModalUpdatePackage = (value, type) => {
+  const handleShowModalUpdateCourse = (value, type) => {
     dispatch(
-      setConfigModalPackage({
+      setConfigModalCourse({
         title: 'Cập nhật khóa học',
         type,
       })
@@ -59,17 +59,17 @@ export default function Handle() {
         file: value.images[index]
       })
     })
-    dispatch(setInfoPackages({
+    dispatch(setInfoCourses({
       ...value,
       images: imageCourse,
     }))
-    dispatch(setErrorInfoPackages(initErrInfoCourse));
-    dispatch(setShowModalCreateOrUpdatePackage(true));
+    dispatch(setErrorInfoCourses(initErrInfoCourse));
+    dispatch(setShowModalCreateOrUpdateCourse(true));
   };
 
   const handleChangeInputInfo = (value, type) => {
-    let data = _.cloneDeep(store.getState().package.infoPackages);
-    let dataError = _.cloneDeep(errorInfoPackages);
+    let data = _.cloneDeep(store.getState().course.infoCourses);
+    let dataError = _.cloneDeep(errorInfoCourses);
 
     if (type === 'time') {
       data['start_time'] = value[0].toDate();
@@ -80,60 +80,60 @@ export default function Handle() {
 
     data[type] = value;
     dataError[type] = '';
-    dispatch(setInfoPackages(data));
-    dispatch(setErrorInfoPackages(dataError));
+    dispatch(setInfoCourses(data));
+    dispatch(setErrorInfoCourses(dataError));
   };
 
-  const handleCancelModalCreateOrUpdatePackage = () => {
+  const handleCancelModalCreateOrUpdateCourse = () => {
     dispatch(
-      setErrorInfoPackages(initErrInfoCourse)
+      setErrorInfoCourses(initErrInfoCourse)
     );
-    dispatch(setShowModalCreateOrUpdatePackage(false));
+    dispatch(setShowModalCreateOrUpdateCourse(false));
   };
 
   const handleFocus = (type) => {
-    let dataError = _.cloneDeep(errorInfoPackages);
+    let dataError = _.cloneDeep(errorInfoCourses);
     dataError[type] = '';
-    dispatch(setErrorInfoPackages(dataError));
+    dispatch(setErrorInfoCourses(dataError));
   };
 
-  const handleSubmit = (type, schema, dataPackage) => {
+  const handleSubmit = (type, schema, dataCourse) => {
     if (type === TYPE_MODAL_PACKAGE.CREATE) {
-      validate(schema, dataPackage, {
-        onSuccess: (data) => dispatch(handleCreatePackages(data)),
-        onError: (error) => dispatch(setErrorInfoPackages(error)),
+      validate(schema, dataCourse, {
+        onSuccess: (data) => dispatch(handleCreateCourses(data)),
+        onError: (error) => dispatch(setErrorInfoCourses(error)),
       });
     } else if (type === TYPE_MODAL_PACKAGE.UPDATE) {
-      validate(schema, dataPackage, {
-        onSuccess: (data) => dispatch(handleUpdatePackages(data._id, data)),
-        onError: (error) => dispatch(setErrorInfoPackages(error)),
+      validate(schema, dataCourse, {
+        onSuccess: (data) => dispatch(handleUpdateCourses(data._id, data)),
+        onError: (error) => dispatch(setErrorInfoCourses(error)),
       });
     }
   };
 
-  const handleShowModalDeletePackages = (value) => {
-    dispatch(setInfoPackages(value));
-    dispatch(setShowModalDeletePackage(true));
+  const handleShowModalDeleteCourses = (value) => {
+    dispatch(setInfoCourses(value));
+    dispatch(setShowModalDeleteCourse(true));
   };
 
-  const handleCancelModalDeletePackage = () => {
-    dispatch(setShowModalDeletePackage(false));
+  const handleCancelModalDeleteCourse = () => {
+    dispatch(setShowModalDeleteCourse(false));
   };
 
-  const handleSubmitDeletePackage = () => {
-    dispatch(handleDeletePackages(infoPackages._id));
+  const handleSubmitDeleteCourse = () => {
+    dispatch(handleDeleteCourses(infoCourses._id));
   };
 
-  const handleSubmitChangeHighlightPackage = (id) => {
-    dispatch(handleChangeHighlightPackage(id));
+  const handleSubmitChangeHighlightCourse = (id) => {
+    dispatch(handleChangeHighlightCourse(id));
   }
 
   //Xử lí ảnh
   const handleChangeImage = (file) => {
-    let maxImage = infoPackages.images.length;
+    let maxImage = infoCourses.images.length;
     let listImage = _.values(file.target.files);
     if (listImage.length > 0) {
-      let course = _.cloneDeep(infoPackages);
+      let course = _.cloneDeep(infoCourses);
       listImage.forEach(function (fileItem) {
         if (maxImage === 3) {
           return false;
@@ -160,28 +160,28 @@ export default function Handle() {
           maxImage++;
         }
       });
-      dispatch(setInfoPackages(course));
+      dispatch(setInfoCourses(course));
     }
   };
 
   const handleRemoveImage = (imageId) => {
-    let newInfoCourse = _.cloneDeep(infoPackages);
+    let newInfoCourse = _.cloneDeep(infoCourses);
     let featured = false;
-    newInfoCourse.images = _.filter(infoPackages.images, function (o) {
+    newInfoCourse.images = _.filter(infoCourses.images, function (o) {
       if (o.id === imageId && o.is_featured) {
         featured = true;
       }
       return o.id !== imageId;
     });
-    dispatch(setInfoPackages(newInfoCourse));
+    dispatch(setInfoCourses(newInfoCourse));
   };
 
   const handleChangeImageFeatured = (imageId) => {
-    let newInfoCourse = _.cloneDeep(infoPackages);
+    let newInfoCourse = _.cloneDeep(infoCourses);
     newInfoCourse.images.forEach((image) => {
       image.is_featured = image.id === imageId;
     });
-    dispatch(setInfoPackages(newInfoCourse));
+    dispatch(setInfoCourses(newInfoCourse));
   };
 
   const handleClickUpload = () => {
@@ -190,26 +190,26 @@ export default function Handle() {
 
   return {
     windowWidth,
-    packages,
+    courses,
     dataFilter,
-    isLoadingCardPackages,
+    isLoadingCardCourses,
     isLoadingBtnCreateOrUpdate,
-    visibleModalCreateOrUpdatePackage,
-    configModalPackage,
-    infoPackages,
-    errorInfoPackages,
+    visibleModalCreateOrUpdateCourse,
+    configModalCourse,
+    infoCourses,
+    errorInfoCourses,
     isLoadingBtnDelete,
-    visibleModalDeletePackage,
-    handleCancelModalCreateOrUpdatePackage,
-    handleCancelModalDeletePackage,
-    handleShowModalCreatePackage,
+    visibleModalDeleteCourse,
+    handleCancelModalCreateOrUpdateCourse,
+    handleCancelModalDeleteCourse,
+    handleShowModalCreateCourse,
     handleChangeInputInfo,
     handleFocus,
     handleSubmit,
-    handleShowModalUpdatePackage,
-    handleShowModalDeletePackages,
-    handleSubmitDeletePackage,
-    handleSubmitChangeHighlightPackage,
+    handleShowModalUpdateCourse,
+    handleShowModalDeleteCourses,
+    handleSubmitDeleteCourse,
+    handleSubmitChangeHighlightCourse,
     handleChangeImage,
     handleRemoveImage,
     handleChangeImageFeatured,

@@ -46,7 +46,7 @@ const UserFeedbackManagement = () => {
           {feedbacks.map((item) => (
             <Col className="gutter-row mt-[18px]" key={item._id} span={6}>
               <Card
-                className={`${styles.feedbackCard} main-card-package`}
+                className={`${styles.feedbackCard} main-card-course`}
                 title={
                   <div
                     className="flex flex-col items-center bg-cover h-[130px]"

@@ -15,8 +15,8 @@ export const getListHistory = () => async (dispatch, getState) => {
         path += `&status=${dataFilter.status}`;
       }
   
-      if (dataFilter.packageName) {
-        path += `&package_name=${dataFilter.packageName}`;
+      if (dataFilter.courseName) {
+        path += `&course_name=${dataFilter.courseName}`;
       }
   
       if (dataFilter.order && dataFilter.column) {

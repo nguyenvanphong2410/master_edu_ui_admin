@@ -65,6 +65,21 @@
     @apply bg-gray-120 border-transparent text-black-20 py-1.5 px-5 rounded-[0.425rem] text-[13px] font-medium outline-none font-medium #{!important}
   }
 }
+
+/* Select set score*/
+.main-select-set-score{
+  @apply min-h-[44px] text-[13px];
+  .ant-select-selector{
+    &:focus, &:hover, &:focus-within{
+      @apply border-transparent outline-none outline-none shadow-none #{!important}
+    }
+    .ant-select-selection-search{
+      @apply m-0;
+      inset-inline-start: 20px;
+    }
+    @apply bg-purple-200 border-transparent text-black-20 py-1.5 px-5 rounded-[0.425rem] text-[13px] font-medium outline-none font-medium #{!important}
+  }
+}
 .ant-select-multiple {
   .ant-select-selection-placeholder {
     @apply pl-[10px]

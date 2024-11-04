@@ -13,10 +13,6 @@ export const createCustomerSchema = Joi.object({
     .messages({ 'any.only': 'Giới tính không hợp lệ.' }),
   phone: Joi.string().trim().pattern(VALIDATE_PHONE_REGEX_RULE).allow(null, '').label('Số điện thoại'),
   address: Joi.string().allow(null, '').label('Địa chỉ'),
-  attendance_score: Joi.number().min(0).label('Điểm chuyên cần'),
-  plus_score: Joi.number().min(0).label('Điểm cộng'),
-  midterm_score: Joi.number().min(0).label('Điểm giữa kì'),
-  final_score: Joi.number().min(0).label('Điểm cuối kì'),
   status: Joi.string()
     .valid(...Object.values(STATUS_ACTIVE))
     .label('Trạng thái')
@@ -33,10 +29,6 @@ export const updateCustomerSchema = Joi.object({
     .messages({ 'any.only': 'Giới tính không hợp lệ.' }),
   phone: Joi.string().trim().pattern(VALIDATE_PHONE_REGEX_RULE).allow(null, '').label('Số điện thoại'),
   address: Joi.string().allow(null, '').label('Địa chỉ'),
-  attendance_score: Joi.number().min(0).label('Điểm chuyên cần'),
-  plus_score: Joi.number().min(0).label('Điểm cộng'),
-  midterm_score: Joi.number().min(0).label('Điểm giữa kì'),
-  final_score: Joi.number().min(0).label('Điểm cuối kì'),
   status: Joi.string()
     .valid(...Object.values(STATUS_ACTIVE))
     .label('Trạng thái')
