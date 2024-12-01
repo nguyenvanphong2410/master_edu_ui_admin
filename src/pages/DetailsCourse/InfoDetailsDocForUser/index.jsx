@@ -3,7 +3,7 @@ import { Button, Col, Radio, Row, Space } from 'antd';
 import styles from './style.module.scss';
 import { FieldTimeOutlined, HighlightOutlined, PicLeftOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setClassRegisterOfCourse } from '@/states/modules/package';
+// import { setClassRegisterOfCourse } from '@/states/modules/course';
 import { dayjsFormatSort, formatMoney } from '@/utils/helper';
 import moment from 'moment';
 // import { useNavigate } from 'react-router-dom';
@@ -74,7 +74,7 @@ const InfoDetailsDocForUser = () => {
       <Row>
         <Col xs={24} sm={24} md={12} lg={12}>
           <div className={styles.infoItem}>
-            {/* {!authUser.userPackages.some((itemPkg) => itemPkg?._id === courseDetails?._id) && (
+            {/* {!authUser.userCourses.some((itemPkg) => itemPkg?._id === courseDetails?._id) && (
               <div className={`${styles.infoItem}`}>
                 <span className={styles.titleOrigin}>
                   <HighlightOutlined /> Lớp
@@ -99,7 +99,7 @@ const InfoDetailsDocForUser = () => {
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} className={`${styles.colRight} justify-end`}>
           {/* <div className={styles.infoItem}>
-            {!authUser.userPackages.some((itemPkg) => itemPkg?._id === courseDetails?._id) && selectedClassId && (
+            {!authUser.userCourses.some((itemPkg) => itemPkg?._id === courseDetails?._id) && selectedClassId && (
               <Button
                 type="primary"
                 size="large"

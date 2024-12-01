@@ -349,26 +349,19 @@ function ModalCreateOrUpdateClass() {
           </span>
         )}
       </div>
-      <div className={`${configModal.type === TYPE_SUBMIT.CREATE ? 'hidden' : 'input-wrap'}`}>
-        <div className="label-wrap">
-          <label className={`label-input `}>Trạng thái</label>
-        </div>
-        {/* <Tooltip placement="left" title={infoClass.status === CLASS_STATUS.LOCK ? 'Khoá' : 'Kích hoạt'}>
-          <Switch
-            className={`main-switch`}
-            onChange={(checked) => handleSwitchChange(checked)}
-            checked={infoClass.status === CLASS_STATUS.UNLOCK ? true : false}
-          />
-        </Tooltip> */}
-      </div>
+
       <div className={`flex justify-center mt-8`}>
-        <Button className={`ant-btn-close mx-[5px]`} size={'large'} onClick={handleCancelModalCreateOrUpdateClass}>
+        <Button 
+          className={`main-btn-close`} 
+          size={'large'} 
+          onClick={handleCancelModalCreateOrUpdateClass}
+        >
           Đóng
         </Button>
         {configModal.type === TYPE_SUBMIT.CREATE ? (
           <Button
             loading={isLoadingBtnCreateClass}
-            className={`ant-btn-primary mx-[5px]`}
+            className={`main-btn-primary mx-[5px]`}
             size={'large'}
             onClick={() => handleSubmit(TYPE_SUBMIT.CREATE, createClassSchema, infoClass)}
           >
@@ -377,7 +370,7 @@ function ModalCreateOrUpdateClass() {
         ) : (
           <Button
             loading={isLoadingBtnUpdateClass}
-            className={`ant-btn-primary mx-[5px]`}
+            className={`main-btn-primary mx-[5px]`}
             size={'large'}
             onClick={() => handleSubmit(TYPE_SUBMIT.UPDATE, updateClassSchema, infoClass)}
           >

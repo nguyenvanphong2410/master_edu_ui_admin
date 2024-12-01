@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initDataFilterClass, initErrInfoClass, initInfoClass, initPaginationListClass } from './initState';
+import {
+  initDataFilterClass,
+  initErrInfoClass,
+  initErrScore,
+  initInfoClass,
+  initInfoScore,
+  initPaginationListClass,
+} from './initState';
 
 const classSlice = createSlice({
   name: 'class',
@@ -10,11 +17,20 @@ const classSlice = createSlice({
     isLoadingBtnUpdateClass: false,
     isLoadingBtnDeleteClass: false,
     visibleModalCreateOrUpdateClass: false,
+    visibleModalSettingScore: false,
     visibleModalDeleteClass: false,
+    isLoadingGetListStudentOfClass: false,
+    isLoadingUpdateScore: false,
 
     classes: [],
     classSelected: {},
+    studentToSetScoreSelected: '',
+    infoScore: initInfoScore,
+    listStudentOfClass: [],
+    dataListStudentScoreOfClass:[],
+
     infoClass: initInfoClass,
+    errorInfoScore: initErrScore,
     errorInfoClass: initErrInfoClass,
     dataFilter: initDataFilterClass,
     paginationListClass: initPaginationListClass,
@@ -34,9 +50,21 @@ const classSlice = createSlice({
       ...state,
       visibleModalCreateOrUpdateClass: action.payload,
     }),
+    setVisibleModalSettingScore: (state, action) => ({
+      ...state,
+      visibleModalSettingScore: action.payload,
+    }),
     setInfoClass: (state, action) => ({
       ...state,
       infoClass: action.payload,
+    }),
+    setInfoScore: (state, action) => ({
+      ...state,
+      infoScore: action.payload,
+    }),
+    setErrorInfoScore: (state, action) => ({
+      ...state,
+      errorInfoScore: action.payload,
     }),
     setErrorInfoClass: (state, action) => ({
       ...state,
@@ -131,6 +159,10 @@ const classSlice = createSlice({
       ...state,
       classSelected: action.payload,
     }),
+    setStudentToSetScoreSelected: (state, action) => ({
+      ...state,
+      studentToSetScoreSelected: action.payload,
+    }),
 
     // Xoa lớp học
     setShowModalDeleteClass: (state, action) => ({
@@ -149,12 +181,77 @@ const classSlice = createSlice({
       ...state,
       isLoadingBtnDeleteClass: false,
     }),
+
+    //getListStudentOfClass
+    getListStudentOfClass: (state) => ({
+      ...state,
+      isLoadingGetListStudentOfClass: true,
+    }),
+    getListStudentOfClassSuccess: (state, action) => ({
+      ...state,
+      isLoadingGetListStudentOfClass: false,
+      listStudentOfClass: action.payload.data.students,
+    }),
+    getListStudentOfClassFailure: (state) => ({
+      ...state,
+      isLoadingGetListStudentOfClass: false,
+    }),
+
+    //Lấy điểm cuat học viên dựa vào idhv idlop
+    getScoreOfStudentOfClass: (state) => ({
+      ...state,
+      isLoadingGetScoreOfStudentOfClass: true,
+    }),
+    getScoreOfStudentOfClassSuccess: (state, action) => ({
+      ...state,
+      isLoadingGetScoreOfStudentOfClass: false,
+      infoScore: {
+        attendance_score: action.payload.data.scoreOfStudent.attendance_score,
+        plus_score: action.payload.data.scoreOfStudent.plus_score,
+        midterm_score: action.payload.data.scoreOfStudent.midterm_score,
+        final_score: action.payload.data.scoreOfStudent.final_score,
+      },
+    }),
+    getScoreOfStudentOfClassFailure: (state) => ({
+      ...state,
+      isLoadingGetScoreOfStudentOfClass: false,
+    }),
+
+    updateScore: (state) => ({
+      ...state,
+      isLoadingUpdateScore: true,
+    }),
+    updateScoreSuccess: (state) => ({
+      ...state,
+      isLoadingUpdateScore: false,
+    }),
+    updateScoreFail: (state) => ({
+      ...state,
+      isLoadingUpdateScore: false,
+    }),
+
+    //Danh sách điêmt số của hoc vien theo lop
+    getListStudentScoreOfClass: (state) => ({
+      ...state,
+      isLoadingGetListStudentScoreOfClass: true,
+    }),
+    getListStudentScoreOfClassSuccess: (state, action) => ({
+      ...state,
+      isLoadingGetListStudentScoreOfClass: false,
+      dataListStudentScoreOfClass: action.payload.data.students,
+    }),
+    getListStudentScoreOfClassFailure: (state) => ({
+      ...state,
+      isLoadingGetListStudentScoreOfClass: false,
+    }),
   },
 });
 
 export const {
   setInfoClass,
+  setInfoScore,
   setErrorInfoClass,
+  setErrorInfoScore,
   setImageList,
 
   getListClass,
@@ -186,10 +283,29 @@ export const {
 
   setConfigModal,
   setVisibleModalCreateOrUpdateClass,
+  setVisibleModalSettingScore,
 
   setSelectCourseId,
 
   setClassSelected,
   setShowModalDeleteClass,
+  setStudentToSetScoreSelected,
+
+  getListStudentOfClass,
+  getListStudentOfClassSuccess,
+  getListStudentOfClassFailure,
+
+  getScoreOfStudentOfClass,
+  getScoreOfStudentOfClassSuccess,
+  getScoreOfStudentOfClassFailure,
+
+  updateScore,
+  updateScoreSuccess,
+  updateScoreFail,
+
+  getListStudentScoreOfClass,
+  getListStudentScoreOfClassSuccess,
+  getListStudentScoreOfClassFailure
+  
 } = classSlice.actions;
 export default classSlice.reducer;

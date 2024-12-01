@@ -10,7 +10,7 @@ import {
 import { orderInitialData } from "./initialState.js";
 import {requestDeleteOrderFail, requestDeleteOrderSuccess} from "./index.js";
 import {getNotification} from "../../../utils/helper.js";
-import {getListOrders, getListPackage} from "../../../api/order/index.js";
+import {getListOrders, getListCourse} from "../../../api/order/index.js";
 import {ORDER_STATUS} from "../../../utils/constants.js";
 
 function* loadRouteData () {
@@ -27,7 +27,7 @@ function* loadRouteData () {
   ]))
   yield put(setDataFilter(orderInitialData.dataFilter))
   yield put(getListOrders());
-  yield put(getListPackage());
+  yield put(getListCourse());
 }
 
 function* handleActions () {

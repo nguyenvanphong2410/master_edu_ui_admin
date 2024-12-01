@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Modal} from "antd";
-import './styles.scss';
 import styles from './styles.module.scss';
 import CircleExclamation from "../../assets/images/icons/light/circle-exclamation.svg";
 import InlineSVG from "react-inlinesvg";
@@ -38,8 +37,7 @@ export default function ModalConfirm(props) {
           </Button>
           <Button
             loading={loading}
-            className={`mx-[5px]`}
-            type={'primary'}
+            className={`main-btn-confirm mx-[5px]`}
             size={'large'}
             onClick={() => handleConfirm()}
           >

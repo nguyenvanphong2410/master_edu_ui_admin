@@ -1,43 +1,3 @@
-.btn-edit {
-  .fa-primary {
-    @apply fill-black-55 #{!important};
-  }
-
-  .fa-secondary {
-    @apply fill-black-70 #{!important};
-  }
-
-  &:hover {
-    .fa-primary {
-      @apply fill-blue-65 #{!important};
-    }
-
-    .fa-secondary {
-      @apply fill-blue-70 #{!important};
-    }
-  }
-}
-
-.btn-delete {
-  .fa-primary {
-    @apply fill-black-55 #{!important};
-  }
-
-  .fa-secondary {
-    @apply fill-black-60 #{!important};
-  }
-
-  &:hover {
-    .fa-primary {
-      @apply fill-blue-65 #{!important};
-    }
-
-    .fa-secondary {
-      @apply fill-blue-70 #{!important};
-    }
-  }
-}
-
 .iconGiftWrap {
   .fa-primary {
     @apply fill-black-55 #{!important};
@@ -48,7 +8,7 @@
   }
 }
 
-.main-card-package {
+.main-card-course {
   .ant-card-body {
     @apply grow;
   }

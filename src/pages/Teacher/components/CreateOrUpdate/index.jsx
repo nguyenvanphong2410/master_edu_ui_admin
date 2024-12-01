@@ -270,7 +270,6 @@ export default function CreateOrUpdate(props) {
         {configModalTeacher.type === TYPE_SUBMIT.CREATE ? (
           <Button
             className={`main-btn-primary`}
-            type={'primary'}
             size={'large'}
             loading={isLoadingBtnCreateOrUpdate}
             onClick={() => handleConfirm(TYPE_SUBMIT.CREATE, inForTeacher)}
@@ -280,7 +279,6 @@ export default function CreateOrUpdate(props) {
         ) : (
           <Button
             className={`main-btn-primary`}
-            type={'primary'}
             size={'large'}
             loading={isLoadingBtnCreateOrUpdate}
             onClick={() => handleConfirm(TYPE_SUBMIT.UPDATE, inForTeacher)}

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Modal} from "antd";
-import './styles.scss';
 import styles from './styles.module.scss'
 import Close from "../../assets/images/icons/duotone/times.svg";
 import InlineSVG from "react-inlinesvg";

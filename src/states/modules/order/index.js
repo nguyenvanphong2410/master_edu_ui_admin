@@ -12,7 +12,7 @@ const orderSlice = createSlice({
     visibleModalChangeStatusOrder: false,
     isLoadingBtnDelete: false,
     isLoadingBtnChangeStatus: false,
-    listPackage: [],
+    listCourse: [],
     statusOrderType: null,
   },
   reducers: {
@@ -46,17 +46,17 @@ const orderSlice = createSlice({
       }
     }),
 
-    startRequestGetListPackage: (state) => ({
+    startRequestGetListCourse: (state) => ({
       ...state,
-      listPackage: []
+      listCourse: []
     }),
-    requestGetListPackageSuccess: (state, action) => ({
+    requestGetListCourseSuccess: (state, action) => ({
       ...state,
-      listPackage: action.payload.data
+      listCourse: action.payload.data
     }),
-    requestGetListPackageFail: (state) => ({
+    requestGetListCourseFail: (state) => ({
       ...state,
-      listPackage: []
+      listCourse: []
     }),
 
     setVisibleModalDeleteOrder: (state, action) => ({
@@ -108,7 +108,7 @@ export const {
   startRequestGetListOrders, requestGetListOrdersSuccess, requestGetListOrdersFail,
   setVisibleModalDeleteOrder,
   startRequestDeleteOrder, requestDeleteOrderSuccess, requestDeleteOrderFail,
-  startRequestGetListPackage, requestGetListPackageSuccess, requestGetListPackageFail,
+  startRequestGetListCourse, requestGetListCourseSuccess, requestGetListCourseFail,
   setVisibleModalChangeStatusOrder, startRequestChangeStatusOrder, requestChangeStatusOrderSuccess, requestChangeStatusOrderFail,
   setStatusOrderType
 } = orderSlice.actions

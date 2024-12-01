@@ -25,7 +25,7 @@ function Home() {
     <MainLayout>
       {hasPermission([PERMISSIONS.LIST.LIST_ADMIN]) ? (
         <>
-          <Row gutter={20}>
+          <Row gutter={{ md: 0, lg: 20 }}>
             <Col span={12} lg={6}>
               <div
                 className="flex justify-between px-5 shadow-xl h-32 items-center rounded-md overview-wrap"
@@ -106,7 +106,7 @@ function Home() {
                   <div className="font-bold text-[#5A5A60] text-3xl text-overview">
                     {overview?.total_order ? formatNumber(overview.total_order) : 0}
                   </div>
-                  <div>Lượt mua</div>
+                  <div>Đơn mua</div>
                 </div>
               </div>
             </Col>

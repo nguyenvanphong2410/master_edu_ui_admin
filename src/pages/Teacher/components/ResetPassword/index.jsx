@@ -68,7 +68,6 @@ export default function CreateOrUpdate(props) {
         </Button>
         <Button
           className={`main-btn-primary`}
-          type={'primary'}
           size={'large'}
           loading={isLoadingBtnResetPassword}
           onClick={() => handleConfirmReset()}>

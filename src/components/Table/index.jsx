@@ -62,7 +62,6 @@ function TableDefault(props) {
           <div className={styles.selectPerPageWrap}>
             <Select
               className={`main-select w-30`}
-              // placeholder="Chọn trạng thái"
               optionLabelProp="label"
               value={limitTable}
               onChange={(e) => handleSelectLimitTable(e)}

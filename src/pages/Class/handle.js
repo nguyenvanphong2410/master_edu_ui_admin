@@ -30,7 +30,7 @@ export default function Handle() {
   const errorInfoClass = useSelector((state) => state.class.errorInfoClass);
   const dataFilter = useSelector((state) => state.class.dataFilter);
   const paginationListClass = useSelector((state) => state.class.paginationListClass);
-  const dataListCourse = useSelector((state) => state.package.allCourse);
+  const dataListCourse = useSelector((state) => state.course.allCourse);
   const dataAllTeacher = useSelector((state) => state.teacher.allTeacher);
 
   const dataAllStudent = useSelector((state) => state.customer.allCustomers);

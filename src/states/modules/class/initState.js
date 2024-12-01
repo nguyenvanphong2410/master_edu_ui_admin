@@ -40,3 +40,17 @@ export const initPaginationListClass = {
   perPage: 20,
   totalRecord: 0,
 };
+
+export const initInfoScore = {
+  attendance_score: 0,
+  plus_score: 0,
+  midterm_score: 0,
+  final_score: 0,
+}
+
+export const initErrScore = {
+  attendance_score: 0,
+  plus_score: 0,
+  midterm_score: 0,
+  final_score: 0,
+}

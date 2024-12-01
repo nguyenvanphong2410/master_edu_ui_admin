@@ -87,15 +87,15 @@ export default function Handle() {
     },
     {
       title: "Khóa học",
-      dataIndex: "package_name",
-      key: "package_name",
+      dataIndex: "course_name",
+      key: "course_name",
       sorter: true,
       showSorterTooltip: false,
     },
     {
       title: "Điểm",
-      dataIndex: "package_point",
-      key: "package_point",
+      dataIndex: "course_point",
+      key: "course_point",
       align: "center",
       sorter: true,
       showSorterTooltip: false,
@@ -108,8 +108,8 @@ export default function Handle() {
     },
     {
       title: "Tổng tiền",
-      dataIndex: "package_current_price",
-      key: "package_current_price",
+      dataIndex: "course_current_price",
+      key: "course_current_price",
       showSorterTooltip: false,
       sorter: true,
       align: "center",
@@ -150,7 +150,7 @@ export default function Handle() {
           render: (text, record) => (
             <div>
               {[ORDER_STATUS['PENDING']].includes(record.status) ? (
-                <div className={`btn-action flex justify-evenly`}>
+                <div className={`btn-table-action flex justify-evenly`}>
                   {
                     hasPermission([PERMISSIONS.EDIT.EDIT_CONFIRM]) ?
                       <Tooltip placement="bottom" title={'Xác nhận'}>

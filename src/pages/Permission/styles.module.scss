@@ -11,7 +11,7 @@
     border: 1px solid #e9e9e9;    
     .permissionWrap{
         margin: 20px 0;
-        border-right: 1px solid $colorStroke;
+        border-right: 1px solid $colorLine;
 
         .permissionTitle{
             margin: 0 20px;
@@ -21,7 +21,7 @@
                padding-bottom: 16px;
                align-items: center;
                justify-content: space-between;
-               border-bottom: 1px solid $colorStroke;
+               border-bottom: 1px solid $colorLine;
 
                 p{
                     margin: 0;
@@ -33,7 +33,7 @@
                     display: flex;
                     cursor: pointer;
                     margin-top: 2px;
-                    color: $colorBlue;
+                    color: $colorMain;
                     align-items: center;
 
                     .iconAdd {
@@ -71,7 +71,7 @@
                 margin: 0 20px;
                 font-size: 16px;
                 font-weight: 600;
-                border-bottom: 1px solid $colorStroke;
+                border-bottom: 1px solid $colorLine;
                 padding-bottom: 15px;
 
                 p{
@@ -121,7 +121,7 @@
                     margin-right: 8px;
                     margin-bottom: 20px;
                     font-size: 100px;
-                    color: $colorPlaceholder;
+                    color: $colorMain;
                     transition: color 0.3s;
                 }
 
@@ -133,7 +133,7 @@
                     text-align: center;
                     margin-top: 10px;
                     font-size: 16px;
-                    color: $colorPlaceholder;
+                    color: $colorMain;
                 }
             }
         }

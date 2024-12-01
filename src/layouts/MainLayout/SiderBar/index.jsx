@@ -79,14 +79,14 @@ function SideBar(props) {
               <img 
               src={Logo} 
               alt="" onClick={() => {
-                if (windowSize.width > 576) { navigate('/order') }
+                if (windowSize.width > 576) { navigate('/') }
               }} />
             </div> :
             <div className={`${styles.imgWrap} ${styles.imgWrapDesktop}`}>
               <img 
               src={IconLogo} 
               alt="" onClick={() => {
-                if (windowSize.width > 576) { navigate('/order') }
+                if (windowSize.width > 576) { navigate('/') }
               }}  />
             </div>
         }

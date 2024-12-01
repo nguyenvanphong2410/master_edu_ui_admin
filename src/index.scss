@@ -5,229 +5,376 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet');
 @import "./assets/scss/variables";
 
-*{
-    font-family: "Montserrat", sans-serif;
-}
-/* Input */
-.main-input{
-    &:focus, &:hover, &:focus-within{
-        @apply bg-gray-95 border-transparent outline-none shadow-none #{!important}
-    }
-    &.ant-input{
-        &:focus, &:hover, &:focus-within{
-            @apply border-transparent bg-gray-95 outline-none shadow-none #{!important}
-        }
-    }
-    .ant-input{
-      @apply bg-transparent text-black-20 #{!important}
-    }
-    .ant-input-number-input {
-      @apply p-0 #{!important};
-    }
-    @apply bg-gray-120 border-gray-120 text-black-20 py-2.5 px-5 rounded-[0.425rem] text-sm outline-none font-medium h-[44px]
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
-.error-input {
-  @apply border-red-65 #{!important}
-}
+/* Input Ant*/
+.main-input {
+  background-color: $colorBgMain !important;
+  border-color: $colorBgMain;
+  color: $colorText;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-weight: 500;
+  height: 44px;
 
-.input-wrap {
-  @apply w-full mb-[15px];
-  .label-wrap {
-    @apply text-[14px] font-medium mb-[5px];
-    .required {
-      @apply text-red-65 font-bold;
+  &:focus,
+  &:hover,
+  &:focus-within {
+    background-color: $colorBgMainHoverFocus ;
+    border-color: transparent;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  }
+
+  &.ant-input {
+    background-color: transparent;
+    color: $colorText ;
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+      background-color: $colorBgMainHoverFocus ;
+      border-color: transparent;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     }
   }
-  .error {
-    @apply
-    flex items-center
-    text-red-65 text-left text-sm
-    mt-[3px];
-    .icon {
-      @apply
-      w-3.5 mt-[-1px] mr-[3px]
-    }
+
+  .ant-input {
+    color: $colorText;
+    background-color: transparent;
   }
+
 }
 
-/* Select */
-.main-select{
-  @apply min-h-[44px] text-[13px];
-  .ant-select-selector{
-    &:focus, &:hover, &:focus-within{
-      @apply border-transparent outline-none outline-none shadow-none #{!important}
+/* Input Number Ant*/
+.main-input-number {
+
+  &:focus,
+  &:hover,
+  &:focus-within {
+    background-color: $colorBgMainHoverFocus !important;
+    border-color: transparent !important;
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  }
+
+  &.ant-input-number {
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+      background-color: $colorBgMainHoverFocus !important;
+      border-color: transparent !important;
+      outline: 2px solid transparent !important;
+      outline-offset: 2px !important;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
     }
-    .ant-select-selection-search{
-      @apply m-0;
+  }
+
+  background-color: $colorBgMain !important;
+  border-color: $colorBgMain !important;
+  color: $colorText;
+  padding: 5px 20px;
+  border-radius: 0.425rem;
+  font-size: 14px;
+  line-height: 20px;
+  outline: 2px solid transparent !important;
+  outline-offset: 2px;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* Select Ant*/
+.main-select {
+  min-height: 44px !important;
+  font-size: 13px !important;
+  .ant-select-selector {
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+      border-color: transparent !important;
+      outline: 2px solid transparent !important;
+      outline-offset: 2px !important;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+    }
+
+    .ant-select-selection-search {
       inset-inline-start: 20px;
     }
-    @apply bg-gray-120 border-transparent text-black-20 py-1.5 px-5 rounded-[0.425rem] text-[13px] font-medium outline-none font-medium #{!important}
+
+    background: $colorBgMain !important;
+    border-color: transparent !important;
+    color: $colorText !important;
+    padding: 6px 20px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
   }
 }
+
+.ant-select .ant-select-arrow {
+  margin-top: 0 !important;
+}
+
+/* Select set score Ant*/
+.main-select-set-score {
+  .ant-select-selector {
+
+    &:focus,
+    &:hover,
+    &:focus-within {
+      border-color: transparent !important;
+      outline: 2px solid transparent !important;
+      outline-offset: 2px !important;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+    }
+
+    .ant-select-selection-search {
+      inset-inline-start: 20px;
+    }
+
+    min-height: 44px !important;
+    font-size: 13px !important;
+    background: #e3d1e6 !important;
+    border-color: transparent !important;
+    color: $colorText !important;
+    padding: 6px 20px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Checkbox Ant*/
+.main-checkbox {
+  .ant-checkbox {
+    &:not(.ant-checkbox-checked) {
+      .ant-checkbox-inner {
+        background-color: #f2f2f2;
+        border-color: transparent;
+        color: $colorText;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+
+    .ant-checkbox-inner {
+      &:after {
+        top: 47%;
+        left: 25.5%;
+      }
+
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: $colorMain;
+  border-color: $colorMain;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+  background-color: $colorMain;
+  border-color: $colorMain;
+}
+
+.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: #ebe8e8;
+  border-color: #f1efef;
+}
+
+/* Select multiple Ant*/
 .ant-select-multiple {
   .ant-select-selection-placeholder {
-    @apply pl-[10px]
+    padding-left: 10px;
   }
+
   .ant-select-selection-search {
-    inset-inline-start: 0!important;
+    inset-inline-start: 0 !important;
   }
 }
 
-/* Checkbox */
-.main-checkbox{
-    .ant-checkbox{
-        &:not(.ant-checkbox-checked){
-            .ant-checkbox-inner {
-                @apply bg-gray-95 border-transparent text-black-20 outline-none #{!important}
-            }
-        }
-        .ant-checkbox-inner{
-            &:after{
-                @apply top-[47%] left-[25.5%]
-            }
-            @apply w-5 h-5
-        }
-    }
-}
-
-/* Switch */
-.main-switch{
-    &:not(.ant-switch-checked){
-        @apply bg-gray-95 #{!important}
-    }
-}
-
-/* Date Picker */
-.main-datepicker{
-    &:focus, &:hover, &:focus-within{
-        @apply bg-gray-95 border-transparent outline-none outline-none shadow-none #{!important}
-    }
-    .ant-select-selection-search{
-        @apply m-0
-    }
-    .ant-select-selection-placeholder{
-        @apply ml-2
-    }
-    @apply bg-gray-120 border-gray-120 text-black-20 py-[9px] px-5 rounded-[0.425rem] text-sm outline-none font-medium h-[44px] #{!important}
-}
-
-/* Input Number */
-.main-input-number{
-    &:focus, &:hover, &:focus-within{
-        @apply bg-gray-95 outline-none
-    }
-    &:focus{
-        @apply bg-gray-95
-    }
-    &.ant-input-number{
-        &:focus, &:hover, &:focus-within{
-            @apply border-transparent bg-gray-95 outline-none shadow-none
-        }
-    }
-    @apply bg-gray-95 border-gray-95 text-black-20 py-[5px] px-5 rounded-[0.425rem] text-sm outline-none font-medium w-full;
-}
-
-.input-price {
-  input {
-    @apply px-0 #{!important}
+/* Switch Ant*/
+.main-switch {
+  &:not(.ant-switch-checked) {
+    background-color: #f2f2f2;
   }
 }
 
-/* Table */
-.main-table{
-    .ant-table-thead{
-        .ant-table-cell{
-            &:before{
-                @apply bg-transparent #{!important}
-            }
-            @apply bg-white text-gray-65 #{!important}
-        }
+/* Date Picker Ant*/
+.main-datepicker {
+
+  &:focus,
+  &:hover,
+  &:focus-within {
+    background-color: #f2f2f2;
+    border-color: transparent;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  background-color: #f9f9f9;
+  border-color: #f9f9f9;
+  color: #333333;
+  padding: 9px 20px;
+  border-radius: 6px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 20px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-weight: 500;
+}
+
+/* Table Ant*/
+.main-table {
+  .ant-table-thead {
+    .ant-table-cell {
+      &:before {
+        background-color: transparent !important;
+      }
+
+      background-color:#ffffff;
+      color: #a6a6a6;
     }
-    .ant-table-cell{
-        @apply border-b border-dashed #{!important}
-    }
-    .ant-table-cell-row-hover, .ant-table-column-sort{
-      @apply bg-transparent #{!important}
-    }
+  }
+
+  .ant-table-cell {
+    border-bottom-width: 1px !important;
+    border-style: dashed !important;
+  }
+
+  .ant-table-cell-row-hover,
+  .ant-table-column-sort {
+    background-color: transparent !important;
+  }
 }
 
 .fixed-cell {
-    .ant-table-thead{
-        .ant-table-cell{
-            &:before{
-                @apply bg-white #{!important}
-            }
-            @apply bg-white text-gray-65 #{!important}
-        }
-    }
+  .ant-table-thead {
+    .ant-table-cell {
+      &:before {
+        background-color: #ffffff !important;
+      }
 
-    .ant-table-cell-row-hover, .ant-table-column-sort{
-        @apply bg-white #{!important}
+      background-color: #ffffff !important;
+      color: #a6a6a6;
     }
+  }
+
+  .ant-table-cell-row-hover,
+  .ant-table-column-sort {
+    background-color: #ffffff !important;
+  }
 }
 
-/* Pagination */
-.ant-pagination-item-active{
-  background-color: #bd16eb !important;
+/* Pagination Ant*/
+.ant-pagination-item-active {
+  background-color: $colorMain !important;
   border: none !important;
 
-    a{
-        @apply text-white #{!important}
-    }
+  a {
+    color: #ffffff !important;
+  }
 }
 
-/* Button */
+/* Button Ant*/
 .main-btn-primary {
-  &.ant-btn-primary {
-    &:hover {
-      opacity: 0.8;
-      @apply bg-[#bd16eb] #{!important}
-    }
+  &:hover {
+    opacity: 0.8;
+    background-color: $colorMain !important;
+    border-color: transparent !important;
+  }
 
-    @apply bg-[#bd16eb] text-white #{!important}
+  background-color: $colorMain !important;
+  border-color: transparent !important;
+  color: $colorWhite !important;
+  border-radius: 6px !important;
+}
+
+/* Button Delete Ant*/
+.main-btn-delete {
+  &:hover {
+    opacity: 0.8;
+    background-color: $colorRed !important;
+    border-color: transparent !important;
+  }
+
+  background-color: $colorRed !important;
+  border-color: transparent !important;
+  color: $colorWhite !important;
+  border-radius: 6px !important;
+}
+
+/* Button Confirm Ant*/
+.main-btn-confirm {
+  &:hover {
+    opacity: 0.8;
+    background-color: $colorGreen !important;
+    border-color: transparent !important;
+  }
+
+  background-color: $colorGreen !important;
+  border-color: transparent !important;
+  color: $colorWhite !important;
+  border-radius: 6px !important;
+}
+
+/* Button Close Ant*/
+.main-btn-close {
+  background-color: $colorBgMain !important;
+  border-color: transparent !important;
+  margin-right: 10px !important;
+  border-radius: 6px !important;
+
+  &:hover {
+    color: $colorText !important;
+    background-color: #e6e1e1 !important;
   }
 }
 
-.ant-btn-primary{
-  &:hover{
-    @apply bg-[#bd16eb] #{!important}
-  }
-  @apply bg-[#bd16eb] text-white #{!important}
+/* Skeleton Ant */
+.ant-skeleton-input-lg {
+  height: 44px !important;
 }
 
-.main-btn-close{
-  @apply bg-gray-120 border-transparent mr-2.5 #{!important};
-  &:hover{
-    @apply text-black-10 bg-gray-115 #{!important};
-  }
-}
-
-.ant-btn-lg {
-  @apply h-[44px] text-sm #{!important};
-}
-
-.main-btn-close{
-  @apply bg-gray-120 border-transparent mr-2.5 #{!important};
-  &:hover{
-    @apply text-black-10 bg-gray-115 #{!important};
-  }
-}
-
-/* Notification */
+/* Notification Ant*/
 .ant-notification {
   z-index: 9999;
+
   .ant-notification-notice-wrapper {
-    @apply w-max
+    width: max-content;
   }
+
   .ant-notification-notice {
 
     .ant-notification-notice-icon {
-      @apply hidden
+      display: none;
     }
 
     .ant-notification-notice-message {
-      @apply hidden
+      display: none;
     }
 
     .ant-notification-notice-description {
@@ -236,78 +383,234 @@
 
         .icon-notification {
           img {
-            @apply max-w-none w-auto h-auto
+            max-width: none;
+            width: auto;
+            height: auto;
           }
 
-         @apply mr-[15px] w-4 h-4
+          margin-right: 5px !important;
+          margin-left: 10px;
+          width: 16px;
+          height: 16px;
         }
 
         .text-notification {
-          @apply text-sm text-black-20
+          font-size: 14px;
+          line-height: 20px;
+          color: #333333;
         }
 
-        @apply flex justify-start items-center min-h-[40px] rounded-md py-2 pr-[42px] pl-4 w-max
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 40px;
+        border-radius: 6px;
+        padding: 8px 42px 8px 4px;
+        width: max-content;
       }
 
       .notification-success {
-        @apply border border-green-75 bg-green-95
+        border-width: 1px;
+        border-color: #99e699;
+        background-color: #ccffcc;
       }
 
       .notification-error {
-        @apply border border-red-75 bg-red-95
+        border-width: 1px;
+        border-color: #ff8080;
+        background-color: #ffe6e6;
       }
 
       .notification-warning {
-        @apply border border-orange-75 bg-orange-95
+        border-width: 1px;
+        border-color: #ffd280;
+        background-color: #fff6e6;
       }
 
-      @apply m-0 ms-0 #{!important}
+      margin: 0px !important;
+      margin-inline-start: 0px !important;
     }
 
     .ant-notification-notice-close {
 
       &:hover {
-        @apply bg-black-110
+        background-color: #6c5ffc0d;
       }
 
       .ant-notification-notice-close-x {
-        @apply flex
+        display: flex;
       }
 
-      @apply top-0 right-[10px] h-full flex items-center
+      top: 0;
+      right: 10px;
+      height: 100%;
+      display: flex;
+      align-items: center;
     }
 
-    @apply p-0 rounded-md w-full overflow-hidden #{!important}
+    padding: 0 !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    overflow: hidden !important;
   }
 }
 
-/* Skeleton */
-.ant-skeleton-input-lg {
-  height: 44px!important;
+/* Modal Ant*/
+.general-dialog-wrap {
+  .ant-modal-content {
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .ant-modal-footer {
+    display: none;
+  }
 }
 
-/* Scroll bar */
-html *::-webkit-scrollbar {
-  @apply h-1.5;
-  @apply w-1.5;
+// Err input border
+.error-input {
+  border-color: $colorRed;
 }
 
-html *::-webkit-scrollbar-track {
-  @apply bg-[#d9dbe2];
-  @apply rounded-lg;
+// Input Wrap
+.input-wrap {
+  width: 100%;
+  margin-bottom: 15px;
+
+  .label-wrap {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+
+    .required {
+      color: $colorRed;
+      font-weight: bold;
+    }
+  }
+
+  .error {
+    @apply flex items-center text-red-65 text-left md:text-sm mt-[3px];
+    .icon {
+      @apply md:w-3.5 mt-[-1px] mr-[3px]
+    }
+  }
 }
 
-html *::-webkit-scrollbar-thumb {
-  @apply bg-[#bec3cd];
-  @apply rounded-lg;
+.input-price {
+  input {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 
-/* Set height inline CKEditor */
+
+.btn-table-action {
+  display: flex;
+  justify-content: center;
+  background: $colorWhite;
+  gap: 4px;
+
+  .btn-edit {
+    .fa-primary {
+      fill: #8c8c8c !important;
+    }
+
+    .fa-secondary {
+      fill: #b3b3b3 !important;
+    }
+
+    &:hover {
+      .fa-primary {
+        fill: $colorMain !important;
+
+      }
+
+      .fa-secondary {
+        fill: $colorMain !important;
+      }
+    }
+
+    cursor: pointer;
+    background-color: #f9f9f9;
+    width: max-content;
+    padding: 8px;
+    border-radius: 6px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-delete {
+    .fa-primary {
+      fill: #8c8c8c !important;
+      ;
+    }
+
+    .fa-secondary {
+      fill: #999999 !important;
+    }
+
+    &:hover {
+      .fa-primary {
+        fill: $colorRed !important;
+
+      }
+
+      .fa-secondary {
+        fill: $colorRed !important;
+      }
+    }
+
+    cursor: pointer;
+    background-color: #f9f9f9;
+    width: max-content;
+    padding: 8px;
+    border-radius: 6px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-reset {
+    .fa-primary {
+      fill: #8c8c8c !important;
+    }
+
+    .fa-secondary {
+      fill: #999999 !important;
+    }
+
+    &:hover {
+      .fa-primary {
+        fill: $colorMain !important;
+      }
+
+      .fa-secondary {
+        fill: $colorMain !important;
+      }
+    }
+
+    cursor: pointer;
+    background-color: #f9f9f9;
+    width: max-content;
+    padding: 8px;
+    border-radius: 6px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* CKEditor */
 .ck-editor__editable_inline {
   min-height: 200px;
 }
 
-/* No data*/
+/* No data */
 .no-data-wrap {
-  @apply flex justify-center items-center h-[60vh];
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }

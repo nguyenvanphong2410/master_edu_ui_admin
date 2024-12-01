@@ -12,14 +12,18 @@ import {
   changeStatusClassSuccess,
   changeStatusClassFail,
   setShowModalDeleteClass,
+  updateScoreSuccess,
+  updateScoreFail,
+  setErrorInfoScore,
 
 } from './index';
 import {getNotification} from '@/utils/helper';
 import {
-  getListClasses
+  getListClasses,
+  requestGetListStudentScoreOfClass
 } from '@/api/class';
 import { setBreadcrumb, setTitlePage } from '../app';
-import { getAllCourses } from '@/api/package';
+import { getAllCourses } from '@/api/course';
 import { requestGetAllTeachers } from '@/api/teacher';
 import { requestGetAllCustomers } from '@/api/customer';
 
@@ -128,6 +132,27 @@ function* handleActions() {
     yield put(getListClasses());
     getNotification('error', 'Thay đổi trạng thái lớp học thất bại.');
   });
+
+  yield takeLatest(updateScoreSuccess, function* () {
+    const classSelected = yield select((state) => state.class.classSelected);
+    yield put(requestGetListStudentScoreOfClass(classSelected._id));
+    getNotification('success', 'Cập nhật điểm số thành công.');
+  });
+
+  yield takeLatest(updateScoreFail, function* (action) {
+    let status = action.payload.status;
+    if (status === 400) {
+      let errors = action.payload.data.detail;
+      yield put(
+        setErrorInfoScore({
+          ...errors,
+        })
+      );
+    } else {
+      getNotification('error', 'Cập nhật điểm số thất bại.');
+    }
+  });
+
 
 }
 
