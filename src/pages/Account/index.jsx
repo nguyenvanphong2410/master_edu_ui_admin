@@ -12,7 +12,9 @@ import { setVisibleModalChangeStatus, setVisibleModalDeleteUser } from '../../st
 import ResetPassword from './components/ResetPassword';
 import ModalConfirm from '../../components/ModalConfirm/index.jsx';
 import { hasPermission } from '@/utils/helper.js';
-import { CONFIG_TYPE, PERMISSIONS, TYPE_SUBMIT } from '@/utils/constants.js';
+import { PERMISSIONS, TYPE_SUBMIT } from '@/utils/constants.js';
+import InlineSVG from 'react-inlinesvg';
+import PlusIcon from '@/assets/images/icons/light/plus.svg';
 
 export default function AccountManagement() {
   const {
@@ -61,10 +63,10 @@ export default function AccountManagement() {
             <div className={styles.action}>
               {hasPermission([PERMISSIONS.ADD.ADD_EMPLOYEE]) && (
                 <Button
-                  onClick={() => openModalCreate()}
-                  className={`main-btn-primary ml-[15px]`}
-                  type={'primary'}
-                  size={'large'}
+                icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
+                className={`md:flex items-center main-btn-primary h-full s:hidden`}
+                size={'large'}
+                onClick={() => openModalCreate()}
                 >
                   Tạo mới
                 </Button>

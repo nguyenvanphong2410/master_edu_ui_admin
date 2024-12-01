@@ -63,7 +63,7 @@ export default function CourseManagement() {
 
   const hanleClickViewDetails = (item) => {
     navigate(`/details-course/${item._id}`);
-  }
+  };
 
   return (
     <MainLayout>
@@ -71,7 +71,7 @@ export default function CourseManagement() {
         <div className={styles.headlistWrap}>
           <Input
             prefix={<img src={IconSearch} className={`w-3.5 mr-1.5`} alt="" />}
-            className={`main-input bg-black-0 w-[350px]`}
+            className={`main-input w-[350px]`}
             placeholder={'Tìm kiếm khóa học theo mã hoặc tên'}
             value={dataFilter.keySearch}
             onChange={(e) =>
@@ -86,10 +86,8 @@ export default function CourseManagement() {
           {hasPermission([PERMISSIONS.ADD.ADD_COURSE]) && (
             <Button
               icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
-              className={`md:flex items-center ant-btn-primary h-full s:hidden`}
-              type={'primary'}
+              className={`md:flex items-center main-btn-primary h-full s:hidden`}
               size={'large'}
-              style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
               onClick={() => handleShowModalCreateCourse(TYPE_MODAL_PACKAGE.CREATE)}
             >
               Tạo mới
@@ -116,7 +114,12 @@ export default function CourseManagement() {
                     }`}
                     title={
                       <div className={`h-[46px] grid items-center`}>
-                        <div className='cursor-pointer hover:text-[#335b96] text-[#3781d6]' onClick={() => hanleClickViewDetails(item)}>{item.name}</div>
+                        <div
+                          className="cursor-pointer hover:text-[#335b96] text-[#3781d6]"
+                          onClick={() => hanleClickViewDetails(item)}
+                        >
+                          {item.name}
+                        </div>
 
                         {item.type === PACKAGE_TYPE['NORMALLY'] ? (
                           <div className="text-[13px] font-normal block">
@@ -134,36 +137,39 @@ export default function CourseManagement() {
                       item.type === PACKAGE_TYPE['NEW_ACCOUNT_GIFT']
                         ? hasPermission([PERMISSIONS.EDIT.EDIT_POPULAR_COURSE]) && [
                             <Tooltip key="edit" placement="top" title={'Cập nhật'}>
-                              <span
-                                className="flex justify-center btn-edit"
-                                onClick={() => handleShowModalUpdateCourse(item, TYPE_MODAL_PACKAGE.UPDATE)}
-                              >
-                                <InlineSVG src={IconEdit} width={18} height={20} />
-                              </span>
+                              <div className="btn-table-action">
+                                <div
+                                  className="btn-edit"
+                                  onClick={() => handleShowModalUpdateCourse(item, TYPE_MODAL_PACKAGE.UPDATE)}
+                                >
+                                  <InlineSVG src={IconEdit} width={18} height={20} />
+                                </div>
+                              </div>
                             </Tooltip>,
                           ]
                         : [
                             <>
                               {hasPermission([PERMISSIONS.EDIT.EDIT_COURSE]) && (
                                 <Tooltip key="edit" placement="top" title={'Cập nhật'}>
-                                  <span
-                                    className="flex justify-center btn-edit"
-                                    onClick={() => handleShowModalUpdateCourse(item, TYPE_MODAL_PACKAGE.UPDATE)}
-                                  >
-                                    <InlineSVG src={IconEdit} width={18} height={20} />
-                                  </span>
+                                  <div className="btn-table-action">
+                                    <div
+                                      className="btn-edit"
+                                      onClick={() => handleShowModalUpdateCourse(item, TYPE_MODAL_PACKAGE.UPDATE)}
+                                    >
+                                      <InlineSVG src={IconEdit} width={18} height={20} />
+                                    </div>
+                                  </div>
                                 </Tooltip>
                               )}
                             </>,
                             <>
                               {hasPermission([PERMISSIONS.DELETE.DELETE_COURSE]) && (
                                 <Tooltip key="delete" placement="top" title={'Xoá'}>
-                                  <span
-                                    className="flex justify-center btn-delete"
-                                    onClick={() => handleShowModalDeleteCourses(item)}
-                                  >
-                                    <InlineSVG src={IconDelete} width={16} height={20} />
-                                  </span>
+                                  <div className="btn-table-action">
+                                    <div className="btn-delete" onClick={() => handleShowModalDeleteCourses(item)}>
+                                      <InlineSVG src={IconDelete} width={16} height={20} />
+                                    </div>
+                                  </div>
                                 </Tooltip>
                               )}
                             </>,
@@ -171,12 +177,12 @@ export default function CourseManagement() {
                               {hasPermission([PERMISSIONS.EDIT.EDIT_POPULAR_COURSE]) && (
                                 <Tooltip key="highlight" placement="top" title={'Phổ biến'}>
                                   {item.is_highlight ? (
-                                    <span className="flex justify-center cursor-default text-[#ffcd39]">
+                                    <span className="flex justify-center cursor-default text-[#ffcd39] mt-2">
                                       <InlineSVG src={IconStarSolid} width={25} height={20} />
                                     </span>
                                   ) : (
                                     <span
-                                      className="flex justify-center text-[#8c8c8c] hover:text-[#ffcd39]"
+                                      className="flex justify-center text-[#8c8c8c] hover:text-[#ffcd39] mt-2"
                                       onClick={() => handleSubmitChangeHighlightCourse(item._id)}
                                     >
                                       <InlineSVG src={IconStar} width={25} height={20} />

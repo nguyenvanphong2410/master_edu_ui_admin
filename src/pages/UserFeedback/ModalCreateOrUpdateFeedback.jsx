@@ -162,7 +162,6 @@ const ModalCreateOrUpdateFeedback = () => {
         </Button>
         <Button
           className={`main-btn-primary`}
-          type={'primary'}
           size={'large'}
           loading={isLoadingBtnCreateOrUpdateFeedback}
           onClick={() => handleSubmit(configModalFeedback.type, feedbackSchema, infoFeedback)}

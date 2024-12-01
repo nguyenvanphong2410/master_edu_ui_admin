@@ -237,7 +237,6 @@ function ModalCreateOrUpdateCourse() {
         </Button>
         <Button
           className={`main-btn-primary`}
-          type={'primary'}
           size={'large'}
           loading={isLoadingBtnCreateOrUpdate}
           onClick={() => handleSubmit(configModalCourse.type, courseSchema, infoCourses)}

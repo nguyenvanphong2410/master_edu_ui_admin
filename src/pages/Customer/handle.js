@@ -128,57 +128,6 @@ export default function Handle() {
       sorter: (a, b) => a.age - b.age,
       render: (text) => (text ? <span>{text}</span> : <i className={`text-gray-60`}>Đang cập nhật</i>),
     },
-    // {
-    //   title: 'Điểm CC',
-    //   dataIndex: 'attendance_score',
-    //   key: 'attendance_score',
-    //   align: 'center',
-    //   width: 130,
-    //   showSorterTooltip: false,
-    //   render: (text) => <p>{formatPoint(text)}</p>,
-    // },
-    // {
-    //   title: 'Điểm cộng',
-    //   dataIndex: 'plus_score',
-    //   key: 'plus_score',
-    //   align: 'center',
-    //   width: 130,
-    //   showSorterTooltip: false,
-    //   render: (text) => <p>{formatPoint(text)}</p>,
-    // },
-    // {
-    //   title: 'Điểm GK',
-    //   dataIndex: 'midterm_score',
-    //   key: 'midterm_score',
-    //   align: 'center',
-    //   width: 130,
-    //   showSorterTooltip: false,
-    //   render: (text) => <p>{formatPoint(text)}</p>,
-    // },
-    // {
-    //   title: 'Điểm CK',
-    //   dataIndex: 'final_score',
-    //   key: 'final_score',
-    //   align: 'center',
-    //   width: 130,
-    //   showSorterTooltip: false,
-    //   render: (text) => <p>{formatPoint(text)}</p>,
-    // },
-    // {
-    //   title: 'Điểm tổng',
-    //   dataIndex: '',
-    //   key: '',
-    //   align: 'center',
-    //   width: 130,
-    //   showSorterTooltip: false,
-    //   render: (text, record) => (
-    //     <p className="font-semibold text-blue-25">
-    //       {displayScoreTotal(
-    //         record.attendance_score * 0.1 + record.plus_score + record.midterm_score * 0.3 + record.final_score * 0.6
-    //       )}
-    //     </p>
-    //   ),
-    // },
 
     {
       title: 'Ngày đăng ký',
@@ -245,11 +194,11 @@ export default function Handle() {
           render: (text, record) => (
             <div>
               {customer_type === CUSTOMER_TYPE.CONFIRMED ? (
-                <div className={`btn-action flex justify-evenly`}>
+                <div className={`btn-table-action`}>
                   {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_STUDENT]) && (
                     <Tooltip placement="bottom" title={'Thay đổi mật khẩu'}>
                       <div
-                        className={`btn-main btn-reset w-[24px] cursor-pointer`}
+                        className={`btn-reset`}
                         onClick={() => openModalResetPassword(record._id)}
                       >
                         <InlineSVG src={ResetPass} width={14} />
@@ -258,24 +207,24 @@ export default function Handle() {
                   )}
                   {hasPermission([PERMISSIONS.EDIT.EDIT_STUDENT]) && (
                     <Tooltip placement="bottom" title={'Cập nhật'}>
-                      <div className={`btn-main btn-edit cursor-pointer`} onClick={() => openModalEdit(record)}>
+                      <div className={`btn-edit`} onClick={() => openModalEdit(record)}>
                         <InlineSVG src={Edit} width={14} />
                       </div>
                     </Tooltip>
                   )}
                   {hasPermission([PERMISSIONS.DELETE.DELETE_STUDENT]) && (
                     <Tooltip placement="bottom" title={'Xóa'}>
-                      <div className={`btn-main btn-delete cursor-pointer`} onClick={() => openModalDelete(record)}>
+                      <div className={`btn-delete`} onClick={() => openModalDelete(record)}>
                         <InlineSVG src={Delete} width={14} />
                       </div>
                     </Tooltip>
                   )}
                 </div>
               ) : (
-                <div className={`btn-action flex justify-evenly`}>
+                <div className={`btn-table-action`}>
                   {hasPermission([PERMISSIONS.EDIT.EDIT_STUDENT]) && (
                     <Tooltip placement="bottom" title={'Xác thực'}>
-                      <div className={`btn-main btn-edit cursor-pointer`} onClick={() => openModalConfirm(record)}>
+                      <div className={`btn-edit`} onClick={() => openModalConfirm(record)}>
                         <InlineSVG src={Check} width={14} />
                       </div>
                     </Tooltip>
@@ -346,7 +295,7 @@ export default function Handle() {
       <span>
         Bạn có chắc chắn muốn xóa học viên
         <div>
-          <b>{formatPhoneNumber(customer.phone)}</b>?
+          <b>{formatPhoneNumber(customer.name)}</b>?
         </div>
       </span>
     );

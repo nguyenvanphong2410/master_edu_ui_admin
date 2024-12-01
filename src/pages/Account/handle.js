@@ -195,11 +195,11 @@ export default function Handle() {
           align: 'center',
           render: (text, record) => (
             <div>
-              <div className={`btn-action flex justify-evenly`}>
+              <div className={`btn-table-action`}>
                 {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_EMPLOYEE]) && (
                   <Tooltip placement="bottom" title={'Thay đổi mật khẩu'}>
                     <div
-                      className={`btn-reset w-[24px] cursor-pointer`}
+                      className={`btn-reset`}
                       onClick={() => openModalResetPassword(record._id)}
                     >
                       <InlineSVG src={ResetPass} width={14} />
@@ -208,14 +208,14 @@ export default function Handle() {
                 )}
                 {hasPermission([PERMISSIONS.EDIT.EDIT_EMPLOYEE]) && (
                   <Tooltip placement="bottom" title={'Cập nhật'}>
-                    <div className={`btn-edit cursor-pointer`} onClick={() => openModalEdit(record)}>
+                    <div className={`btn-edit`} onClick={() => openModalEdit(record)}>
                       <InlineSVG src={Edit} width={14} />
                     </div>
                   </Tooltip>
                 )}
                 {hasPermission([PERMISSIONS.DELETE.DELETE_EMPLOYEE]) && (
                   <Tooltip placement="bottom" title={'Xóa'}>
-                    <div className={`btn-delete cursor-pointer`} onClick={() => openModalDelete(record)}>
+                    <div className={`btn-delete`} onClick={() => openModalDelete(record)}>
                       <InlineSVG src={Delete} width={14} />
                     </div>
                   </Tooltip>

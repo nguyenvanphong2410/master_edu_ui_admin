@@ -26,11 +26,11 @@
         }
         
         .activeRole {
-            color: $colorBlue;
+            color: $colorMain;
         }
 
         .selectedName:hover{
-            color: $colorBlue;
+            color: $colorMain;
             opacity: 0.8;
             cursor: pointer;
         }
@@ -47,7 +47,7 @@
             }
 
             .iconEdit:hover{
-                color: $colorBlue;
+                color: $colorMain;
                 cursor: pointer;
             }
         }
@@ -57,7 +57,7 @@
         }
 
         .iconDelete:hover{
-            color: $colorSecond;
+            color: $colorRed;
             cursor: pointer;
         }
     }

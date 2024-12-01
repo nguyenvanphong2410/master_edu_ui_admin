@@ -1,12 +1,11 @@
 import React from 'react';
 import {Button, Modal, Row, Col} from "antd";
-import './styles.scss';
 import styles from './styles.module.scss';
 import CircleXmark from "@/assets/images/icons/light/circle-xmark.svg";
 import CircleCheck from "@/assets/images/icons/light/circle-check.svg";
 import InlineSVG from "react-inlinesvg";
 import {ORDER_STATUS} from "@/utils/constants.js";
-import {formatMoney, formatPoint} from "@/utils/helper.js";
+import {formatMoney} from "@/utils/helper.js";
 
 export default function ModalChangeStatusOrder(props) {
   const {
@@ -56,7 +55,6 @@ export default function ModalChangeStatusOrder(props) {
           <Button
             loading={loading}
             className={`mx-[5px]`}
-            type={'primary'}
             size={'large'}
             onClick={() => handleConfirm()}
           >

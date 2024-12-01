@@ -1,17 +1,13 @@
-import { Card, Input, Select } from "antd";
-import React from "react";
-import styles from "../../styles.module.scss";
-import "../../styles.scss"
-import Handle from "../../handle";
-import InlineSVG from "react-inlinesvg";
-import IconWarning from "../../../../assets/images/icons/light/warning.svg";
-import {
-  BANK_TEMPLATE_OPTIONS,
-  CONFIG_TYPE,
-  PERMISSIONS,
-} from "../../../../utils/constants";
-import { bankSchema } from "../../schema";
-import { hasPermission } from "@/utils/helper";
+import { Button, Card, Input, Select } from 'antd';
+import React from 'react';
+import styles from '../../styles.module.scss';
+import '../../styles.scss';
+import Handle from '../../handle';
+import InlineSVG from 'react-inlinesvg';
+import IconWarning from '../../../../assets/images/icons/light/warning.svg';
+import { BANK_TEMPLATE_OPTIONS, CONFIG_TYPE, PERMISSIONS } from '../../../../utils/constants';
+import { bankSchema } from '../../schema';
+import { hasPermission } from '@/utils/helper';
 
 function Bank() {
   const {
@@ -29,33 +25,29 @@ function Bank() {
       title="Tài khoản ngân hàng"
       extra={
         <>
-          {
-            hasPermission([PERMISSIONS.EDIT.EDIT_CONFIG_BANK]) &&
-            <span
-            className="cursor-pointer hover:bg-[#F9F9F9] p-2 rounded-md"
-            onClick={() =>
-              handleSubmit(CONFIG_TYPE.BANK, bankSchema, updateInfoBank)
-            }
+          {hasPermission([PERMISSIONS.EDIT.EDIT_CONFIG_BANK]) && (
+            <Button
+              className={`main-btn-primary`}
+              size={'small'}
+              onClick={() => handleSubmit(CONFIG_TYPE.BANK, bankSchema, updateInfoBank)}
             >
               Lưu
-            </span>
-          }
+            </Button>
+          )}
         </>
       }
       className={`${styles.boxItem} h-full`}
     >
       <div className={`input-wrap`}>
-        <div className={"label-wrap"}>
-          Ngân hàng <span className={"required"}>*</span>
+        <div className={'label-wrap'}>
+          Ngân hàng <span className={'required'}>*</span>
         </div>
         <Select
           className={`main-select w-full temmpalte-select`}
-          placeholder={"Nhập ngân hàng"}
+          placeholder={'Nhập ngân hàng'}
           value={updateInfoBank?.bank_id || null}
-          onFocus={() => handleFocus(CONFIG_TYPE.BANK, "bank_id")}
-          onChange={(value) =>
-            handleChangeInputInfo(CONFIG_TYPE.BANK, value, "bank_id")
-          }
+          onFocus={() => handleFocus(CONFIG_TYPE.BANK, 'bank_id')}
+          onChange={(value) => handleChangeInputInfo(CONFIG_TYPE.BANK, value, 'bank_id')}
           options={optionBank}
           showSearch={true}
         />
@@ -70,18 +62,16 @@ function Bank() {
       </div>
 
       <div className={`input-wrap`}>
-        <div className={"label-wrap"}>
-          Template <span className={"required"}>*</span>
+        <div className={'label-wrap'}>
+          Template <span className={'required'}>*</span>
         </div>
         <Select
           className={`main-select w-full temmpalte-select`}
-          placeholder={"Chọn template"}
+          placeholder={'Chọn template'}
           defaultValue={BANK_TEMPLATE_OPTIONS.COMPACT2}
           value={updateInfoBank?.template}
-          onFocus={() => handleFocus(CONFIG_TYPE.BANK, "template")}
-          onChange={(value) =>
-            handleChangeInputInfo(CONFIG_TYPE.BANK, value, "template")
-          }
+          onFocus={() => handleFocus(CONFIG_TYPE.BANK, 'template')}
+          onChange={(value) => handleChangeInputInfo(CONFIG_TYPE.BANK, value, 'template')}
           options={optionTemplate}
         />
         {errorInfoBank && errorInfoBank.template && (
@@ -94,21 +84,16 @@ function Bank() {
         )}
       </div>
 
-
       <div className={`input-wrap`}>
-        <div className={"label-wrap"}>Tên chủ sở hữu <span className={"required"}>*</span></div>
+        <div className={'label-wrap'}>
+          Tên chủ sở hữu <span className={'required'}>*</span>
+        </div>
         <Input
           className={`main-input`}
-          placeholder={"Nhập tên chủ sở hữu"}
+          placeholder={'Nhập tên chủ sở hữu'}
           value={updateInfoBank?.account_name}
-          onFocus={() => handleFocus(CONFIG_TYPE.BANK, "account_name")}
-          onChange={(e) =>
-            handleChangeInputInfo(
-              CONFIG_TYPE.BANK,
-              e.target.value,
-              "account_name"
-            )
-          }
+          onFocus={() => handleFocus(CONFIG_TYPE.BANK, 'account_name')}
+          onChange={(e) => handleChangeInputInfo(CONFIG_TYPE.BANK, e.target.value, 'account_name')}
         />
         {errorInfoBank && errorInfoBank.account_name && (
           <span className={`error`}>
@@ -121,19 +106,15 @@ function Bank() {
       </div>
 
       <div className={`input-wrap`}>
-        <div className={"label-wrap"}>Số tài khoản <span className={"required"}>*</span></div>
+        <div className={'label-wrap'}>
+          Số tài khoản <span className={'required'}>*</span>
+        </div>
         <Input
           className={`main-input`}
-          placeholder={"Nhập số tài khoản"}
+          placeholder={'Nhập số tài khoản'}
           value={updateInfoBank?.account_no}
-          onFocus={() => handleFocus(CONFIG_TYPE.BANK, "account_no")}
-          onChange={(e) =>
-            handleChangeInputInfo(
-              CONFIG_TYPE.BANK,
-              e.target.value,
-              "account_no"
-            )
-          }
+          onFocus={() => handleFocus(CONFIG_TYPE.BANK, 'account_no')}
+          onChange={(e) => handleChangeInputInfo(CONFIG_TYPE.BANK, e.target.value, 'account_no')}
         />
         {errorInfoBank && errorInfoBank.account_no && (
           <span className={`error`}>

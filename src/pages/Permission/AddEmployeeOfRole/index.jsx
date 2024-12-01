@@ -70,10 +70,9 @@ export default function AddEmployeeOfRole() {
               onChange={(value) => handleChangeSelectEmployeeOfRole(value, 'employee_ids')}
             />
             <Button
-              loading={isLoadingBtnAddEmployeeOfRole}
               className={`main-btn-primary ml-3`}
-              type={'primary'}
               size={'large'}
+              loading={isLoadingBtnAddEmployeeOfRole}
               onClick={() => handleSubmitEmployeeOfRole(updateEmployeeOfRoleSchema, infoEmployeeIds)}
             >
               Thêm

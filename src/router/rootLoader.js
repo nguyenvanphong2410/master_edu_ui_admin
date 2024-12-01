@@ -27,7 +27,7 @@ export const rootLoader = async ({request, params}, requiredAuth, saga = null, p
       return redirect('/login');
     }
   } else if (auth.isAuthSuccess) {
-      return redirect('/order');
+      return redirect('/');
   }
 
   let query = {...(url.search ? convertQueryStringToObject(url.search) : {})};

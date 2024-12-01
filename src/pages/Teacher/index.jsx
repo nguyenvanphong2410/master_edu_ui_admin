@@ -13,6 +13,8 @@ import ModalConfirm from '../../components/ModalConfirm/index.jsx';
 import { hasPermission } from '@/utils/helper.js';
 import { PERMISSIONS } from '@/utils/constants.js';
 import { setVisibleModalChangeStatusTeacher, setVisibleModalDeleteTeacher } from '@/states/modules/teacher/index.js';
+import InlineSVG from 'react-inlinesvg';
+import PlusIcon from '@/assets/images/icons/light/plus.svg';
 
 export default function Teacher() {
   const {
@@ -61,10 +63,10 @@ export default function Teacher() {
             <div className={styles.action}>
               {hasPermission([PERMISSIONS.ADD.ADD_TEACHER]) && (
                 <Button
-                  onClick={() => openModalCreate()}
-                  className={`main-btn-primary ml-[15px]`}
-                  type={'primary'}
+                  icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
+                  className={`md:flex items-center main-btn-primary h-full s:hidden`}
                   size={'large'}
+                  onClick={() => openModalCreate()}
                 >
                   Tạo mới
                 </Button>

@@ -43,8 +43,7 @@ function ClassCpn() {
   };
 
   const handleFilterSelect = (e, val) => {
-
-    dispatch(setDataFilter({...dataFilter, courseName: val?.label, courseId:e}));
+    dispatch(setDataFilter({ ...dataFilter, courseName: val?.label, courseId: e }));
     dispatch(getListClasses());
   };
 
@@ -71,7 +70,7 @@ function ClassCpn() {
               <div className={`md:w-96 s:w-full`}>
                 <Input
                   prefix={<img src={IconSearch} className={`w-3.5 mr-1.5`} alt="" />}
-                  className={`main-input bg-black-0`}
+                  className={`main-input`}
                   placeholder={'Tìm kiếm khóa học theo mã hoặc tên'}
                   value={dataFilter.keySearch}
                   onChange={(e) =>
@@ -101,7 +100,8 @@ function ClassCpn() {
                 <>
                   <Button
                     icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
-                    className={`md:flex items-center ant-btn-primary h-full s:hidden`}
+                    className={`md:flex items-center main-btn-primary h-full s:hidden`}
+                    size={'large'}
                     onClick={handleShowModalCreateClass}
                   >
                     Tạo mới

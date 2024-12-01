@@ -241,13 +241,16 @@ export default function CreateOrUpdate(props) {
         </div>
       </div>
       <div className={`flex justify-center`}>
-        <Button className={`main-btn-close mr-[10px]`} size={'large'} onClick={() => closeModal()}>
+        <Button 
+          className={`main-btn-close mr-[10px]`} 
+          size={'large'} 
+          onClick={() => closeModal()}
+        >
           Đóng
         </Button>
         {configModal.type === TYPE_SUBMIT.CREATE ? (
           <Button
             className={`main-btn-primary`}
-            type={'primary'}
             size={'large'}
             loading={isLoadingBtnCreateOrUpdate}
             onClick={() => handleConfirm(TYPE_SUBMIT.CREATE, inForCustomer)}
@@ -257,7 +260,6 @@ export default function CreateOrUpdate(props) {
         ) : (
           <Button
             className={`main-btn-primary`}
-            type={'primary'}
             size={'large'}
             loading={isLoadingBtnCreateOrUpdate}
             onClick={() => handleConfirm(TYPE_SUBMIT.UPDATE, inForCustomer)}

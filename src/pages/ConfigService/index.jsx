@@ -30,7 +30,6 @@ function ConfigService() {
             hasPermission([PERMISSIONS.EDIT.EDIT_CONFIG_SERVICE_INFORMATION]) && <Button
               onClick={() => handleSubmit(updateConfigService, infoConfigServices)}
               className={`main-btn-primary`}
-              type={'primary'}
               size={'large'}
             >
               Lưu

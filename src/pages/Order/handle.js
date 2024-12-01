@@ -159,11 +159,11 @@ export default function Handle() {
           render: (text, record) => (
             <div>
               {[ORDER_STATUS['PENDING']].includes(record.status) ? (
-                <div className={`btn-action flex justify-evenly`}>
+                <div className={`btn-table-action`}>
                   {hasPermission([PERMISSIONS.EDIT.EDIT_CONFIRM]) ? (
-                    <Tooltip placement="bottom" title={'Xác nhận'}>
+                    <Tooltip placement="top" title={'Xác nhận'}>
                       <div
-                        className={`btn-edit cursor-pointer`}
+                        className={`btn-edit`}
                         onClick={() => openModalChangeStatus(record, ORDER_STATUS['COMPLETED'])}
                       >
                         <InlineSVG src={Check} width={14} />
@@ -173,9 +173,9 @@ export default function Handle() {
                     ''
                   )}
                   {hasPermission([PERMISSIONS.EDIT.EDIT_CANCEL]) ? (
-                    <Tooltip placement="bottom" title={'Hủy'}>
+                    <Tooltip placement="top" title={'Hủy'}>
                       <div
-                        className={`btn-edit cursor-pointer ml-1 !mr-0`}
+                        className={`btn-delete`}
                         onClick={() => openModalChangeStatus(record, ORDER_STATUS['CANCEL'])}
                       >
                         <InlineSVG src={Xmark} width={14} />
@@ -185,8 +185,8 @@ export default function Handle() {
                     ''
                   )}
                   {hasPermission([PERMISSIONS.DELETE.DELETE_ORDER]) ? (
-                    <Tooltip placement="bottom" title={'Xóa'}>
-                      <div className={`btn-delete cursor-pointer`} onClick={() => openModalDelete(record)}>
+                    <Tooltip placement="top" title={'Xóa'}>
+                      <div className={`btn-delete`} onClick={() => openModalDelete(record)}>
                         <InlineSVG src={Delete} width={14} />
                       </div>
                     </Tooltip>
@@ -282,7 +282,7 @@ export default function Handle() {
           <span>
             Xác nhận yêu cầu mua của học viên{' '}
             <div>
-              <b>{formatPhoneNumber(order.user.phone)}</b>
+              <b>{formatPhoneNumber(order.user.name)}</b>
             </div>
           </span>
         );
@@ -292,7 +292,7 @@ export default function Handle() {
           <span>
             Hủy yêu cầu mua khóa học của học viên{' '}
             <div>
-              <b>{formatPhoneNumber(order.user.phone)}</b>
+              <b>{formatPhoneNumber(order.user.name)}</b>
             </div>
           </span>
         );

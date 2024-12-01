@@ -11,12 +11,14 @@ import ModalDeleteDefault from '../../components/ModalDelete/index.jsx';
 import {
   setVisibleModalChangeStatus,
   setVisibleModalConfirmCustomer,
-  setVisibleModalDeleteCustomer
+  setVisibleModalDeleteCustomer,
 } from '../../states/modules/customer/index.js';
 import ResetPassword from './components/ResetPassword/index.jsx';
 import ModalConfirm from '../../components/ModalConfirm/index.jsx';
 import { CUSTOMER_TYPE, PERMISSIONS } from '@/utils/constants.js';
 import { hasPermission } from '@/utils/helper.js';
+import InlineSVG from 'react-inlinesvg';
+import PlusIcon from '@/assets/images/icons/light/plus.svg';
 
 export default function CustomerManagement() {
   const {
@@ -50,7 +52,7 @@ export default function CustomerManagement() {
     handleSelectPagination,
     handleSelectLimitTable,
     handelChangeTab,
-    handleConfirmCustomer
+    handleConfirmCustomer,
   } = Handle();
 
   return (
@@ -60,7 +62,7 @@ export default function CustomerManagement() {
           <div className={styles.filterWrap}>
             <div className={styles.search}>
               <Input
-                prefix={<img src={IconSearch} className={`w-3.5 mr-1.5`} alt='' />}
+                prefix={<img src={IconSearch} className={`w-3.5 mr-1.5`} alt="" />}
                 className={`main-input`}
                 placeholder={'Nhập họ tên, email hoặc SĐT để tìm kiếm'}
                 value={dataFilter.keySearch}
@@ -68,65 +70,79 @@ export default function CustomerManagement() {
               />
             </div>
             <div>
-              {
-                hasPermission([PERMISSIONS.ADD.ADD_STUDENT]) &&
+              {hasPermission([PERMISSIONS.ADD.ADD_STUDENT]) && (
                 <Button
+                  icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
+                  className={`md:flex items-center main-btn-primary h-full s:hidden`}
+                  size={'large'}
                   onClick={() => openModalCreate()}
-                  className={`main-btn-primary ml-[15px]`}
-                  type={'primary'}
-                  size={'large'}>
+                >
                   Tạo mới
                 </Button>
-              }
+              )}
             </div>
           </div>
 
           <div className={`tableWrap ${windowWidth <= 576 ? 'h-[calc(100vh-260px)]' : 'h-[calc(100vh-267px)]'}`}>
             <Tabs
               defaultActiveKey={customer_type}
-              onChange={(value)=> handelChangeTab(value)}
+              onChange={(value) => handelChangeTab(value)}
               items={[
                 {
                   key: CUSTOMER_TYPE.CONFIRMED,
                   label: 'Đã xác thực',
-                  children: <TableDefault
-                    loading={isLoadingTableCustomers}
-                    dataSource={customers}
-                    columns={columns}
-                    onChange={handleChangeTable}
-                    pagination={paginationListCustomers}
-                    handleSelectPagination={(e) => handleSelectPagination(e)}
-                    rowKey={'_id'}
-                    isFixed
-                    extraClassName={'h-[calc(100vh-380px)]'}
-                    scroll={{
-                      x: 1000,
-                      y: windowWidth <= 576 ? 'calc(100vh - 380px)' : windowWidth <= 1536 ? 'calc(100vh - 430px)' : 'calc(100vh - 395px)'
-                    }}
-                    limitTable={dataFilter.perPage}
-                    handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
-                  />
+                  children: (
+                    <TableDefault
+                      loading={isLoadingTableCustomers}
+                      dataSource={customers}
+                      columns={columns}
+                      onChange={handleChangeTable}
+                      pagination={paginationListCustomers}
+                      handleSelectPagination={(e) => handleSelectPagination(e)}
+                      rowKey={'_id'}
+                      isFixed
+                      extraClassName={'h-[calc(100vh-380px)]'}
+                      scroll={{
+                        x: 1000,
+                        y:
+                          windowWidth <= 576
+                            ? 'calc(100vh - 380px)'
+                            : windowWidth <= 1536
+                            ? 'calc(100vh - 430px)'
+                            : 'calc(100vh - 395px)',
+                      }}
+                      limitTable={dataFilter.perPage}
+                      handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
+                    />
+                  ),
                 },
                 {
                   key: CUSTOMER_TYPE.UNCONFIRMED,
                   label: 'Chưa xác nhận',
-                  children: <TableDefault
-                    loading={isLoadingTableCustomers}
-                    dataSource={customers}
-                    columns={columns}
-                    onChange={handleChangeTable}
-                    pagination={paginationListCustomers}
-                    handleSelectPagination={(e) => handleSelectPagination(e)}
-                    rowKey={'_id'}
-                    isFixed
-                    extraClassName={'h-[calc(100vh-380px)]'}
-                    scroll={{
-                      x: 1000,
-                      y: windowWidth <= 576 ? 'calc(100vh - 380px)' : windowWidth <= 1536 ? 'calc(100vh - 390px)' : 'calc(100vh - 395px)'
-                    }}
-                    limitTable={dataFilter.perPage}
-                    handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
-                  />
+                  children: (
+                    <TableDefault
+                      loading={isLoadingTableCustomers}
+                      dataSource={customers}
+                      columns={columns}
+                      onChange={handleChangeTable}
+                      pagination={paginationListCustomers}
+                      handleSelectPagination={(e) => handleSelectPagination(e)}
+                      rowKey={'_id'}
+                      isFixed
+                      extraClassName={'h-[calc(100vh-380px)]'}
+                      scroll={{
+                        x: 1000,
+                        y:
+                          windowWidth <= 576
+                            ? 'calc(100vh - 380px)'
+                            : windowWidth <= 1536
+                            ? 'calc(100vh - 390px)'
+                            : 'calc(100vh - 395px)',
+                      }}
+                      limitTable={dataFilter.perPage}
+                      handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
+                    />
+                  ),
                 },
               ]}
             />
@@ -140,10 +156,7 @@ export default function CustomerManagement() {
           title={configModal.title}
           width={900}
         >
-          <CreateOrUpdate
-            detailCustomer={detailCustomer}
-            closeModal={() => handleToggleVisibleModalCreateOrUpdate()}
-          />
+          <CreateOrUpdate detailCustomer={detailCustomer} closeModal={() => handleToggleVisibleModalCreateOrUpdate()} />
         </ModalDefault>
 
         <ModalDefault
@@ -152,10 +165,7 @@ export default function CustomerManagement() {
           handleCancel={() => handleToggleVisibleModalResetPassword()}
           title={'Thay đổi mật khẩu'}
         >
-          <ResetPassword
-            customerId={customerId}
-            closeModal={() => handleToggleVisibleModalResetPassword()}
-          />
+          <ResetPassword customerId={customerId} closeModal={() => handleToggleVisibleModalResetPassword()} />
         </ModalDefault>
 
         <ModalDeleteDefault

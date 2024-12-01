@@ -150,7 +150,7 @@ export default function Handle() {
           render: (text, record) => (
             <div>
               {[ORDER_STATUS['PENDING']].includes(record.status) ? (
-                <div className={`btn-action flex justify-evenly`}>
+                <div className={`btn-table-action flex justify-evenly`}>
                   {
                     hasPermission([PERMISSIONS.EDIT.EDIT_CONFIRM]) ?
                       <Tooltip placement="bottom" title={'Xác nhận'}>

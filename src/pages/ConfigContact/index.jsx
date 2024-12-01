@@ -1,7 +1,7 @@
 import React from 'react';
 import MainLayout from '@/layouts/MainLayout';
 import styles from './styles.module.scss';
-import './styles.scss'
+import './styles.scss';
 import { Button, Divider, Input, Tooltip, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import Delete from '../../assets/images/icons/duotone/trash-can.svg';
@@ -48,21 +48,20 @@ function ConfigContact() {
       <div className={styles.configContactWrap}>
         <div>
           <div className="pb-3 border-b mb-10 flex justify-between items-center">
-            <span className='text-lg font-bold'>Liên hệ</span>
+            <span className="text-lg font-bold">Liên hệ</span>
             {hasPermission([PERMISSIONS.EDIT.EDIT_CONFIG_CONTACT]) && (
-            <Button
-              className={`main-btn-primary`}
-              type={'primary'}
-              size={'large'}
-              onClick={() => handleUpdateContact(updateConfigContactSchema, listContact)}
-              loading={isLoadingUpdateConfigContact}
-            >
-              Lưu
-            </Button>
+              <Button
+                className={`main-btn-primary`}
+                size={'small'}
+                onClick={() => handleUpdateContact(updateConfigContactSchema, listContact)}
+                loading={isLoadingUpdateConfigContact}
+              >
+                Lưu
+              </Button>
             )}
           </div>
 
-          <div className='px-5'>
+          <div className="px-5">
             <Divider>Cấu hình email và số điện thoại</Divider>
             <div className={`input-wrap`}>
               <div className={'label-wrap'}>
@@ -107,7 +106,7 @@ function ConfigContact() {
             </div>
           </div>
 
-          <div className='px-5 mt-16 text-center'>
+          <div className="px-5 mt-16 text-center">
             <Divider>Cấu hình mạng xã hội</Divider>
             {listContact?.socials?.map((contact, index) => (
               <div className={`input-wrap`} key={index}>
@@ -122,11 +121,11 @@ function ConfigContact() {
                       className="contact-uploader"
                       showUploadList={false}
                       beforeUpload={beforeUpload}
-                      onChange={info => {
+                      onChange={(info) => {
                         handleChangeImg(info, index, 'icon');
                       }}
                       onClick={() => onFocusInput('icon', index)}
-                      customRequest={() => { }}
+                      customRequest={() => {}}
                     >
                       {contact.icon ? (
                         <img
@@ -153,8 +152,13 @@ function ConfigContact() {
                   />
 
                   <Tooltip placement="bottom" title={'Xóa'}>
-                    <div className={`btn-delete cursor-pointer ${styles.btnDelete}`} onClick={() => removeContact(index)}>
-                      <InlineSVG src={Delete} width={14} />
+                    <div className='btn-table-action'>
+                      <div
+                        className={`btn-delete cursor-pointer ${styles.btnDelete}`}
+                        onClick={() => removeContact(index)}
+                      >
+                        <InlineSVG src={Delete} width={14} />
+                      </div>
                     </div>
                   </Tooltip>
                 </div>
@@ -175,7 +179,6 @@ function ConfigContact() {
                   </span>
                 )}
               </div>
-
             ))}
             <Button type="primary" size={'large'} onClick={addContact} icon={<PlusOutlined />}>
               Thêm mạng xã hội

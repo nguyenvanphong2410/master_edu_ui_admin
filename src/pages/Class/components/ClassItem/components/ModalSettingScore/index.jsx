@@ -322,7 +322,6 @@ function ModalSettingScore() {
           <div className={`flex justify-center`}>
             <Button
               className={`main-btn-primary`}
-              type={'primary'}
               size={'large'}
               loading={isLoadingUpdateScore}
               onClick={() => handleConfirm(infoScore)}

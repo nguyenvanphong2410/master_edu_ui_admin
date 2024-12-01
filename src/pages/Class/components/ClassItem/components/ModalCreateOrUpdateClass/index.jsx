@@ -351,13 +351,17 @@ function ModalCreateOrUpdateClass() {
       </div>
 
       <div className={`flex justify-center mt-8`}>
-        <Button className={`ant-btn-close mx-[5px]`} size={'large'} onClick={handleCancelModalCreateOrUpdateClass}>
+        <Button 
+          className={`main-btn-close`} 
+          size={'large'} 
+          onClick={handleCancelModalCreateOrUpdateClass}
+        >
           Đóng
         </Button>
         {configModal.type === TYPE_SUBMIT.CREATE ? (
           <Button
             loading={isLoadingBtnCreateClass}
-            className={`ant-btn-primary mx-[5px]`}
+            className={`main-btn-primary mx-[5px]`}
             size={'large'}
             onClick={() => handleSubmit(TYPE_SUBMIT.CREATE, createClassSchema, infoClass)}
           >
@@ -366,7 +370,7 @@ function ModalCreateOrUpdateClass() {
         ) : (
           <Button
             loading={isLoadingBtnUpdateClass}
-            className={`ant-btn-primary mx-[5px]`}
+            className={`main-btn-primary mx-[5px]`}
             size={'large'}
             onClick={() => handleSubmit(TYPE_SUBMIT.UPDATE, updateClassSchema, infoClass)}
           >

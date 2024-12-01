@@ -151,10 +151,10 @@ function TableClass({ handleChangeTableClass }) {
           width: 160,
           render: (text, record) => {
             return (
-              <div className={`btn-action flex justify-evenly bg-white`}>
-                <Tooltip placement="top" title={'Xet điểm'}>
+              <div className={`btn-table-action`}>
+                <Tooltip placement="top" title={'Xét điểm'}>
                   <div
-                    className={`btn-edit cursor-pointer mr-2`}
+                    className={`btn-edit`}
                     onClick={() => handleShowModalSettingScoreClass(record)}
                   >
                     <InlineSVG src={filePen} width={14} />
@@ -163,7 +163,7 @@ function TableClass({ handleChangeTableClass }) {
                 {hasPermission([PERMISSIONS.EDIT.EDIT_CLASS]) && (
                   <Tooltip placement="top" title={'Cập nhật'}>
                     <div
-                      className={`btn-edit cursor-pointer mr-1`}
+                      className={`btn-edit`}
                       onClick={() => handleShowModalUpdateClass(record, TYPE_SUBMIT.UPDATE)}
                     >
                       <InlineSVG src={Edit} width={14} />
@@ -173,7 +173,7 @@ function TableClass({ handleChangeTableClass }) {
 
                 {hasPermission([PERMISSIONS.DELETE.DELETE_CLASS]) && (
                   <Tooltip placement="top" title={'Xóa'}>
-                    <div className={`btn-delete cursor-pointer`} onClick={() => handleDeleteClassAlert(record)}>
+                    <div className={`btn-delete`} onClick={() => handleDeleteClassAlert(record)}>
                       <InlineSVG src={Delete} width={14} />
                     </div>
                   </Tooltip>
