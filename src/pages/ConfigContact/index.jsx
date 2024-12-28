@@ -180,7 +180,7 @@ function ConfigContact() {
                 )}
               </div>
             ))}
-            <Button type="primary" size={'large'} onClick={addContact} icon={<PlusOutlined />}>
+            <Button className="main-btn-primary" size={'large'} onClick={addContact} icon={<PlusOutlined />}>
               Thêm mạng xã hội
             </Button>
           </div>

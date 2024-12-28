@@ -7,9 +7,11 @@ import {
   setIdTeacher,
   setInForTeacher,
   setVisibleModalChangeStatusTeacher,
+  setVisibleModalCourseAndClassOfTeacher,
   setVisibleModalCreateOrUpdateTeacher,
   setVisibleModalDeleteTeacher,
   setVisibleModalResetPasswordTeacher,
+  setVisiblePopoverSelect,
 } from '../../states/modules/teacher/index.js';
 import React, { useEffect, useState } from 'react';
 import { Avatar, Switch, Tag, Tooltip } from 'antd';
@@ -29,25 +31,30 @@ import { initErrInfoTeacher, initInfoTeacher } from '@/states/modules/teacher/in
 import avatarDefault from '@/assets/images/user/default-avatar-point.png';
 import chalkboard from '@/assets/images/icons/solid/chalkboard-user.svg';
 import moment from 'moment';
+import ClassOfUser from '../../assets/images/icons/duotone/clipboard-user.svg';
 
 export default function Handle() {
   const [isTypeModalCreate, setIsTypeModalCreate] = useState(true);
-  const visibleModalCreateOrUpdate = useSelector((state) => state.teacher.visibleModalCreateOrUpdate);
-  const teachers = useSelector((state) => state.teacher.teachers);
-  const paginationListTeachers = useSelector((state) => state.teacher.paginationListTeachers);
-  const isLoadingTableTeachers = useSelector((state) => state.teacher.isLoadingTableTeachers);
-  const visibleModalDeleteTeacher = useSelector((state) => state.teacher.visibleModalDeleteTeacher);
-  const isLoadingBtnDelete = useSelector((state) => state.teacher.isLoadingBtnDelete);
   const [contentModalDelete, setContentModalDelete] = useState('');
   const [detailTeacher, setDetailTeacher] = useState({});
   const [timeoutId, setTimeoutId] = useState(null);
   const [teacherId, setTeacherId] = useState(null);
   const [teacherStatus, setTeacherStatus] = useState(false);
   const [contentModalChangeStatus, setContentModalChangeStatus] = useState('');
+  const [dataCourseAndClassOfTeacher, setDataCourseAndClassOfTeacher] = useState([]);
+
+  const visibleModalCreateOrUpdate = useSelector((state) => state.teacher.visibleModalCreateOrUpdate);
+  const visiblePopoverSelect = useSelector((state) => state.teacher.visiblePopoverSelect);
+  
+  const teachers = useSelector((state) => state.teacher.teachers);
+  const paginationListTeachers = useSelector((state) => state.teacher.paginationListTeachers);
+  const isLoadingTableTeachers = useSelector((state) => state.teacher.isLoadingTableTeachers);
+  const visibleModalDeleteTeacher = useSelector((state) => state.teacher.visibleModalDeleteTeacher);
+  const isLoadingBtnDelete = useSelector((state) => state.teacher.isLoadingBtnDelete);
   const dataFilter = useSelector((state) => state.teacher.dataFilter);
-  console.log("🌈 ~ Handle ~ dataFilter:", dataFilter)
   const visibleModalResetPassword = useSelector((state) => state.teacher.visibleModalResetPassword);
   const visibleModalChangeStatus = useSelector((state) => state.teacher.visibleModalChangeStatus);
+  const visibleModalCourseAndClassOfTeacher = useSelector((state) => state.teacher.visibleModalCourseAndClassOfTeacher);
   const configModalTeacher = useSelector((state) => state.teacher.configModalTeacher);
 
   const dispatch = useDispatch();
@@ -98,6 +105,57 @@ export default function Handle() {
       },
     },
     {
+      title: 'Khóa học',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      width: 180,
+      showSorterTooltip: false,
+      render: (text, record) => (
+        <div>
+          <span>
+            {record?.courseAndClass?.length > 0 ? (
+              record.courseAndClass?.map((item, index) => (
+                <Tag color="purple" key={index} className="mt-1">
+                  {item.course.name}
+                </Tag>
+              ))
+            ) : (
+              <span className={`text-[#909399] italic `}>---</span>
+            )}
+          </span>
+        </div>
+      ),
+    },
+    {
+      title: 'Lớp học',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      width: 180,
+      showSorterTooltip: false,
+      render: (text, record) => (
+        <div>
+          <span>
+            {record?.courseAndClass?.length > 0 ? (
+              record.courseAndClass?.map((item, courseIndex) => (
+                <div key={courseIndex}>
+                  {/* Hiển thị danh sách lớp */}
+                  {item.class?.map((classItem, classIndex) => (
+                    <Tag key={classIndex} color="default" className="mt-1">
+                      {classItem.name}
+                    </Tag>
+                  ))}
+                </div>
+              ))
+            ) : (
+              <span className={`text-[#909399] italic `}>---</span>
+            )}
+          </span>
+        </div>
+      ),
+    },
+    {
       title: 'Vai trò',
       dataIndex: 'role_ids',
       key: 'role_ids',
@@ -118,10 +176,12 @@ export default function Handle() {
         </span>
       ),
     },
+    
     {
       title: 'Giới tính',
       dataIndex: 'gender',
       key: 'gender',
+      align: 'center',
       width: 150,
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
@@ -198,6 +258,13 @@ export default function Handle() {
           render: (text, record) => (
             <div>
               <div className={`btn-table-action`}>
+              {hasPermission([PERMISSIONS.LIST.LIST_TEACHER]) && (
+                    <Tooltip placement="top" title={'Xem khóa và lớp'}>
+                      <div className={`btn-edit`} onClick={() => handleClickViewCourseAndClassOfTeacher(record.courseAndClass)}>
+                        <InlineSVG src={ClassOfUser} width={14} />
+                      </div>
+                    </Tooltip>
+                  )}
                 {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_TEACHER]) && (
                   <Tooltip placement="bottom" title={'Thay đổi mật khẩu'}>
                     <div
@@ -389,6 +456,23 @@ export default function Handle() {
     return genderDisplay;
   };
 
+  const handleClickViewCourseAndClassOfTeacher = (courseAndClass) => {
+    dispatch(setVisibleModalCourseAndClassOfTeacher(true))
+    setDataCourseAndClassOfTeacher(courseAndClass)
+  }
+
+  const handleCancelModalCourseAndClassOfTeacher = () => {
+    dispatch(setVisibleModalCourseAndClassOfTeacher(false))
+  }
+
+  const handleShowPopoverSelect = () => {
+    dispatch(setVisiblePopoverSelect(true));
+  };
+
+  const handleOpenChange = (newOpen) => {
+    dispatch(setVisiblePopoverSelect(newOpen));
+  };
+
   return {
     teachers,
     detailTeacher,
@@ -405,7 +489,10 @@ export default function Handle() {
     dataFilter,
     visibleModalResetPassword,
     visibleModalChangeStatus,
+    visibleModalCourseAndClassOfTeacher,
     contentModalChangeStatus,
+    dataCourseAndClassOfTeacher,
+    visiblePopoverSelect,
     handleConfirmChangeStatus,
     handleToggleVisibleModalCreateOrUpdate,
     openModalCreate,
@@ -415,6 +502,9 @@ export default function Handle() {
     handleChangeTable,
     handleSelectPagination,
     handleSelectLimitTable,
+    handleCancelModalCourseAndClassOfTeacher,
+    handleOpenChange,
+    handleShowPopoverSelect,
     windowWidth,
   };
 }

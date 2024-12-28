@@ -47,7 +47,7 @@ export default function OrderManagement() {
             <Input
               prefix={<img src={IconSearch} className={`w-3.5 mr-1.5`} alt="" />}
               className={`main-input`}
-              placeholder={'Nhập mã giao dịch, tên hoặc SĐT học viênđể tìm kiếm'}
+              placeholder={'Nhập mã giao dịch, tên hoặc SĐT học viên để tìm kiếm'}
               value={dataFilter.keySearch}
               onChange={(e) => handleSearch(e)}
             />

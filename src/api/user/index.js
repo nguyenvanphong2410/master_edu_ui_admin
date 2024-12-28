@@ -22,7 +22,6 @@ import {
 import _ from "lodash";
 
 export const getListUsers = (dataFilter) => async (dispatch, getState) => {
-  console.log("🌈 ~ getListUsers ~ dataFilter:", dataFilter)
   let path = `admin-management`;
   if (dataFilter && dataFilter.perPage && dataFilter.page) {
     path += `?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;

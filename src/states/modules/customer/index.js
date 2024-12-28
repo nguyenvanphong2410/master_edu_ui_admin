@@ -13,6 +13,7 @@ const customerSlice = createSlice({
     },
     isLoadingBtnCreateOrUpdate: false,
     visibleModalCreateOrUpdate: false,
+    visiblePopoverSelect: false,
     isLoadingTableCustomers: false,
     customers: [],
     allCustomers: [],
@@ -32,6 +33,7 @@ const customerSlice = createSlice({
     visibleModalResetPassword: false,
     visibleModalChangeStatus: false,
     visibleModalConfirmCustomer: false,
+    visibleModalCourseAndClassOfStudent: false,
     dataFilterPoint: {
       q: null,
       perPage: 20,
@@ -221,6 +223,14 @@ const customerSlice = createSlice({
       ...state,
       configModal: action.payload,
     }),
+    setVisibleModalCourseAndClassOfStudent: (state, action) => ({
+      ...state,
+      visibleModalCourseAndClassOfStudent: action.payload,
+    }),
+    setVisiblePopoverSelect: (state, action) => ({
+      ...state,
+      visiblePopoverSelect: action.payload,
+    }),
   }
 })
 
@@ -259,8 +269,9 @@ export const {
   requestConfirmSuccess,
   requestConfirmFail,
   setCustomerType,
-
-  setConfigModal
+  setConfigModal,
+  setVisibleModalCourseAndClassOfStudent,
+  setVisiblePopoverSelect,
 } = customerSlice.actions
 
 export default customerSlice.reducer;

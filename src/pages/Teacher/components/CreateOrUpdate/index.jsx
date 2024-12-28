@@ -27,7 +27,6 @@ export default function CreateOrUpdate(props) {
     handleFocus,
     handleChangeAvatar,
   } = Handle(props);
-    console.log("🌈 ~ CreateOrUpdate ~ inForTeacher:", inForTeacher)
 
   const { treeDataOption } = HandlePermission();
 

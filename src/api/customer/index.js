@@ -90,6 +90,14 @@ export const getListCustomers = (dataFilter) => async (dispatch, getState) => {
     if (dataFilter.order && dataFilter.column) {
       path += `&sort_order=${dataFilter.order}&field=${dataFilter.column}`;
     }
+
+    if (dataFilter && dataFilter.course_id_of_student) {
+      path += `&course_id_of_student=${dataFilter.course_id_of_student}`;
+    }
+
+    if (dataFilter && dataFilter.class_id_of_student) {
+      path += `&class_id_of_student=${dataFilter.class_id_of_student}`;
+    }
   }
   return callApi({
     method: 'get',

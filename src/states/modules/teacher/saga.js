@@ -8,6 +8,8 @@ import _ from "lodash";
 import {getListTeachers} from "../../../api/teacher/index.js";
 import {teacherInitialData} from "./initialState.js";
 import { requestChangeStatusFailTeacher, requestChangeStatusSuccessTeacher, requestCreateTeacherFail, requestCreateTeacherSuccess, requestDeleteTeacherFail, requestDeleteTeacherSuccess, requestResetPasswordFailTeacher, requestResetPasswordSuccessTeacher, requestUpdateTeacherFail, requestUpdateTeacherSuccess, setDataFilterTeacher, setErrorCreateOrUpdateTeacher, setErrorResetPasswordTeacher } from "./index.js";
+import { getAllCourses } from "@/api/course/index.js";
+import { getAllClasses } from "@/api/class/index.js";
 
 function* loadRouteData () {
   yield put(setTitlePage('Quản lý giáo viên'));
@@ -23,6 +25,8 @@ function* loadRouteData () {
   ]))
   yield put(setDataFilterTeacher(teacherInitialData));
   yield put(getListTeachers(teacherInitialData));
+  yield put(getAllCourses());
+  yield put(getAllClasses());
 }
 
 function* handleActions () {

@@ -274,7 +274,6 @@ export default function Handle() {
         type: TYPE_SUBMIT.UPDATE,
       })
     );
-    console.log('🌈 ~ openModalEdit ~ user:', user);
 
     dispatch(handleGetRoles());
 

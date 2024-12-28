@@ -1,13 +1,9 @@
 import moment from "moment";
-import { Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataFilter } from "../../../states/modules/detail";
 import { getSearchHistory } from "../../../api/customer";
 import './styles.scss';
 import _ from "lodash";
-import Male from "@/assets/images/theme/male.png";
-import Female from "@/assets/images/theme/female.png";
-import { GENDER } from "@/utils/constants";
 import useWindowSize from "@/utils/hooks/useWindowSize";
 import React from "react";
 
@@ -43,13 +39,7 @@ export default function Handle() {
                     <span className={`font-normal flex items-center w-max`}>
                       Họ tên con:
                       <span className={`font-bold`}>&nbsp;{text.name}</span>
-                        {
-                          Object.values(GENDER).includes(text.gender) &&
-                            <Tooltip placement="bottom" title={text.gender === GENDER.FEMALE ? "Bé gái" : "Bé trai"}>
-                                <img className={`h-3 w-[auto] ml-1 ${text.gender === GENDER.FEMALE ? '!h-[13px]' : ''}`}
-                                     src={text.gender === GENDER.MALE ? Male : Female} alt="gender"/>
-                            </Tooltip>
-                        }
+                       
                       </span>
                       <br/>
                     </>
@@ -58,13 +48,7 @@ export default function Handle() {
               <span className={`font-normal flex items-center w-max`}>
                 Ngày sinh:
                   <span className={`font-bold ml-[5px]`}>{moment(text.birthday).format("DD/MM/YYYY")}</span>
-                    {
-                      record.service_code === "NAME_BASED_ON_BIRTH" && Object.values(GENDER).includes(text.gender) &&
-                        <Tooltip placement="bottom" title={text.gender === GENDER.FEMALE ? "Bé gái" : "Bé trai"}>
-                            <img className={`h-3 w-[auto] ml-1 ${text.gender === GENDER.FEMALE ? '!h-[13px]' : ''}`}
-                                 src={text.gender === GENDER.MALE ? Male : Female} alt="gender"/>
-                        </Tooltip>
-                    }
+                   
                   </span>
               </span>
               :

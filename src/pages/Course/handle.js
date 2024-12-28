@@ -5,15 +5,17 @@ import {
   setInfoCourses,
   setShowModalCreateOrUpdateCourse,
   setShowModalDeleteCourse,
+  setShowModalViewClassesOfCourse,
 } from '../../states/modules/course/index.js';
 import {TYPE_FILE, TYPE_MODAL_PACKAGE} from '../../utils/constants.js';
 import useWindowSize from '../../utils/hooks/useWindowSize.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { validate } from '../../utils/validateJoi/index.js';
-import { handleChangeHighlightCourse, handleCreateCourses, handleDeleteCourses, handleUpdateCourses } from '../../api/course/index.js';
+import { handleChangeHighlightCourse, handleCreateCourses, handleDeleteCourses, handleUpdateCourses, requestGetClassesOfCourse } from '../../api/course/index.js';
 import store from '../../states/configureStore.js';
 import { initErrInfoCourse, initInfoCourse } from '@/states/modules/course/initState.js';
 import { getNotification } from '@/utils/helper.js';
+import { useState } from 'react';
 
 export default function Handle() {
   const windowWidth = useWindowSize().width;
@@ -28,6 +30,9 @@ export default function Handle() {
   const isLoadingBtnDelete = useSelector((state) => state.course.isLoadingBtnDelete);
   const visibleModalDeleteCourse = useSelector((state) => state.course.visibleModalDeleteCourse);
   const dataFilter = useSelector((state) => state.course.dataFilter);
+  const visibleModalViewClassesOfCourse = useSelector((state) => state.course.visibleModalViewClassesOfCourse);
+  
+  const [dataTimeOfModalClassOfCourse, setDataTimeOfModalClassOfCourse] = useState({start_time: null,end_time: null});
 
   const handleShowModalCreateCourse = (type) => {
     dispatch(
@@ -188,6 +193,16 @@ export default function Handle() {
     document.getElementById('inputFile').click();
   };
 
+  const handleShowModalClassesOfCourse = (item) => {
+    dispatch(setInfoCourses(item));
+    dispatch(setShowModalViewClassesOfCourse(true))
+    dispatch(requestGetClassesOfCourse(item._id))
+    setDataTimeOfModalClassOfCourse({start_time: item.start_time, end_time: item.end_time})
+  }
+
+  const handleCancelModalClassesOfCourse = () => {
+    dispatch(setShowModalViewClassesOfCourse(false))
+  }
   return {
     windowWidth,
     courses,
@@ -200,6 +215,8 @@ export default function Handle() {
     errorInfoCourses,
     isLoadingBtnDelete,
     visibleModalDeleteCourse,
+    visibleModalViewClassesOfCourse,
+    dataTimeOfModalClassOfCourse,
     handleCancelModalCreateOrUpdateCourse,
     handleCancelModalDeleteCourse,
     handleShowModalCreateCourse,
@@ -214,5 +231,7 @@ export default function Handle() {
     handleRemoveImage,
     handleChangeImageFeatured,
     handleClickUpload,
+    handleShowModalClassesOfCourse,
+    handleCancelModalClassesOfCourse
   };
 }

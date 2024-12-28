@@ -1,25 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { initDataFilterCourse, initErrInfoCourse, initInfoCourse } from "./initState";
+import { createSlice } from '@reduxjs/toolkit';
+import { initDataFilterCourse, initErrInfoCourse, initInfoCourse } from './initState';
 
 const courseSlice = createSlice({
-  name: "course",
+  name: 'course',
   initialState: {
     isLoadingCardCourses: false,
     isLoadingBtnCreateOrUpdate: false,
     isLoadingBtnDelete: false,
+    isLoadingClassesCourse: false,
+
     visibleModalCreateOrUpdateCourse: false,
     visibleModalDeleteCourse: false,
+    visibleModalViewClassesOfCourse: false,
+    visibleModalDSSV: false,
+
     courses: [],
     allCourse: [],
+    classesOfCourse: [],
     giftCourse: null,
-    
+
     infoCourses: initInfoCourse,
     errorInfoCourses: initErrInfoCourse,
 
     dataFilter: initDataFilterCourse,
     configModalCourse: {
-      title: "",
-      type: "",
+      title: '',
+      type: '',
     },
   },
   reducers: {
@@ -30,7 +36,7 @@ const courseSlice = createSlice({
     getListDataCourseSuccess: (state, action) => ({
       ...state,
       isLoadingCardCourses: false,
-      courses: action.payload.data.courses
+      courses: action.payload.data.courses,
     }),
     getListDataCourseFailure: (state) => ({
       ...state,
@@ -102,17 +108,12 @@ const courseSlice = createSlice({
     changeHighlightCourseFailure: (state) => ({
       ...state,
     }),
-
-
-    //Thêm
     setDataFilterCourse: (state, action) => ({
       ...state,
       dataFilter: action.payload,
     }),
-
     getAllCourse: (state) => ({
       ...state,
-      allCourse: [],
     }),
     getAllCourseSuccess: (state, action) => ({
       ...state,
@@ -121,6 +122,30 @@ const courseSlice = createSlice({
     getAllCourseFailure: (state) => ({
       ...state,
       allCourse: [],
+    }),
+
+    //Xem những lớp thuộc khóa
+    setShowModalViewClassesOfCourse: (state, action) => ({
+      ...state,
+      visibleModalViewClassesOfCourse: action.payload,
+    }),
+    setShowModalDSSV: (state, action) => ({
+      ...state,
+      visibleModalDSSV: action.payload,
+    }),
+    getListClassesOfCourse: (state) => ({
+      ...state,
+      isLoadingClassesCourse: true,
+    }),
+    getListClassesOfCourseSuccess: (state, action) => ({
+      ...state,
+      isLoadingClassesCourse: false,
+      classesOfCourse: action.payload.data.classes,
+    }),
+    getListClassesOfCourseFailure: (state) => ({
+      ...state,
+      isLoadingClassesCourse: false,
+      classesOfCourse: [],
     }),
   },
 });
@@ -146,13 +171,18 @@ export const {
   changeHighlightCourse,
   changeHighlightCourseSuccess,
   changeHighlightCourseFailure,
-
-  //Thêm
   setDataFilterCourse,
-
   getAllCourse,
   getAllCourseSuccess,
   getAllCourseFailure,
+
+  //Xem những lớp thuộc khóa
+  setShowModalViewClassesOfCourse,
+  setShowModalDSSV,
+  getListClassesOfCourse,
+  getListClassesOfCourseSuccess,
+  getListClassesOfCourseFailure
+
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

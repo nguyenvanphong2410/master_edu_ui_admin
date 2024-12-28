@@ -14,6 +14,8 @@ const teacherSlice = createSlice({
     visibleModalResetPassword: false,
     visibleModalChangeStatus: false,
     visibleModalCreateOrUpdate: false,
+    visibleModalCourseAndClassOfTeacher: false,
+    visiblePopoverSelect: false,
     isLoadingBtnChangeStatusTeacher: false,
     isLoadingBtnCreateOrUpdateTeacher: false,
 
@@ -190,6 +192,15 @@ const teacherSlice = createSlice({
       ...state,
       configModalTeacher: action.payload,
     }),
+
+    setVisibleModalCourseAndClassOfTeacher: (state, action) => ({
+      ...state,
+      visibleModalCourseAndClassOfTeacher: action.payload,
+    }),
+    setVisiblePopoverSelect: (state, action) => ({
+      ...state,
+      visiblePopoverSelect: action.payload,
+    }),
   },
 });
 
@@ -234,7 +245,9 @@ export const {
   requestChangeStatusTeacher,
   requestChangeStatusSuccessTeacher,
   requestChangeStatusFailTeacher,
-
+  
+  setVisibleModalCourseAndClassOfTeacher,
+  setVisiblePopoverSelect,
 } = teacherSlice.actions;
 
 export default teacherSlice.reducer;

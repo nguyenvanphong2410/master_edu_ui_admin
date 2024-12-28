@@ -25,6 +25,8 @@ import _ from "lodash";
 import {getListCustomers} from "../../../api/customer/index.js";
 import {customerInitialData} from "./initialState.js";
 import { CUSTOMER_TYPE } from '@/utils/constants.js';
+import { getAllCourses } from "@/api/course/index.js";
+import { getAllClasses } from "@/api/class/index.js";
 
 function* loadRouteData () {
   yield put(setTitlePage('Quản lý học viên'));
@@ -41,6 +43,8 @@ function* loadRouteData () {
   yield put(setDataFilter(customerInitialData.dataFilter));
   yield put(setCustomerType(CUSTOMER_TYPE.CONFIRMED));
   yield put(getListCustomers(customerInitialData.dataFilter));
+  yield put(getAllCourses());
+  yield put(getAllClasses());
 }
 
 function* handleActions () {
