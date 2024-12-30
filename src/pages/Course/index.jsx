@@ -6,9 +6,8 @@ import Handle from './handle.js';
 import { Badge, Button, Card, Col, Empty, Input, Popover, Row, Tooltip } from 'antd';
 import { formatMoney, hasPermission } from '../../utils/helper.js';
 import IconEdit from '../../assets/images/icons/duotone/pencil.svg';
+import IconEye from '../../assets/images/icons/duotone/eye.svg';
 import IconDelete from '../../assets/images/icons/duotone/trash-can.svg';
-import IconStar from '@/assets/images/icons/duotone/star.svg';
-import IconStarSolid from '@/assets/images/icons/duotone/star-solid.svg';
 import InlineSVG from 'react-inlinesvg';
 import LoadingCard from './components/LoadingCard/index.jsx';
 import ModalDefault from '../../components/Modal/index.jsx';
@@ -24,6 +23,7 @@ import imageDefaultClass from '@/assets/images/default/image-default.png';
 import moment from 'moment';
 import PlusIcon from '@/assets/images/icons/light/plus.svg';
 import { useNavigate } from 'react-router-dom';
+import TableClassesOfCourse from './components/TableClassesOfCourse/index.jsx';
 
 export default function CourseManagement() {
   const dispatch = useDispatch();
@@ -39,13 +39,16 @@ export default function CourseManagement() {
     isLoadingBtnDelete,
     visibleModalDeleteCourse,
     infoCourses,
+    visibleModalViewClassesOfCourse,
+    dataTimeOfModalClassOfCourse,
     handleCancelModalCreateOrUpdateCourse,
     handleShowModalCreateCourse,
     handleShowModalUpdateCourse,
     handleShowModalDeleteCourses,
     handleCancelModalDeleteCourse,
     handleSubmitDeleteCourse,
-    handleSubmitChangeHighlightCourse,
+    handleShowModalClassesOfCourse,
+    handleCancelModalClassesOfCourse,
   } = Handle();
 
   useEffect(() => {
@@ -150,6 +153,17 @@ export default function CourseManagement() {
                         : [
                             <>
                               {hasPermission([PERMISSIONS.EDIT.EDIT_COURSE]) && (
+                                <Tooltip key="edit" placement="top" title={'Xem lớp'}>
+                                  <div className="btn-table-action">
+                                    <div className="btn-edit" onClick={() => handleShowModalClassesOfCourse(item)}>
+                                      <InlineSVG src={IconEye} width={18} height={20} />
+                                    </div>
+                                  </div>
+                                </Tooltip>
+                              )}
+                            </>,
+                            <>
+                              {hasPermission([PERMISSIONS.EDIT.EDIT_COURSE]) && (
                                 <Tooltip key="edit" placement="top" title={'Cập nhật'}>
                                   <div className="btn-table-action">
                                     <div
@@ -173,24 +187,6 @@ export default function CourseManagement() {
                                 </Tooltip>
                               )}
                             </>,
-                            <>
-                              {hasPermission([PERMISSIONS.EDIT.EDIT_POPULAR_COURSE]) && (
-                                <Tooltip key="highlight" placement="top" title={'Phổ biến'}>
-                                  {item.is_highlight ? (
-                                    <span className="flex justify-center cursor-default text-[#ffcd39] mt-2">
-                                      <InlineSVG src={IconStarSolid} width={25} height={20} />
-                                    </span>
-                                  ) : (
-                                    <span
-                                      className="flex justify-center text-[#8c8c8c] hover:text-[#ffcd39] mt-2"
-                                      onClick={() => handleSubmitChangeHighlightCourse(item._id)}
-                                    >
-                                      <InlineSVG src={IconStar} width={25} height={20} />
-                                    </span>
-                                  )}
-                                </Tooltip>
-                              )}
-                            </>,
                           ]
                     }
                   >
@@ -205,27 +201,6 @@ export default function CourseManagement() {
                         />
                       </Col>
                       <Col span={14}>
-                        <div className={`${styles.contentInfoWrap}`}>
-                          <div className={`${styles.itemInfo}`}>
-                            <span className={`${styles.fieldName}`}>Thời gian: </span>
-                            <span className={`${styles.content}`}>
-                              {moment(item.start_time).format('DD/MM/YYYY')} -{' '}
-                              {moment(item.end_time).format('DD/MM/YYYY')}
-                            </span>
-                          </div>
-                        </div>
-                        <div className={`${styles.contentInfoWrap}`}>
-                          <div className={`${styles.itemInfo}`}>
-                            <span className={`${styles.fieldName}`}>Người tạo: </span>
-                            <span className={`${styles.content}`}>{item.creator.name}</span>
-                          </div>
-                        </div>
-                        <div className={`${styles.contentInfoWrap}`}>
-                          <div className={`${styles.itemInfo}`}>
-                            <span className={`${styles.fieldName}`}>Người sửa: </span>
-                            <span className={`${styles.content}`}>{item.updater.name}</span>
-                          </div>
-                        </div>
                         <div className={`${styles.contentInfoWrap}`}>
                           <div className={`${styles.itemInfo}`}>
                             <p className={`${styles.fieldName}`}>Mô tả: </p>
@@ -253,6 +228,34 @@ export default function CourseManagement() {
                             </Popover>
                           </div>
                         </div>
+                        <div className={`${styles.contentInfoWrap}`}>
+                          <div className={`${styles.itemInfo}`}>
+                            <span className={`${styles.fieldName}`}>Thời gian: </span>
+                            <span className={`${styles.content}`}>
+                              {moment(item.start_time).format('DD/MM/YYYY')} -{' '}
+                              {moment(item.end_time).format('DD/MM/YYYY')}
+                            </span>
+                          </div>
+                        </div>
+                        <div className={`${styles.contentInfoWrap}`}>
+                          <div className={`${styles.itemInfo}`}>
+                            <span className={`${styles.fieldName}`}>Đang học: </span>
+                            <span className={`${styles.content}`}>{item.student_of_course.length} học viên</span>
+                          </div>
+                        </div>
+
+                        <div className={`${styles.contentInfoWrap}`}>
+                          <div className={`${styles.itemInfo}`}>
+                            <span className={`${styles.fieldName}`}>Người tạo: </span>
+                            <span className={`${styles.content}`}>{item.creator.name}</span>
+                          </div>
+                        </div>
+                        <div className={`${styles.contentInfoWrap}`}>
+                          <div className={`${styles.itemInfo}`}>
+                            <span className={`${styles.fieldName}`}>Người sửa: </span>
+                            <span className={`${styles.content}`}>{item.updater.name}</span>
+                          </div>
+                        </div>
                       </Col>
                     </Row>
                   </Card>
@@ -268,6 +271,14 @@ export default function CourseManagement() {
           width={900}
         >
           <ModalCreateOrUpdateCourse />
+        </ModalDefault>
+        <ModalDefault
+          isModalOpen={visibleModalViewClassesOfCourse}
+          handleCancel={handleCancelModalClassesOfCourse}
+          title={<>Danh sách lớp học của khóa học <span className='text-color-main'>{infoCourses?.name}</span></>}
+          width={1200}
+        >
+          <TableClassesOfCourse dataTimeOfModalClassOfCourse={dataTimeOfModalClassOfCourse} infoCourses={infoCourses} />
         </ModalDefault>
 
         <ModalDeleteDefault

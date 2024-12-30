@@ -34,16 +34,27 @@ export default function Handle() {
   const dataAllTeacher = useSelector((state) => state.teacher.allTeacher);
 
   const dataAllStudent = useSelector((state) => state.customer.allCustomers);
-  // const dataAllStudent = [];
+
+  const now = moment(); // Lấy thời gian hiện tại
 
   useEffect(() => {
+
     setCourseOption(
-      dataListCourse?.map((item) => ({
-        value: item._id,
-        label: <span>
-          <span className='font-semibold'>{item.name}</span> | {moment(item.start_time).format('DD/MM/YYYY')} - {moment(item.end_time).format('DD/MM/YYYY')}
-        </span>,
-      }))
+      dataListCourse
+        ?.filter(
+          (item) =>
+            moment(item.end_time).isAfter(now) // Loại bỏ khóa học đã kết thúc
+        )
+        ?.map((item) => ({
+          value: item._id,
+          label: (
+            <span>
+              <span className="font-semibold">{item.name}</span> |{" "}
+              {moment(item.start_time).format("DD/MM/YYYY")} -{" "}
+              {moment(item.end_time).format("DD/MM/YYYY")}
+            </span>
+          ),
+        }))
     );
 
     setTeacherOption(

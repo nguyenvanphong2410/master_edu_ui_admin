@@ -129,7 +129,7 @@
 }
 
 .ant-select .ant-select-arrow {
-  margin-top: 0 !important;
+  margin-top: -6px !important;
 }
 
 /* Select set score Ant*/
@@ -311,6 +311,23 @@
   border-color: transparent !important;
   color: $colorWhite !important;
   border-radius: 6px !important;
+}
+
+/* Button Ant*/
+.main-btn-light-color {
+  &:hover {
+    opacity: 1;
+    background-color: $colorMain !important;
+    border-color: transparent !important;
+    color: $colorWhite !important;
+    
+  }
+
+  background-color: $colorWhite !important ;
+  border-color: $colorMain !important;
+  color: $colorMain !important;
+  border-radius: 6px !important;
+  opacity: 0.6;
 }
 
 /* Button Delete Ant*/
@@ -613,4 +630,44 @@
   justify-content: center;
   align-items: center;
   height: 60vh;
+}
+
+/* Filter*/
+.filter-wrap{
+  width: 400px;
+  border-radius: 0.5rem /* 8px */;
+  background-color: white;
+  
+  .filter-content{
+    padding-left: 1.5rem /* 24px */;
+    padding-right: 1.5rem /* 24px */;
+    padding-top: 1rem /* 16px */;
+    padding-bottom: 1rem /* 16px */;
+  }
+}
+.title-filter-wrap {
+  padding-left: 1.5rem /* 24px */;
+  padding-right: 1.5rem /* 24px */;
+  border-bottom-width: 1px;
+  border-style: solid;
+}
+
+.title-filter{
+  line-height: 55px;
+  font-size: 16px;
+}
+
+.label-filter {
+  font-weight: 600;
+  margin-bottom: 0.5rem /* 8px */;
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+}
+
+.text-color-main {
+  color: $colorMain;
+}
+
+.text-color-blue {
+  color: #0466c2;
 }

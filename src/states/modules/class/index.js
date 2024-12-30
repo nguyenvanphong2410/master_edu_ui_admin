@@ -19,15 +19,17 @@ const classSlice = createSlice({
     visibleModalCreateOrUpdateClass: false,
     visibleModalSettingScore: false,
     visibleModalDeleteClass: false,
+    visibleModalDSSVOfClass: false,
     isLoadingGetListStudentOfClass: false,
     isLoadingUpdateScore: false,
 
     classes: [],
     classSelected: {},
+    allClass: [],
     studentToSetScoreSelected: '',
     infoScore: initInfoScore,
     listStudentOfClass: [],
-    dataListStudentScoreOfClass:[],
+    dataListStudentScoreOfClass: [],
 
     infoClass: initInfoClass,
     errorInfoScore: initErrScore,
@@ -244,6 +246,23 @@ const classSlice = createSlice({
       ...state,
       isLoadingGetListStudentScoreOfClass: false,
     }),
+
+    getAllClass: (state) => ({
+      ...state,
+    }),
+    getAllClassSuccess: (state, action) => ({
+      ...state,
+      allClass: action.payload.data.classes,
+    }),
+    getAllClassFailure: (state) => ({
+      ...state,
+      allClass: [],
+    }),
+
+    setVisibleModalDSSVOfClass: (state, action) => ({
+      ...state,
+      visibleModalDSSVOfClass: action.payload,
+    }),
   },
 });
 
@@ -305,7 +324,13 @@ export const {
 
   getListStudentScoreOfClass,
   getListStudentScoreOfClassSuccess,
-  getListStudentScoreOfClassFailure
-  
+  getListStudentScoreOfClassFailure,
+
+  getAllClass,
+  getAllClassSuccess,
+  getAllClassFailure,
+
+  setVisibleModalDSSVOfClass,
+
 } = classSlice.actions;
 export default classSlice.reducer;

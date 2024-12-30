@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout/index.jsx';
-import { Button, Input } from 'antd';
+import { Button, Input, Popover } from 'antd';
 import Handle from './handle.js';
 import TableDefault from '../../components/Table/index.jsx';
 import styles from './styles.module.scss';
@@ -15,6 +15,9 @@ import { PERMISSIONS } from '@/utils/constants.js';
 import { setVisibleModalChangeStatusTeacher, setVisibleModalDeleteTeacher } from '@/states/modules/teacher/index.js';
 import InlineSVG from 'react-inlinesvg';
 import PlusIcon from '@/assets/images/icons/light/plus.svg';
+import CourseAndClassOfTeacher from './components/CourseAndClassOfTeacher/index.jsx';
+import FilterPopoverTeacher from './components/FilterPopover/index.jsx';
+import FilterIcon from '@/assets/images/icons/duotone/filter-list.svg';
 
 export default function Teacher() {
   const {
@@ -32,7 +35,10 @@ export default function Teacher() {
     visibleModalResetPassword,
     configModalTeacher,
     visibleModalChangeStatus,
+    visibleModalCourseAndClassOfTeacher,
     contentModalChangeStatus,
+    dataCourseAndClassOfTeacher,
+    visiblePopoverSelect,
     dispatch,
     handleConfirmChangeStatus,
     handleToggleVisibleModalResetPassword,
@@ -43,6 +49,9 @@ export default function Teacher() {
     handleSearch,
     handleChangeTable,
     handleSelectPagination,
+    handleCancelModalCourseAndClassOfTeacher,
+    handleOpenChange,
+    handleShowPopoverSelect,
     windowWidth,
   } = Handle();
 
@@ -60,6 +69,32 @@ export default function Teacher() {
                 onChange={(e) => handleSearch(e)}
               />
             </div>
+            <div className="flex">
+            <div className="mr-4">
+                {hasPermission([PERMISSIONS.LIST.LIST_STUDENT]) && (
+                  <Popover
+                    content={<FilterPopoverTeacher />}
+                    placement="bottomRight"
+                    open={visiblePopoverSelect}
+                    onOpenChange={handleOpenChange}
+                    trigger={'click'}
+                    title={
+                      <div className={`title-filter-wrap`}>
+                        <span className={`title-filter`}>Bộ lọc giáo viên</span>
+                      </div>
+                    }
+                  >
+                    <Button
+                      icon={<InlineSVG src={FilterIcon} className={`w-4 h-4`} />}
+                      className={`md:flex items-center main-btn-light-color h-full s:hidden`}
+                      size={'large'}
+                      onClick={handleShowPopoverSelect}
+                    >
+                      Bộ lọc
+                    </Button>
+                  </Popover>
+                )}
+              </div>
             <div className={styles.action}>
               {hasPermission([PERMISSIONS.ADD.ADD_TEACHER]) && (
                 <Button
@@ -71,6 +106,7 @@ export default function Teacher() {
                   Tạo mới
                 </Button>
               )}
+            </div>
             </div>
           </div>
 
@@ -141,6 +177,15 @@ export default function Teacher() {
           handleConfirm={() => handleConfirmChangeStatus()}
           loading={isLoadingBtnDelete}
         />
+
+        <ModalDefault
+          isModalOpen={visibleModalCourseAndClassOfTeacher}
+          handleCancel={() => handleCancelModalCourseAndClassOfTeacher()}
+          title={'Khóa học và lớp do giáo viên phụ trách'}
+          width={1200}
+        >
+          <CourseAndClassOfTeacher dataCourseAndClassOfTeacher={dataCourseAndClassOfTeacher}/>
+        </ModalDefault>
       </div>
     </MainLayout>
   );

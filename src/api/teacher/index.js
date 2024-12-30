@@ -36,7 +36,6 @@ export const requestGetAllTeachers = () => async (dispatch, getState) => {
 };
 
 export const getListTeachers = (dataFilter) => async (dispatch, getState) => {
-  console.log("🌈 ~ getListTeachers ~ dataFilter:", dataFilter)
   let path = `admin/teacher`;
   if (dataFilter && dataFilter.perPage && dataFilter.page) {
     path += `?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
@@ -47,6 +46,14 @@ export const getListTeachers = (dataFilter) => async (dispatch, getState) => {
 
     if (dataFilter.order && dataFilter.column) {
       path += `&sort_order=${dataFilter.order}&field=${dataFilter.column}`;
+    }
+
+    if (dataFilter && dataFilter.course_id_of_teacher) {
+      path += `&course_id_of_teacher=${dataFilter.course_id_of_teacher}`;
+    }
+
+    if (dataFilter && dataFilter.class_id_of_teacher) {
+      path += `&class_id_of_teacher=${dataFilter.class_id_of_teacher}`;
     }
   }
   return callApi({

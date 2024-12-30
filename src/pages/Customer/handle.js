@@ -8,17 +8,20 @@ import {
   setInForCustomer,
   setVisibleModalChangeStatus,
   setVisibleModalConfirmCustomer,
+  setVisibleModalCourseAndClassOfStudent,
   setVisibleModalCreateOrUpdate,
   setVisibleModalDeleteCustomer,
   setVisibleModalResetPassword,
+  setVisiblePopoverSelect,
 } from '@/states/modules/customer/index.js';
 import React, { useEffect, useState } from 'react';
-import { Avatar, Switch, Tooltip } from 'antd';
+import { Avatar, Switch, Tag, Tooltip } from 'antd';
 import { changeStatusCustomer, confirmCustomer, deleteCustomer, getListCustomers } from '@/api/customer/index.js';
 import { formatPhoneNumber, formatPoint, handleSetTimeOut, hasPermission } from '@/utils/helper.js';
 import _ from 'lodash';
 import InlineSVG from 'react-inlinesvg';
 import Edit from '../../assets/images/icons/duotone/pencil.svg';
+import ClassOfUser from '../../assets/images/icons/duotone/clipboard-user.svg';
 import Delete from '../../assets/images/icons/duotone/trash-can.svg';
 import ResetPass from '../../assets/images/icons/duotone/lock-keyhole.svg';
 import useWindowSize from '../../utils/hooks/useWindowSize.js';
@@ -48,8 +51,15 @@ export default function Handle() {
   const visibleModalResetPassword = useSelector((state) => state.customer.visibleModalResetPassword);
   const visibleModalChangeStatus = useSelector((state) => state.customer.visibleModalChangeStatus);
   const visibleModalConfirmCustomer = useSelector((state) => state.customer.visibleModalConfirmCustomer);
+  const visibleModalCourseAndClassOfStudent = useSelector(
+    (state) => state.customer.visibleModalCourseAndClassOfStudent
+  );
+  const visiblePopoverSelect = useSelector((state) => state.customer.visiblePopoverSelect);
+
   const customer_type = useSelector((state) => state.customer.customer_type);
   const [contentModalConfirm, setContentModalConfirm] = useState('');
+  const [dataCourseAndClassOfStudent, setDataCourseAndClassOfStudent] = useState([]);
+
   const dispatch = useDispatch();
 
   const configModal = useSelector((state) => state.customer.configModal);
@@ -101,9 +111,61 @@ export default function Handle() {
       },
     },
     {
+      title: 'Khóa học',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      width: 180,
+      showSorterTooltip: false,
+      render: (text, record) => (
+        <div>
+          <span>
+            {record?.courseAndClassOfStudent?.length > 0 ? (
+              record.courseAndClassOfStudent?.map((item, index) => (
+                <Tag color="purple" key={index} className="mt-1">
+                  {item.course.name}
+                </Tag>
+              ))
+            ) : (
+              <span className={`text-[#909399] italic `}>---</span>
+            )}
+          </span>
+        </div>
+      ),
+    },
+    {
+      title: 'Lớp học',
+      dataIndex: '',
+      key: '',
+      align: 'center',
+      width: 180,
+      showSorterTooltip: false,
+      render: (text, record) => (
+        <div>
+          <span>
+            {record?.courseAndClassOfStudent?.length > 0 ? (
+              record.courseAndClassOfStudent?.map((item, courseIndex) => (
+                <div key={courseIndex}>
+                  {/* Hiển thị danh sách lớp */}
+                  {item.class?.map((classItem, classIndex) => (
+                    <Tag key={classIndex} color="default" className="mt-1">
+                      {classItem.name}
+                    </Tag>
+                  ))}
+                </div>
+              ))
+            ) : (
+              <span className={`text-[#909399] italic `}>---</span>
+            )}
+          </span>
+        </div>
+      ),
+    },
+    {
       title: 'Giới tính',
       dataIndex: 'gender',
       key: 'gender',
+      align: 'center',
       width: 180,
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
@@ -195,25 +257,29 @@ export default function Handle() {
             <div>
               {customer_type === CUSTOMER_TYPE.CONFIRMED ? (
                 <div className={`btn-table-action`}>
+                  {hasPermission([PERMISSIONS.LIST.LIST_STUDENT]) && (
+                    <Tooltip placement="top" title={'Xem khóa và lớp'}>
+                      <div className={`btn-edit`} onClick={() => handleClickViewCourseAndClassOfStudent(record.courseAndClassOfStudent)}>
+                        <InlineSVG src={ClassOfUser} width={14} />
+                      </div>
+                    </Tooltip>
+                  )}
                   {hasPermission([PERMISSIONS.EDIT.EDIT_RESET_PASSWORD_STUDENT]) && (
-                    <Tooltip placement="bottom" title={'Thay đổi mật khẩu'}>
-                      <div
-                        className={`btn-reset`}
-                        onClick={() => openModalResetPassword(record._id)}
-                      >
+                    <Tooltip placement="top" title={'Thay đổi mật khẩu'}>
+                      <div className={`btn-reset`} onClick={() => openModalResetPassword(record._id)}>
                         <InlineSVG src={ResetPass} width={14} />
                       </div>
                     </Tooltip>
                   )}
                   {hasPermission([PERMISSIONS.EDIT.EDIT_STUDENT]) && (
-                    <Tooltip placement="bottom" title={'Cập nhật'}>
+                    <Tooltip placement="top" title={'Cập nhật'}>
                       <div className={`btn-edit`} onClick={() => openModalEdit(record)}>
                         <InlineSVG src={Edit} width={14} />
                       </div>
                     </Tooltip>
                   )}
                   {hasPermission([PERMISSIONS.DELETE.DELETE_STUDENT]) && (
-                    <Tooltip placement="bottom" title={'Xóa'}>
+                    <Tooltip placement="top" title={'Xóa'}>
                       <div className={`btn-delete`} onClick={() => openModalDelete(record)}>
                         <InlineSVG src={Delete} width={14} />
                       </div>
@@ -419,6 +485,23 @@ export default function Handle() {
     return genderDisplay;
   };
 
+  const handleClickViewCourseAndClassOfStudent = (courseAndClass) => {
+    dispatch(setVisibleModalCourseAndClassOfStudent(true));
+    setDataCourseAndClassOfStudent(courseAndClass);
+  };
+
+  const handleCancelModalCourseAndClassOfStudent = () => {
+    dispatch(setVisibleModalCourseAndClassOfStudent(false));
+  };
+
+  const handleShowPopoverSelect = () => {
+    dispatch(setVisiblePopoverSelect(true));
+  };
+
+  const handleOpenChange = (newOpen) => {
+    dispatch(setVisiblePopoverSelect(newOpen));
+  };
+
   return {
     windowWidth,
     customers,
@@ -439,6 +522,9 @@ export default function Handle() {
     contentModalConfirm,
     contentModalChangeStatus,
     customer_type,
+    visibleModalCourseAndClassOfStudent,
+    dataCourseAndClassOfStudent,
+    visiblePopoverSelect,
     dispatch,
     handleConfirmChangeStatus,
     handleToggleVisibleModalResetPassword,
@@ -451,5 +537,9 @@ export default function Handle() {
     handleSelectLimitTable,
     handelChangeTab,
     handleConfirmCustomer,
+    handleClickViewCourseAndClassOfStudent,
+    handleCancelModalCourseAndClassOfStudent,
+    handleShowPopoverSelect,
+    handleOpenChange,
   };
 }

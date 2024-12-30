@@ -12,6 +12,9 @@ import {
   getAllCourse,
   getAllCourseFailure,
   getAllCourseSuccess,
+  getListClassesOfCourse,
+  getListClassesOfCourseFailure,
+  getListClassesOfCourseSuccess,
   getListDataCourse,
   getListDataCourseFailure,
   getListDataCourseSuccess,
@@ -170,6 +173,21 @@ export const requestGetDetailsCourseForUser = (id) => async (dispatch, getState)
     method: 'get',
     apiPath: path,
     actionTypes: [getListDetailsCourse, getListDetailsCourseSuccess, getListDetailsCourseFailure],
+    variables: {},
+    dispatch,
+    getState,
+  });
+};
+
+export const requestGetClassesOfCourse = (id) => async (dispatch, getState) => {
+  let path = `admin/courses/classOfCourse/${id}`;
+
+  return callApi({
+    method: 'get',
+    apiPath: path,
+    actionTypes: [getListClassesOfCourse,
+      getListClassesOfCourseSuccess,
+      getListClassesOfCourseFailure],
     variables: {},
     dispatch,
     getState,

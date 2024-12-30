@@ -1,6 +1,6 @@
 import React from 'react';
 import Handle from './handle';
-import { Tooltip } from 'antd';
+import { Tag, Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import InlineSVG from 'react-inlinesvg';
 import TableDefault from '@/components/Table';
@@ -19,12 +19,14 @@ import {
   setClassSelected,
   setInfoScore,
   setStudentToSetScoreSelected,
+  setVisibleModalDSSVOfClass,
   setVisibleModalSettingScore,
 } from '@/states/modules/class';
 import ModalSettingScore from '../ModalSettingScore';
 import { requestGetListStudentOfClass } from '@/api/score';
 import { initInfoScore } from '@/states/modules/class/initState';
 import { requestGetListStudentScoreOfClass } from '@/api/class';
+import TableDSSVOfClass from '../TableDSSVOfClass';
 
 function TableClass({ handleChangeTableClass }) {
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ function TableClass({ handleChangeTableClass }) {
   const paginationListClass = useSelector((state) => state.class.paginationListClass);
   const classSelected = useSelector((state) => state.class.classSelected);
   const visibleModalSettingScore = useSelector((state) => state.class.visibleModalSettingScore);
+  const visibleModalDSSVOfClass = useSelector((state) => state.class.visibleModalDSSVOfClass);
 
   const { handleShowModalUpdateClass, handleDeleteClassAlert, handleChangePaginationClass } = Handle();
 
@@ -101,27 +104,30 @@ function TableClass({ handleChangeTableClass }) {
       },
     },
     {
-      title: <span className="title-table">Tạo bởi</span>,
+      title: <span className="title-table">Học viên</span>,
       dataIndex: 'creator',
       key: 'creator',
       width: 150,
       showSorterTooltip: false,
       defaultSortOrder: '',
-      render: (text) => {
-        return <span>{text?.name}</span>;
+      render: (text, record) => {
+        return (
+          <span className="text-blue-55 underline cursor-pointer" onClick={() => handleClickTotalStudent(record)}>
+            {record.student_ids?.length > 0 ? record.student_ids?.length : 0} học viên
+          </span>
+        );
       },
     },
     {
-      title: <span className="title-table">Tối đa</span>,
-      dataIndex: 'max_number_student',
-      key: 'max_number_student',
+      title: <span className="title-table">Trạng thái</span>,
+      dataIndex: 'time',
+      key: 'time',
       align: 'center',
-      width: 120,
-      sorter: (a, b) => a.age - b.age,
+      width: 200,
       showSorterTooltip: false,
       defaultSortOrder: '',
-      render: (text) => {
-        return text ? <span>{text} người</span> : '---';
+      render: (text, record) => {
+        return <div>{handleDisplayStatusClass(record?.course?.start_time, record?.course?.end_time)}</div>;
       },
     },
     {
@@ -141,6 +147,18 @@ function TableClass({ handleChangeTableClass }) {
         );
       },
     },
+    {
+      title: <span className="title-table">Tạo bởi</span>,
+      dataIndex: 'creator',
+      key: 'creator',
+      align:'center',
+      width: 150,
+      showSorterTooltip: false,
+      defaultSortOrder: '',
+      render: (text) => {
+        return <span>{text?.name}</span>;
+      },
+    },
     hasPermission([PERMISSIONS.EDIT.EDIT_CLASS, PERMISSIONS.DELETE.DELETE_CLASS])
       ? {
           title: <span className="title-table">Hoạt động</span>,
@@ -153,24 +171,17 @@ function TableClass({ handleChangeTableClass }) {
             return (
               <div className={`btn-table-action`}>
                 <Tooltip placement="top" title={'Xét điểm'}>
-                  <div
-                    className={`btn-edit`}
-                    onClick={() => handleShowModalSettingScoreClass(record)}
-                  >
+                  <div className={`btn-edit`} onClick={() => handleShowModalSettingScoreClass(record)}>
                     <InlineSVG src={filePen} width={14} />
                   </div>
                 </Tooltip>
                 {hasPermission([PERMISSIONS.EDIT.EDIT_CLASS]) && (
                   <Tooltip placement="top" title={'Cập nhật'}>
-                    <div
-                      className={`btn-edit`}
-                      onClick={() => handleShowModalUpdateClass(record, TYPE_SUBMIT.UPDATE)}
-                    >
+                    <div className={`btn-edit`} onClick={() => handleShowModalUpdateClass(record, TYPE_SUBMIT.UPDATE)}>
                       <InlineSVG src={Edit} width={14} />
                     </div>
                   </Tooltip>
                 )}
-
                 {hasPermission([PERMISSIONS.DELETE.DELETE_CLASS]) && (
                   <Tooltip placement="top" title={'Xóa'}>
                     <div className={`btn-delete`} onClick={() => handleDeleteClassAlert(record)}>
@@ -200,6 +211,37 @@ function TableClass({ handleChangeTableClass }) {
     dispatch(setInfoScore(initInfoScore));
   };
 
+  const handleDisplayStatusClass = (start_time, end_time) => {
+    if (!start_time || !end_time) {
+      return <Tag color="default">Không xác định</Tag>;
+    }
+
+    const now = new Date();
+    let result = null;
+
+    if (new Date(start_time) < now && new Date(end_time) < now) {
+      result = <Tag color="green">Đã hoàn thành</Tag>;
+    } else if (new Date(start_time) <= now && new Date(end_time) > now) {
+      result = <Tag color="blue">Đang diễn ra</Tag>;
+    } else if (new Date(start_time) > now && new Date(end_time) > now) {
+      result = <Tag color="orange">Sắp diễn ra</Tag>;
+    }
+
+    return result;
+  };
+
+  const handleClickTotalStudent = (record) => {
+    dispatch(setClassSelected(record))
+    dispatch(requestGetListStudentScoreOfClass(record._id));
+    dispatch(setVisibleModalDSSVOfClass(true));
+
+  }
+
+  const handleCancelModalDSSVOfClass = () => {
+    dispatch(setVisibleModalDSSVOfClass(false));
+
+  }
+
   return (
     <div>
       <TableDefault
@@ -228,6 +270,15 @@ function TableClass({ handleChangeTableClass }) {
         width={1200}
       >
         <ModalSettingScore />
+      </ModalDefault>
+
+      <ModalDefault
+        isModalOpen={visibleModalDSSVOfClass}
+        handleCancel={handleCancelModalDSSVOfClass}
+        title={<>Danh sách học viên của lớp <span className='text-color-blue'>{classSelected?.name}</span> thuộc khóa học <span className='text-color-main'>{classSelected?.course?.name}</span></>}
+        width={1650}
+      >
+        <TableDSSVOfClass />
       </ModalDefault>
     </div>
   );

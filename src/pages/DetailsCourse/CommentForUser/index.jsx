@@ -104,12 +104,6 @@ const CommentForUser = () => {
   });
 
   const handleDisplayTypeUser = (user_type, protectedValue, is_admin) => {
-    console.log(
-      '🌈 ~ handleDisplayTypeUser ~ user_type, protectedValue, is_admin:',
-      user_type,
-      protectedValue,
-      is_admin
-    );
     if (protectedValue === 1 && is_admin === null && user_type === null) {
       return (
         <Tooltip title="SuperAdmin">
@@ -206,7 +200,7 @@ const CommentForUser = () => {
         <Button
           type="primary"
           loading={isLoadingBtnCreateComment}
-          className={`main-btn-primary-register mx-[5px] ml-[10px]`}
+          className={`main-btn-primary mx-[5px] ml-[10px]`}
           size={'large'}
           onClick={() => handleSubmit(TYPE_SUBMIT.CREATE, commentSchema, infoComment)}
         >

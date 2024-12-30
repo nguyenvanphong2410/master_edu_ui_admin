@@ -12,6 +12,9 @@ import {
   deleteClass,
   deleteClassFail,
   deleteClassSuccess,
+  getAllClass,
+  getAllClassFailure,
+  getAllClassSuccess,
   getListClass,
   getListClassFailure,
   getListClassSuccess,
@@ -26,6 +29,17 @@ import {
   updateScoreSuccess,
 } from '@/states/modules/class';
 
+export const getAllClasses = () => async (dispatch, getState) => {
+  return callApi({
+    method: 'get',
+    apiPath: '/admin/class/all',
+    actionTypes: [getAllClass, getAllClassSuccess, getAllClassFailure],
+    variables: {},
+    dispatch,
+    getState,
+  });
+};
+
 export const getListClasses = () => async (dispatch, getState) => {
   const dataFilter = getState().class.dataFilter;
   let path = `/admin/class?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
@@ -39,7 +53,6 @@ export const getListClasses = () => async (dispatch, getState) => {
   }
 
   if (dataFilter.courseId) {
-    console.log('🌈 ~ getListClasses ~ courseId:', dataFilter.courseId);
     path += `&course_id=${dataFilter.courseId}`;
   }
 
@@ -94,7 +107,6 @@ export const handleCreateClass = (data) => async (dispatch, getState) => {
 };
 
 export const handleUpdateClass = (id, data) => async (dispatch, getState) => {
-  console.log('🌈 ~ handleUpdateClass ~ id:', id);
   const headers = {
     'Content-Type': 'multipart/form-data',
   };

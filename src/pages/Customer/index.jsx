@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from '../../layouts/MainLayout/index.jsx';
-import { Button, Input, Tabs } from 'antd';
+import { Button, Input, Popover } from 'antd';
 import Handle from './handle.js';
 import TableDefault from '../../components/Table/index.jsx';
 import styles from './styles.module.scss';
@@ -15,10 +15,13 @@ import {
 } from '../../states/modules/customer/index.js';
 import ResetPassword from './components/ResetPassword/index.jsx';
 import ModalConfirm from '../../components/ModalConfirm/index.jsx';
-import { CUSTOMER_TYPE, PERMISSIONS } from '@/utils/constants.js';
+import { PERMISSIONS } from '@/utils/constants.js';
 import { hasPermission } from '@/utils/helper.js';
 import InlineSVG from 'react-inlinesvg';
 import PlusIcon from '@/assets/images/icons/light/plus.svg';
+import CourseAndClassOfStudent from './components/CourseAndClassOfStudent/index.jsx';
+import FilterIcon from '@/assets/images/icons/duotone/filter-list.svg';
+import FilterPopoverCustomer from './components/FilterPopover/index.jsx';
 
 export default function CustomerManagement() {
   const {
@@ -42,6 +45,11 @@ export default function CustomerManagement() {
     visibleModalConfirmCustomer,
     contentModalConfirm,
     customer_type,
+    visibleModalCourseAndClassOfStudent,
+    dataCourseAndClassOfStudent,
+    visiblePopoverSelect,
+    handleOpenChange,
+    handleShowPopoverSelect,
     handleConfirmChangeStatus,
     handleToggleVisibleModalResetPassword,
     handleToggleVisibleModalCreateOrUpdate,
@@ -53,6 +61,7 @@ export default function CustomerManagement() {
     handleSelectLimitTable,
     handelChangeTab,
     handleConfirmCustomer,
+    handleCancelModalCourseAndClassOfStudent,
   } = Handle();
 
   return (
@@ -69,82 +78,70 @@ export default function CustomerManagement() {
                 onChange={(e) => handleSearch(e)}
               />
             </div>
-            <div>
-              {hasPermission([PERMISSIONS.ADD.ADD_STUDENT]) && (
-                <Button
-                  icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
-                  className={`md:flex items-center main-btn-primary h-full s:hidden`}
-                  size={'large'}
-                  onClick={() => openModalCreate()}
-                >
-                  Tạo mới
-                </Button>
-              )}
+
+            <div className="flex">
+              <div className="mr-4">
+                {hasPermission([PERMISSIONS.LIST.LIST_STUDENT]) && (
+                  <Popover
+                    content={<FilterPopoverCustomer />}
+                    placement="bottomRight"
+                    open={visiblePopoverSelect}
+                    onOpenChange={handleOpenChange}
+                    trigger={'click'}
+                    title={
+                      <div className={`title-filter-wrap`}>
+                        <span className={`title-filter`}>Bộ lọc học viên</span>
+                      </div>
+                    }
+                  >
+                    <Button
+                      icon={<InlineSVG src={FilterIcon} className={`w-4 h-4`} />}
+                      className={`md:flex items-center main-btn-light-color h-full s:hidden`}
+                      size={'large'}
+                      onClick={handleShowPopoverSelect}
+                    >
+                      Bộ lọc
+                    </Button>
+                  </Popover>
+                )}
+              </div>
+              <div>
+                {hasPermission([PERMISSIONS.ADD.ADD_STUDENT]) && (
+                  <Button
+                    icon={<InlineSVG src={PlusIcon} className={`w-4 h-4`} />}
+                    className={`md:flex items-center main-btn-primary h-full s:hidden`}
+                    size={'large'}
+                    onClick={() => openModalCreate()}
+                  >
+                    Tạo mới
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className={`tableWrap ${windowWidth <= 576 ? 'h-[calc(100vh-260px)]' : 'h-[calc(100vh-267px)]'}`}>
-            <Tabs
-              defaultActiveKey={customer_type}
-              onChange={(value) => handelChangeTab(value)}
-              items={[
-                {
-                  key: CUSTOMER_TYPE.CONFIRMED,
-                  label: 'Đã xác thực',
-                  children: (
-                    <TableDefault
-                      loading={isLoadingTableCustomers}
-                      dataSource={customers}
-                      columns={columns}
-                      onChange={handleChangeTable}
-                      pagination={paginationListCustomers}
-                      handleSelectPagination={(e) => handleSelectPagination(e)}
-                      rowKey={'_id'}
-                      isFixed
-                      extraClassName={'h-[calc(100vh-380px)]'}
-                      scroll={{
-                        x: 1000,
-                        y:
-                          windowWidth <= 576
-                            ? 'calc(100vh - 380px)'
-                            : windowWidth <= 1536
-                            ? 'calc(100vh - 430px)'
-                            : 'calc(100vh - 395px)',
-                      }}
-                      limitTable={dataFilter.perPage}
-                      handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
-                    />
-                  ),
-                },
-                {
-                  key: CUSTOMER_TYPE.UNCONFIRMED,
-                  label: 'Chưa xác nhận',
-                  children: (
-                    <TableDefault
-                      loading={isLoadingTableCustomers}
-                      dataSource={customers}
-                      columns={columns}
-                      onChange={handleChangeTable}
-                      pagination={paginationListCustomers}
-                      handleSelectPagination={(e) => handleSelectPagination(e)}
-                      rowKey={'_id'}
-                      isFixed
-                      extraClassName={'h-[calc(100vh-380px)]'}
-                      scroll={{
-                        x: 1000,
-                        y:
-                          windowWidth <= 576
-                            ? 'calc(100vh - 380px)'
-                            : windowWidth <= 1536
-                            ? 'calc(100vh - 390px)'
-                            : 'calc(100vh - 395px)',
-                      }}
-                      limitTable={dataFilter.perPage}
-                      handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
-                    />
-                  ),
-                },
-              ]}
+          <div className={'tableWrap h-[calc(100vh-267px)]'}>
+            <TableDefault
+              loading={isLoadingTableCustomers}
+              dataSource={customers}
+              columns={columns}
+              onChange={handleChangeTable}
+              pagination={paginationListCustomers}
+              handleSelectPagination={(e) => handleSelectPagination(e)}
+              rowKey={'_id'}
+              isFixed
+              extraClassName={'h-[calc(100vh-310px)]'}
+              scroll={{
+                x: 1000,
+                y:
+                  windowWidth <= 576
+                    ? 'calc(100vh - 310px)'
+                    : windowWidth <= 1536
+                    ? 'calc(100vh - 370px)'
+                    : 'calc(100vh - 342px)',
+              }}
+              limitTable={dataFilter.perPage}
+              handleSelectLimitTable={(e) => handleSelectLimitTable(e)}
             />
           </div>
         </div>
@@ -197,6 +194,15 @@ export default function CustomerManagement() {
           handleConfirm={() => handleConfirmCustomer()}
           loading={isLoadingBtnDelete}
         />
+
+        <ModalDefault
+          isModalOpen={visibleModalCourseAndClassOfStudent}
+          handleCancel={() => handleCancelModalCourseAndClassOfStudent()}
+          title={'Khóa học và lớp của học viên'}
+          width={1200}
+        >
+          <CourseAndClassOfStudent dataCourseAndClassOfStudent={dataCourseAndClassOfStudent} />
+        </ModalDefault>
       </div>
     </MainLayout>
   );
